@@ -1,0 +1,2133 @@
+<title>José Marmolejo Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap">
+<style>
+/* Layout concept: one long page that follows the delivery flow top to bottom (request, priority, plan, track, govern), with a working simulator as the centrepiece. */
+:root{
+  --bg:#F4F6F9; --surface:#FFFFFF; --ink:#101B2B; --muted:#586479; --line:#DCE2EA;
+  --accent:#1B5E8C; --accent-soft:#E2EDF6; --accent-ink:#FFFFFF;
+  --good:#1E7B4F; --good-soft:#E1F1E8; --warn:#A8560A; --warn-soft:#FBEBD6; --bad:#B42318; --bad-soft:#FBE3E0;
+  --f-display:'Newsreader',Georgia,'Times New Roman',serif;
+  --f-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C131D; --surface:#131C2A; --ink:#E7ECF4; --muted:#93A0B5; --line:#243148;
+    --accent:#6DB2E3; --accent-soft:#162B3F; --accent-ink:#0C131D;
+    --good:#58C08A; --good-soft:#14301F; --warn:#E5A14F; --warn-soft:#352414; --bad:#F08A7E; --bad-soft:#381C19;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C131D; --surface:#131C2A; --ink:#E7ECF4; --muted:#93A0B5; --line:#243148;
+  --accent:#6DB2E3; --accent-soft:#162B3F; --accent-ink:#0C131D;
+  --good:#58C08A; --good-soft:#14301F; --warn:#E5A14F; --warn-soft:#352414; --bad:#F08A7E; --bad-soft:#381C19;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,3.2vw,2.3rem)}
+h3{font-size:1.2rem}
+p{margin:0}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.muted{color:var(--muted)}
+.sample{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--line);border-radius:4px;padding:2px 8px;white-space:nowrap}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.brand{font-family:var(--f-display);font-weight:600;font-size:1.1rem;white-space:nowrap}
+.nav{display:flex;gap:4px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{color:var(--muted);text-decoration:none;font-size:.88rem;padding:6px 10px;border-radius:6px;white-space:nowrap}
+.nav a:hover{color:var(--ink);background:var(--accent-soft)}
+.lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none}
+.lang button{border:0;background:transparent;padding:5px 11px;font-family:var(--f-mono);font-size:.78rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.flag{width:16px;height:11px;display:block;border-radius:1px}
+
+/* hero */
+.hero{padding-block:72px 56px}
+.hero .grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:end}
+.hero h1{font-size:clamp(2.2rem,5.2vw,3.7rem);margin:14px 0 20px}
+.hero .lead{font-size:1.1rem;color:var(--muted);max-width:60ch}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:.84rem}
+.chip.strong{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cta{display:inline-flex;margin-top:28px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:8px;padding:12px 20px;font-weight:600;text-decoration:none}
+.cta:hover{filter:brightness(1.08)}
+.sectors{border-left:2px solid var(--line);padding-left:24px;display:grid;gap:18px}
+.sectors div b{display:block;font-family:var(--f-display);font-size:1.35rem;font-weight:600}
+.sectors div span{color:var(--muted);font-size:.9rem}
+
+/* sections */
+section{padding-block:64px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:10px;margin-bottom:32px;max-width:70ch}
+.sec-head p{color:var(--muted)}
+.row-between{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
+.panel h3{margin-bottom:14px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cols > *{min-width:0}
+.scroll-x{overflow-x:auto}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px}
+.flow button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 8px;text-align:left;display:grid;gap:6px;align-content:start;min-height:96px}
+.flow button .n{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.flow button .t{font-size:.8rem;line-height:1.3;font-weight:500}
+.flow button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.flow button[aria-selected="true"] .n{color:inherit;opacity:.8}
+.flow-detail{margin-top:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.flow-detail p{color:var(--muted)}
+.flow-detail .out{font-family:var(--f-mono);font-size:.82rem;border-left:2px solid var(--accent);padding-left:14px}
+
+/* simulator */
+.sim{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:20px;align-items:start}
+.form{display:grid;gap:16px}
+.field{display:grid;gap:6px}
+.field label,.field legend{font-size:.84rem;font-weight:600}
+.field .hint{font-size:.78rem;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg label{font-weight:500;position:relative}
+.seg input{position:absolute;opacity:0}
+.seg label > span{display:block;border:1px solid var(--line);border-radius:6px;padding:5px 11px;font-size:.84rem;background:var(--bg)}
+.seg input:checked + span{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+select,.field input[type=text]{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:7px 10px;width:100%}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.val{font-family:var(--f-mono);font-size:.82rem;color:var(--accent)}
+.check{display:flex;gap:8px;align-items:center;font-size:.9rem}
+.out-grid{display:grid;gap:20px}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.kv div{background:var(--surface);padding:9px 12px;min-width:0}
+.kv small{display:block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kv b{font-weight:500;overflow-wrap:anywhere}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0}
+.opt .card{display:grid;gap:4px;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--bg);height:100%}
+.opt input:checked + .card{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt input:focus-visible + .card{outline:2px solid var(--accent);outline-offset:2px}
+.opt .card b{font-family:var(--f-display);font-size:1.05rem}
+.opt .card small{color:var(--muted);font-size:.78rem;line-height:1.35}
+.opt .num{font-family:var(--f-mono);font-size:.8rem}
+.road{display:grid;gap:8px}
+.rrow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 96px;gap:12px;align-items:center;font-size:.85rem}
+.rname{min-width:0}
+.rname small{display:block;color:var(--muted);font-family:var(--f-mono);font-size:.7rem}
+.track{position:relative;height:18px;background:var(--bg);border-radius:4px;border:1px solid var(--line)}
+.bar{position:absolute;top:2px;bottom:2px;border-radius:3px;background:var(--muted);opacity:.55}
+.rrow.new .bar{background:var(--accent);opacity:1}
+.eta{font-family:var(--f-mono);font-size:.78rem;text-align:right}
+.delta{display:inline-block;margin-left:4px;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:0 4px}
+.summary{border-left:3px solid var(--accent);padding:4px 0 4px 14px}
+.pill{display:inline-block;border-radius:4px;padding:0 6px;font-family:var(--f-mono);font-size:.72rem;border:1px solid var(--line)}
+.pill.good{background:var(--good-soft);color:var(--good);border-color:transparent}
+.pill.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.pill.acc{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+
+/* tabs */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 12px;font-size:.85rem}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* jira */
+.tree{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.88rem}
+.tree ul{list-style:none;margin:6px 0 0 18px;padding:0 0 0 14px;border-left:1px solid var(--line);display:grid;gap:6px}
+.tk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;width:100%;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:6px 10px}
+.tk .id{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.tk .ti{flex:1;min-width:120px}
+.tk .h{font-family:var(--f-mono);font-size:.74rem;color:var(--muted)}
+.tk.top-lvl{background:var(--accent-soft);border-color:transparent;font-weight:600}
+.tk.sel{outline:2px solid var(--accent)}
+.tk.up{border-color:var(--bad);background:var(--bad-soft)}
+.tk.down{border-color:var(--warn);background:var(--warn-soft)}
+.alert{display:grid;gap:8px;border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:10px;background:var(--bg)}
+.meter{height:8px;background:var(--line);border-radius:4px;position:relative;overflow:hidden}
+.meter i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.meter.tm i{background:var(--muted)}
+.mrow{display:grid;grid-template-columns:90px minmax(0,1fr) 42px;gap:8px;align-items:center;font-size:.78rem}
+.mrow span:last-child{text-align:right;font-family:var(--f-mono)}
+
+/* team */
+.load{display:grid;gap:10px}
+.lrow{display:grid;grid-template-columns:130px minmax(0,1fr) 70px;gap:12px;align-items:center;font-size:.85rem}
+.lrow .track{height:16px}
+.lrow .bar{opacity:1;background:var(--accent)}
+.lrow.over .bar{background:var(--bad)}
+.cap{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.heat{display:grid;grid-template-columns:130px repeat(4,minmax(54px,1fr));gap:3px;font-size:.78rem;min-width:420px}
+.heat div{padding:8px 4px;text-align:center;border-radius:4px;background:var(--bg)}
+.heat .h{background:transparent;color:var(--muted);font-family:var(--f-mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase}
+.heat .l{text-align:left;background:transparent;padding-left:0}
+.heat .g{background:var(--good-soft);color:var(--good)}
+.heat .m{background:var(--warn-soft);color:var(--warn)}
+.heat .b{background:var(--bad-soft);color:var(--bad)}
+
+/* timeline */
+.tl{display:flex;height:42px;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.tl div{display:flex;align-items:center;justify-content:center;font-size:.74rem;font-family:var(--f-mono);min-width:0;overflow:hidden;white-space:nowrap}
+.tl .on{background:var(--accent);color:var(--accent-ink)}
+.tl .pause{background:repeating-linear-gradient(135deg,var(--warn-soft),var(--warn-soft) 6px,var(--surface) 6px,var(--surface) 12px);color:var(--warn)}
+.axis{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;color:var(--muted);margin-top:4px}
+.causes{display:grid;gap:8px;margin-top:6px}
+.crow{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,2fr) 40px;gap:10px;align-items:center;font-size:.85rem}
+.crow .meter i{background:var(--warn)}
+.crow span:last-child{font-family:var(--f-mono);text-align:right}
+
+/* docs, weekly */
+.plan{display:grid;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.plan div{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);font-size:.9rem}
+.plan div:last-child{border-bottom:0}
+.plan b{font-family:var(--f-mono);font-weight:500;font-size:.82rem;white-space:nowrap}
+.plan div:nth-child(odd){background:var(--bg)}
+.dq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;font-size:.88rem;padding:0;margin:0;list-style:none}
+.dq li{display:flex;gap:10px;border-bottom:1px solid var(--line);padding:6px 0}
+.dq li i{font-style:normal;font-family:var(--f-mono);color:var(--accent);font-size:.78rem;min-width:22px}
+.ck{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.9rem}
+.ck li{display:flex;gap:10px}
+.ck li::before{content:"";flex:none;width:16px;height:16px;border-radius:4px;margin-top:3px;border:1.5px solid var(--muted)}
+.ck.done li::before{background:var(--good);border-color:var(--good);box-shadow:inset 0 0 0 3px var(--surface)}
+
+/* gov */
+.mx{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
+.mx th,.mx td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:center}
+.mx th:first-child,.mx td:first-child{text-align:left}
+.mx th{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.mx tr.rl{cursor:pointer}
+.mx tr.rl:hover td,.mx tr.rl.sel td{background:var(--accent-soft)}
+.lv{display:inline-block;width:14px;height:14px;border-radius:50%;border:1.5px solid var(--muted)}
+.lv.l1{background:linear-gradient(90deg,var(--accent) 50%,transparent 50%);border-color:var(--accent)}
+.lv.l2{background:var(--accent);border-color:var(--accent)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:10px}
+.legend span{display:flex;gap:6px;align-items:center}
+.log{display:grid;gap:8px;font-size:.84rem}
+.log div{display:grid;gap:2px;border-left:2px solid var(--line);padding-left:12px}
+.log small{font-family:var(--f-mono);color:var(--muted);font-size:.7rem}
+
+/* lineage */
+.lin svg{width:100%;height:auto;min-width:640px;display:block}
+.lin .node rect{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.lin .node text{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.lin .node .sub{fill:var(--muted);font-family:var(--f-mono);font-size:10px}
+.lin .node{cursor:pointer}
+.lin .node.hot rect{stroke:var(--accent);stroke-width:2.5;fill:var(--accent-soft)}
+.lin .node.rel rect{stroke:var(--accent)}
+.lin .edge{fill:none;stroke:var(--line);stroke-width:2}
+.lin .edge.hot{stroke:var(--accent);stroke-width:2.5}
+.lin .colh{fill:var(--muted);font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+
+/* contact */
+.contact{padding-block:64px 80px;border-top:1px solid var(--line)}
+.contact .panel{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:center}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:10px 16px;text-decoration:none;font-weight:600}
+.foot{color:var(--muted);font-size:.8rem;margin-top:22px}
+
+@media (max-width:860px){
+  .hero .grid,.cols,.sim,.flow-detail,.contact .panel{grid-template-columns:minmax(0,1fr)}
+  .hero{padding-block:44px 36px}
+  .sectors{border-left:0;padding-left:0;border-top:2px solid var(--line);padding-top:20px}
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .opts{grid-template-columns:minmax(0,1fr)}
+  .rrow{grid-template-columns:minmax(0,1fr) 96px}
+  .rrow .track{grid-column:1 / -1;order:3}
+  .dq{grid-template-columns:minmax(0,1fr)}
+  .brand{display:none}
+  section{padding-block:48px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<style>
+/* Visual layer: depth, gradients, dark bands (hero, simulator, team, lineage) and motion. */
+:root{--p1:#1F6FC2;--p2:#12857D;--p3:#C7791A;--p4:#C2503F;--amber:#C7791A;--teal:#12857D;--sh:0 1px 2px rgba(16,27,43,.06),0 18px 40px -18px rgba(16,27,43,.22);--accent:#1F6FC2;--accent-soft:#E3EEFA}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--amber:#F0B35C;--teal:#4FD1A0;--sh:0 1px 2px rgba(0,0,0,.4),0 18px 40px -18px rgba(0,0,0,.7);--accent:#6CB6F0;--accent-soft:#162B3F;--p1:#6CB6F0;--p2:#4FD1A0;--p3:#F0B35C;--p4:#F28B82}}
+:root[data-theme="dark"]{--amber:#F0B35C;--teal:#4FD1A0;--sh:0 1px 2px rgba(0,0,0,.4),0 18px 40px -18px rgba(0,0,0,.7);--accent:#6CB6F0;--accent-soft:#162B3F;--p1:#6CB6F0;--p2:#4FD1A0;--p3:#F0B35C;--p4:#F28B82}
+.band{--bg:#0A1220;--surface:#111C2E;--ink:#E9EEF6;--muted:#9AA8BD;--line:#22304A;--accent:#6CB6F0;--accent-soft:#14283F;--accent-ink:#08111D;--good:#4FD1A0;--good-soft:#11322B;--warn:#F0B35C;--warn-soft:#36280F;--bad:#F28B82;--bad-soft:#3A1D1B;--amber:#F0B35C;--teal:#4FD1A0;--sh:0 1px 2px rgba(0,0,0,.4),0 18px 40px -18px rgba(0,0,0,.7);--p1:#6CB6F0;--p2:#4FD1A0;--p3:#F0B35C;--p4:#F28B82;color-scheme:dark;color:var(--ink)}
+section.band{background:radial-gradient(820px 420px at 8% 0%,rgba(108,182,240,.14),transparent 62%),radial-gradient(640px 360px at 100% 100%,rgba(240,179,92,.08),transparent 60%),var(--bg);border-top:0}
+section{padding-block:92px}
+.top{background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.panel{border-radius:16px;box-shadow:var(--sh)}
+.band .panel{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.01)),var(--surface)}
+h2{font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.06;letter-spacing:-.02em}
+.sec-head{max-width:76ch;margin-bottom:44px;gap:14px}
+.sec-head p{font-size:1.06rem}
+.eyebrow::before{content:"";display:inline-block;width:30px;height:1px;background:currentColor;vertical-align:middle;margin-right:10px}
+.tabs button,.seg label > span{border-radius:999px}
+.kv{border-radius:12px}
+
+/* hero */
+.hero.band{position:relative;overflow:hidden;padding-block:96px 72px;border-bottom:1px solid var(--line);background:radial-gradient(900px 520px at 88% -8%,rgba(108,182,240,.30),transparent 62%),radial-gradient(640px 420px at -4% 108%,rgba(240,179,92,.16),transparent 60%),var(--bg)}
+.hero.band::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.3px);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 88%);mask-image:linear-gradient(180deg,#000,transparent 88%)}
+.hero .wrap{position:relative}
+.hero .grid{align-items:center;gap:56px}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.3rem);line-height:1.03;letter-spacing:-.025em}
+.hl{font-style:italic;background:linear-gradient(95deg,#9BD3FF 5%,#F0B35C 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:1.15rem}
+.hero .chip{background:rgba(255,255,255,.05)}
+.hero .chip.strong{background:var(--accent);color:var(--accent-ink)}
+.cta{background:linear-gradient(135deg,#8FD0FF,#4A8FE0);color:#08111D;box-shadow:0 12px 34px -10px rgba(108,182,240,.75);transition:transform .2s,box-shadow .2s;padding:14px 24px;border-radius:999px}
+.cta::after{content:"\2192";margin-left:10px}
+.cta:hover{transform:translateY(-2px);filter:none;box-shadow:0 16px 40px -10px rgba(108,182,240,.9)}
+.mock{position:relative;border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:20px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.02));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 36px 90px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.12)}
+.mock-head{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.live{display:flex;gap:7px;align-items:center;color:var(--good)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(79,209,160,.6)}100%{box-shadow:0 0 0 10px rgba(79,209,160,0)}}
+.mrow2{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;align-items:center;font-size:.74rem;margin-bottom:10px;color:var(--muted)}
+.mrow2 span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow2 .tr{position:relative;height:14px;border-radius:7px;background:rgba(255,255,255,.06)}
+.mrow2 .b{position:absolute;top:0;bottom:0;border-radius:7px;background:linear-gradient(90deg,#4B6585,#6F8CAF);transition:left .9s cubic-bezier(.3,.8,.2,1),width .9s cubic-bezier(.3,.8,.2,1)}
+.mrow2.new{color:var(--ink)}
+.mrow2.new .b{background:linear-gradient(90deg,#6CB6F0,#F0B35C);box-shadow:0 0 20px rgba(108,182,240,.6)}
+.mrow2.push .b{background:linear-gradient(90deg,#8A6A3A,#F0B35C)}
+.mock-foot{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem}
+.hero .sectors{grid-column:1 / -1;border:0;padding:0;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.hero .sectors div{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:rgba(255,255,255,.03);transition:transform .25s,border-color .25s,background .25s}
+.hero .sectors div:hover{transform:translateY(-4px);border-color:var(--accent);background:rgba(108,182,240,.07)}
+.sectors svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:12px;display:block}
+
+/* flow stepper */
+.flow{position:relative;gap:0}
+.flow::before{content:"";position:absolute;left:5.5%;right:5.5%;top:25px;height:2px;background:linear-gradient(90deg,var(--accent),var(--amber));opacity:.5}
+.flow button{border:0;background:transparent;padding:0 4px;min-height:0;justify-items:center;text-align:center;gap:12px;position:relative;color:var(--ink)}
+.flow button .n{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line);color:var(--ink);font-size:.85rem;font-weight:500;transition:all .25s;box-shadow:var(--sh);opacity:1}
+.flow button:hover .n{border-color:var(--accent);transform:translateY(-3px)}
+.flow button .t{color:var(--muted);font-weight:500}
+.flow button[aria-selected="true"]{background:transparent;color:var(--ink)}
+.flow button[aria-selected="true"] .n{background:linear-gradient(135deg,var(--accent),var(--amber));border-color:transparent;color:#fff;box-shadow:0 0 0 6px var(--accent-soft),0 12px 28px -6px var(--accent);opacity:1}
+.flow button[aria-selected="true"] .t{color:var(--ink);font-weight:600}
+.flow-detail{margin-top:34px;padding:28px;border-left:4px solid var(--accent);background:linear-gradient(110deg,var(--accent-soft),transparent 55%),var(--surface)}
+.flow-detail h3{font-size:1.6rem}
+.flow-detail .out{border-left-color:var(--amber);font-size:.9rem}
+
+/* simulator */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{border-radius:16px;padding:18px 20px;border:1px solid var(--line);background:linear-gradient(160deg,var(--accent-soft),transparent 70%),var(--surface);box-shadow:var(--sh)}
+.tile small{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile b{display:block;font-family:var(--f-display);font-size:clamp(1.8rem,3.4vw,2.5rem);line-height:1.1;margin-top:6px;font-weight:600}
+.tile span{font-size:.8rem;color:var(--muted)}
+.bar{background:linear-gradient(90deg,color-mix(in srgb,var(--muted) 65%,transparent),var(--muted));opacity:.9;border-radius:4px}
+.rrow.new .bar{background:linear-gradient(90deg,var(--accent),var(--amber));box-shadow:0 0 16px -2px var(--accent);opacity:1}
+.track{border-radius:6px;height:20px}
+.opt .card{border-radius:12px;transition:transform .2s,border-color .2s}
+.opt:hover .card{transform:translateY(-2px)}
+
+/* charts */
+.lrow .bar{background:linear-gradient(90deg,var(--accent),var(--teal));opacity:1}
+.lrow.over .bar{background:linear-gradient(90deg,var(--amber),var(--bad))}
+.tl{height:54px;border-radius:14px}
+.tl .on{background:linear-gradient(90deg,var(--accent),var(--teal))}
+.causewrap{display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+.donut{width:160px;height:160px;border-radius:50%;flex:none;display:grid;place-items:center}
+.donut::after{content:"";width:104px;height:104px;border-radius:50%;background:var(--surface)}
+
+/* lineage */
+.lin .edge.hot{stroke-dasharray:6 6;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-12}}
+.lin .node.hot rect{filter:drop-shadow(0 0 10px rgba(108,182,240,.55))}
+.lin .node:hover rect{stroke:var(--accent)}
+
+/* contact */
+.contact .panel{padding:44px;background:linear-gradient(135deg,var(--accent-soft),transparent 70%),var(--surface)}
+.contact h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+.btn{background:linear-gradient(135deg,#8FD0FF,#4A8FE0);color:#08111D;border-color:transparent;border-radius:999px;padding:12px 22px;box-shadow:0 12px 30px -10px rgba(74,143,224,.7)}
+
+@media (max-width:860px){
+  .hero.band{padding-block:56px 44px}
+  .hero .sectors{grid-template-columns:minmax(0,1fr);border:0;padding:0}
+  .flow::before{display:none}
+  .flow{gap:18px 4px}
+  section{padding-block:60px}
+  .contact .panel{padding:26px}
+}
+.hero .sectorline{grid-column:1 / -1;color:var(--muted);font-size:.92rem;padding-top:22px;border-top:1px solid var(--line)}
+.flow{grid-template-columns:repeat(10,minmax(0,1fr))}
+.flow::before{left:5%;right:5%}
+.chain{display:grid;gap:8px}
+.cstep{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.cstep .no{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:.78rem;background:var(--accent);color:var(--accent-ink)}
+.cstep.eng .no{background:var(--amber);color:#08111D}
+.cstep b{display:block;font-size:.92rem}
+.cstep p{color:var(--muted);font-size:.86rem}
+.cdown{text-align:center;color:var(--muted);line-height:1}
+.not{border:1px dashed var(--bad);background:var(--bad-soft);color:var(--bad);border-radius:10px;padding:10px 14px;font-size:.88rem;margin-top:16px}
+.hand{color:var(--muted);font-size:.9rem;margin-top:14px}
+.mx .colsel{background:var(--accent-soft)}
+.accflow{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.accflow li{border-top:3px solid var(--accent);background:var(--bg);border-radius:0 0 12px 12px;padding:14px;display:grid;gap:6px;align-content:start}
+.accflow .who{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.accflow b{font-size:.95rem}
+.accflow p{color:var(--muted);font-size:.84rem;line-height:1.45}
+.lrow .track + .track{margin-top:5px}
+.lrow .q .bar{background:linear-gradient(90deg,var(--amber),var(--bad))}
+.kv .pill{margin-top:4px}
+@media (max-width:860px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.accflow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.field textarea,.field input[type=date]{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:7px 10px;width:100%;resize:vertical;font:inherit;color:inherit}
+.grp{border-top:1px solid var(--line);padding-top:16px;margin:4px 0 0}
+.twof{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.kv .wide{grid-column:1 / -1}
+.path{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.path .pill{padding:3px 10px;font-size:.78rem}
+@media (max-width:560px){.twof{grid-template-columns:minmax(0,1fr)}}
+.scene{min-height:calc(100svh - 56px);display:flex;flex-direction:column;justify-content:center}
+.scene > .wrap{width:100%}
+.next{display:inline-flex;margin-top:40px;color:var(--muted);text-decoration:none;font-size:.88rem;border:1px solid var(--line);border-radius:999px;padding:8px 18px;transition:all .2s}
+.next:hover{color:var(--accent);border-color:var(--accent);transform:translateY(2px)}
+.dots{position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:grid;gap:12px;z-index:15}
+.dots a{width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--muted);transition:all .2s}
+.dots a:hover{background:var(--muted)}
+.dots a.on{background:var(--accent);border-color:var(--accent);transform:scale(1.4)}
+.wprog{display:flex;gap:10px;list-style:none;padding:0;margin:0 0 26px;flex-wrap:wrap}
+.wprog button{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 16px 6px 6px;font-size:.88rem}
+.wprog .n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--bg);font-family:var(--f-mono);font-size:.78rem}
+.wprog .cur{border-color:var(--accent);background:var(--accent-soft)}
+.wprog .cur .n{background:var(--accent);color:var(--accent-ink)}
+.wprog .done .n{background:var(--good);color:var(--accent-ink)}
+.wprog button:disabled{opacity:.45;cursor:default}
+.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:20px}
+.fgroup{display:grid;gap:16px;align-content:start}
+.fgroup > .eyebrow{padding-bottom:8px;border-bottom:1px solid var(--line)}
+.presetbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.presetbox select{width:auto}
+.stagefoot{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:28px;flex-wrap:wrap}
+.btn2{display:inline-flex;align-items:center;border:0;border-radius:999px;padding:12px 24px;font-weight:600;text-decoration:none;background:linear-gradient(135deg,#8FD0FF,#4A8FE0);color:#08111D;box-shadow:0 12px 30px -12px rgba(74,143,224,.8);transition:transform .2s}
+.btn2:hover{transform:translateY(-2px)}
+.btn2.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn2.small{padding:6px 14px;font-size:.8rem}
+.s2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start}
+.s3{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:20px;align-items:start}
+.s2 > *,.s3 > *{min-width:0}
+.side{display:grid;gap:16px}
+.rmrow{display:grid;grid-template-columns:34px 14px minmax(0,1.15fr) minmax(0,1.4fr) 110px 58px;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);cursor:grab}
+.rmrow.new{border-color:var(--accent);background:var(--accent-soft)}
+.rmrow.dragging{opacity:.45}
+.rank{font-family:var(--f-display);font-size:1.5rem;text-align:center;line-height:1}
+.grip{color:var(--muted);letter-spacing:-3px;font-size:.9rem}
+.mv{display:flex;gap:4px}
+.mv button{border:1px solid var(--line);background:var(--surface);border-radius:6px;width:26px;height:26px;line-height:1;font-size:.7rem}
+.mv button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.mv button:disabled{opacity:.3;cursor:default}
+.delta.good{color:var(--good);background:var(--good-soft)}
+.clauses{list-style:none;margin:0;padding:0}
+.clauses li{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.clauses li:last-child{border-bottom:0}
+.clauses small{display:block;color:var(--muted);font-size:.8rem}
+.clauses span{font-family:var(--f-mono);font-size:.8rem;color:var(--accent);text-align:right}
+.alertgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.alertgrid .alert{margin-top:0}
+.decq{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.dec svg{width:100%;height:auto;min-width:760px;display:block}
+.dn rect,.dn polygon{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.dn text{fill:var(--ink);font-family:var(--f-body);font-size:13px}
+.dn.hot rect,.dn.hot polygon{stroke:var(--accent);stroke-width:2.2}
+.dn.warn rect{stroke:var(--warn)}
+.dn.dim{opacity:.35}
+.de{fill:none;stroke:var(--line);stroke-width:2}
+.de.hot{stroke:var(--accent);stroke-width:2.5}
+.de.dim{opacity:.35}
+.dl{fill:var(--muted);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em}
+.ahp{fill:var(--accent)}
+.adp{fill:var(--line)}
+@media (max-width:860px){
+  .dots{display:none}
+  .formgrid,.s2,.s3{grid-template-columns:minmax(0,1fr)}
+  .rmrow{grid-template-columns:30px minmax(0,1fr) 58px}
+  .rmrow .grip{display:none}
+  .rmrow .rname{grid-column:2}
+  .rmrow .mv{grid-column:3;grid-row:1}
+  .rmrow .track,.rmrow .eta{grid-column:1 / -1;text-align:left}
+}
+.lvls{list-style:none;padding:0;margin:0;display:grid;gap:12px;font-size:.88rem}
+.lvls li{display:grid;gap:4px}
+.lvls .pill{justify-self:start}
+[data-part="1"]{--pc:var(--p1)}
+[data-part="2"]{--pc:var(--p2)}
+[data-part="3"]{--pc:var(--p3)}
+[data-part="4"]{--pc:var(--p4)}
+section[data-part] .eyebrow{color:var(--pc)}
+.nav a[data-part] .nn{color:var(--pc);font-family:var(--f-mono);font-size:.78rem}
+.flow button .n{border-color:color-mix(in srgb,var(--pc) 60%,var(--line))}
+.flow button[aria-selected="true"] .n{background:var(--pc);border-color:transparent;color:var(--accent-ink);box-shadow:0 0 0 6px color-mix(in srgb,var(--pc) 24%,transparent),0 12px 28px -6px var(--pc)}
+.flegend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:.82rem;color:var(--muted)}
+.flegend span{display:flex;gap:8px;align-items:center}
+.flegend i{width:10px;height:10px;border-radius:50%;background:var(--pc)}
+.partpill{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--pc);border:1px solid color-mix(in srgb,var(--pc) 55%,transparent);border-radius:999px;padding:3px 12px}
+.seelink{display:inline-flex;margin-top:18px;color:var(--accent);text-decoration:none;font-family:var(--f-body);font-size:.88rem;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.seelink:hover{border-color:var(--accent)}
+section.chapter{background:radial-gradient(900px 520px at 12% 35%,color-mix(in srgb,var(--pc) 26%,transparent),transparent 64%),radial-gradient(600px 400px at 100% 100%,color-mix(in srgb,var(--pc) 10%,transparent),transparent 60%),var(--bg)}
+.chap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.chnum{font-family:var(--f-display);font-size:clamp(8rem,24vw,18rem);line-height:.78;font-weight:600;background:linear-gradient(180deg,var(--pc),transparent 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.chlabel{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pc);margin-bottom:14px}
+.chbody h2{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.04}
+.chlead{font-size:1.12rem;color:var(--muted);margin-top:18px;max-width:58ch}
+.chchips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:26px 0 30px}
+.chchips a{display:inline-block;color:var(--ink);text-decoration:none;font-size:.85rem;border:1px solid color-mix(in srgb,var(--pc) 55%,transparent);border-radius:999px;padding:5px 14px;transition:background .2s}
+.chchips a:hover{background:color-mix(in srgb,var(--pc) 18%,transparent)}
+.dots a[data-part]{border-color:var(--pc)}
+.dots a.on[data-part]{background:var(--pc)}
+.dots a.ch{width:14px;height:14px;border-width:2px}
+@media (max-width:860px){.chap{grid-template-columns:minmax(0,1fr)}.chnum{font-size:6.5rem}}
+section.band[data-part]{background:radial-gradient(900px 460px at 8% 0%,color-mix(in srgb,var(--pc) 17%,transparent),transparent 64%),radial-gradient(640px 360px at 100% 100%,color-mix(in srgb,var(--pc) 8%,transparent),transparent 60%),var(--bg)}
+section[data-part]:not(.band){background:radial-gradient(900px 420px at 90% 0%,color-mix(in srgb,var(--pc) 8%,transparent),transparent 62%),linear-gradient(180deg,color-mix(in srgb,var(--pc) 3%,var(--bg)),var(--bg) 40%)}
+section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,color-mix(in srgb,var(--pc) 30%,transparent),transparent 64%),radial-gradient(600px 400px at 100% 100%,color-mix(in srgb,var(--pc) 12%,transparent),transparent 60%),var(--bg)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">José Marmolejo</span>
+    <nav class="nav" aria-label="Sections">
+      <a href="#flow" data-i18n="nav_flow">The flow</a>
+      <a href="#part1" data-part="1"><span class="nn">1</span> <span data-i18n="nav_p1">Request</span></a>
+      <a href="#part2" data-part="2"><span class="nn">2</span> <span data-i18n="nav_p2">Delivery</span></a>
+      <a href="#part3" data-part="3"><span class="nn">3</span> <span data-i18n="nav_p3">Catalogue</span></a>
+      <a href="#part4" data-part="4"><span class="nn">4</span> <span data-i18n="nav_p4">Access</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lang-en" type="button" aria-pressed="true">EN</button>
+      <button id="lang-es" type="button" aria-pressed="false">
+        <svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#AA151B"/><rect y=".5" width="3" height="1" fill="#F1BF00"/></svg>ES
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="dots" id="dots" aria-label="Scenes"></nav>
+<main>
+<div class="hero band">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow" data-i18n="hero_eye">Data &amp; Product Lead · Data Governance Lead</span>
+      <h1><span data-i18n="hero_h1a">I turn business requests into</span> <span class="hl" data-i18n="hero_h1b">prioritised, tracked and governed data delivery.</span></h1>
+      <p class="lead" data-i18n="hero_lead">I built the operating model around a data team: how work is requested, justified, estimated, prioritised, delivered, documented and governed. This page lets you run a simplified version of it yourself.</p>
+      <div class="roles">
+        <span class="chip strong">José Marmolejo</span>
+        <span class="chip" data-i18n="chip1">Data product leadership</span>
+        <span class="chip" data-i18n="chip2">Data governance</span>
+        <span class="chip" data-i18n="chip3">Delivery &amp; stakeholder management</span>
+      </div>
+      <a class="cta" href="#try" data-i18n="cta">Run the method on a request</a>
+    </div>
+    <div class="mock" aria-hidden="true">
+      <div class="mock-head"><span data-i18n="m_head">Live roadmap</span><span class="live"><i></i>LIVE</span></div>
+      <div id="mockRows"></div>
+      <div class="mock-foot" id="mockFoot"></div>
+    </div>
+    <p class="sectorline" data-i18n="sectors_line">Experience across gambling, aerospace and retail.</p>
+  </div>
+</div>
+
+<section id="flow" class="scene">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="flow_eye">End to end</span>
+      <h2 data-i18n="flow_h">From a request to a weekly plan, in nine steps</h2>
+      <p data-i18n="flow_p">Every piece of work followed the same path. Select a step to see what happened and what it produced.</p>
+    </div>
+    <div class="flow" id="flowSteps" role="tablist"></div>
+    <div class="flegend" id="flegend"></div>
+    <div class="panel flow-detail" id="flowDetail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="part1" class="band scene chapter" data-part="1" data-nonext="1">
+  <div class="wrap">
+    <div class="chap">
+      <div class="chnum" aria-hidden="true">1</div>
+      <div class="chbody">
+        <p class="chlabel"><span data-i18n="part_w">Part</span> 1 / 4</p>
+        <h2 data-i18n="ch1_h">Chapter</h2>
+        <p class="chlead" data-i18n="ch1_p">Text</p>
+        <ul class="chchips" data-chips="1"></ul>
+        <a class="btn2 chgo" href="#try" data-i18n="ch_go">Start this part</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="try" class="band scene" data-part="1" data-nonext="1">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="try_eye">Steps 1 to 6 · interactive</span>
+      <h2 data-i18n="try_h">Bring me a request. See the answer I would give.</h2>
+      <p data-i18n="try_p">Follow one request through the method, one stage at a time.</p>
+    </div>
+    <ol class="wprog" id="wprog"></ol>
+
+    <div class="stage" id="st1">
+      <form class="panel form" id="simForm" onsubmit="return false">
+        <div class="row-between">
+          <h3 data-i18n="f_h">The request</h3>
+          <div class="presetbox"><label for="preset" class="muted" data-i18n="f_preset">Start from an example</label>
+            <select id="preset">
+              <option value="sales" data-i18n="p_sales">Weekly sales dashboard</option>
+              <option value="report" data-i18n="p_report">Automate compliance report</option>
+              <option value="churn" data-i18n="p_churn">Customer churn model</option>
+              <option value="custom" data-i18n="p_custom">Custom request</option>
+            </select>
+            <span class="sample" data-i18n="sample">Illustrative data</span></div>
+        </div>
+        <div class="formgrid">
+          <div class="fgroup">
+            <p class="eyebrow" data-i18n="grp_biz">Business case</p>
+            <fieldset class="field"><legend data-i18n="f_kpi">Which company KPI does it move?</legend>
+              <div class="seg">
+                <label><input type="radio" name="kpi" value="savings"><span data-i18n="k_sav">Savings</span></label>
+                <label><input type="radio" name="kpi" value="revenue" checked><span data-i18n="k_rev">Revenue</span></label>
+              </div></fieldset>
+            <div class="field"><label for="sub" data-i18n="f_sub">Subcategory</label><select id="sub"></select></div>
+            <div class="field"><label for="impact"><span data-i18n="f_impact">Expected annual impact</span> <span class="val" id="o_impact"></span></label>
+              <input type="range" id="impact" min="10" max="600" step="10"></div>
+            <div class="field"><label for="ev" data-i18n="f_ev">How solid is that figure?</label>
+              <select id="ev">
+                <option value="figures" data-i18n="ev_figures">Backed by figures</option>
+                <option value="estimate" data-i18n="ev_estimate">Team estimate</option>
+                <option value="assumption" data-i18n="ev_assumption">Assumption</option>
+              </select></div>
+            <div class="field"><label for="evid" data-i18n="f_evid">Calculation behind it</label><textarea id="evid" rows="4"></textarea></div>
+          </div>
+          <div class="fgroup">
+            <p class="eyebrow" data-i18n="grp_now">Current situation</p>
+            <div class="field"><label for="problem" data-i18n="f_prob">Problem today and its effect on daily operations</label><textarea id="problem" rows="4"></textarea></div>
+            <div class="field"><label for="process" data-i18n="f_proc">How it is done today</label><textarea id="process" rows="4"></textarea></div>
+            <div class="field"><label for="hours"><span data-i18n="f_time">Time the current process takes</span> <span class="val" id="o_hours"></span></label>
+              <input type="range" id="hours" min="0" max="80" step="1"></div>
+          </div>
+          <div class="fgroup">
+            <p class="eyebrow" data-i18n="grp_need">What they need</p>
+            <div class="field"><label for="mvp" data-i18n="f_mvp">Minimum version that would already solve it (MVP)</label><textarea id="mvp" rows="3"></textarea></div>
+            <div class="field"><label for="need" data-i18n="f_need">Date they would like it</label><input type="date" id="need"></div>
+            <label class="check"><input type="checkbox" id="blocks"> <span data-i18n="f_blocks">Other projects depend on this</span></label>
+            <div class="field" id="depsField"><label for="deps" data-i18n="f_deps">Which projects?</label><input type="text" id="deps"></div>
+            <div class="field"><label for="refresh" data-i18n="f_refresh">How fresh must the data be?</label>
+              <select id="refresh">
+                <option value="weekly" data-i18n="r_weekly">Weekly</option>
+                <option value="daily" data-i18n="r_daily">Daily</option>
+                <option value="hourly" data-i18n="r_hourly">Hourly</option>
+                <option value="rt" data-i18n="r_rt">Near real time</option>
+              </select></div>
+            <div class="field"><label for="fields"><span data-i18n="f_fields">Approximate number of fields</span> <span class="val" id="o_fields"></span></label>
+              <input type="range" id="fields" min="5" max="80" step="1">
+              <span class="hint" data-i18n="f_fields_h">The final list is fixed in the data contract.</span></div>
+            <fieldset class="field"><legend data-i18n="f_cons">Who consumes it?</legend>
+              <div class="seg">
+                <label><input type="radio" name="cons" value="people" checked><span data-i18n="c_people">People</span></label>
+                <label><input type="radio" name="cons" value="systems"><span data-i18n="c_sys">Systems only</span></label>
+              </div></fieldset>
+            <div class="field" id="usersField"><label for="users"><span data-i18n="f_users">People who will access it</span> <span class="val" id="o_users"></span></label>
+              <input type="range" id="users" min="1" max="30" step="1"></div>
+            <div class="field" id="actionField"><label for="action" data-i18n="f_action">Action it triggers</label>
+              <select id="action">
+                <option value="email" data-i18n="a_email">Send an email automatically</option>
+                <option value="system" data-i18n="a_system">Update another system</option>
+                <option value="alert" data-i18n="a_alert">Raise an alert</option>
+              </select></div>
+          </div>
+        </div>
+        <div class="stagefoot"><span class="muted" data-i18n="hint_1">Nothing here is about architecture or priority. Those come next, from the people who own them.</span>
+          <button type="button" class="btn2" data-go="2" data-i18n="bt_1">Continue: summary and architect</button></div>
+      </form>
+    </div>
+    <div class="stage" id="st2" hidden></div>
+    <div class="stage" id="st3" hidden></div>
+    <div class="stage" id="st4" hidden></div>
+  </div>
+</section>
+
+<section id="part2" class="band scene chapter" data-part="2" data-nonext="1">
+  <div class="wrap">
+    <div class="chap">
+      <div class="chnum" aria-hidden="true">2</div>
+      <div class="chbody">
+        <p class="chlabel"><span data-i18n="part_w">Part</span> 2 / 4</p>
+        <h2 data-i18n="ch2_h">Chapter</h2>
+        <p class="chlead" data-i18n="ch2_p">Text</p>
+        <ul class="chchips" data-chips="2"></ul>
+        <a class="btn2 chgo" href="#delivery" data-i18n="ch_go">Start this part</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery" class="scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="del_eye">Step 7 · Plan in Jira</span>
+      <h2 data-i18n="del_h">Once agreed, everything is traceable</h2>
+      <p data-i18n="del_p">The agreement became a custom Jira structure, with estimates, dependencies and alerts. Select any ticket to see what blocks it and what it blocks.</p>
+    </div>
+    <div class="cols" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)">
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="j_h">Initiative, epics, tasks, subtasks</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <ul class="tree" id="tree" style="margin-top:14px"></ul>
+        <div class="legend" id="jlegend"></div>
+      </div>
+      <div class="panel">
+        <h3 data-i18n="j_ex_h">How the structure works</h3>
+        <ul class="ck done" style="margin-top:14px">
+          <li data-i18n="j_ex1">Initiative: a large project made of several epics.</li>
+          <li data-i18n="j_ex2">Epic: one deliverable with an owner and a deadline.</li>
+          <li data-i18n="j_ex3">Task: a piece of work with its hours estimated.</li>
+          <li data-i18n="j_ex4">Subtask: the smallest unit, linked to whatever blocks it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roles" class="band scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="roles_eye">Standardised responsibilities</span>
+      <h2 data-i18n="roles_h">One task, one owner</h2>
+      <p data-i18n="roles_p">Every recurring task had a defined owner and a defined way to hand work to the next role. Select a role.</p>
+    </div>
+    <div class="tabs" id="rTabs" role="tablist"></div>
+    <div class="cols">
+      <div class="panel" id="rCard"></div>
+      <div class="panel">
+        <h3 data-i18n="chain_h">Example: a quality check, end to end</h3>
+        <div class="chain" id="chain" style="margin-top:14px"></div>
+        <p class="summary" style="margin-top:16px" data-i18n="chain_n">The engineer runs the automation. The meaning of the data and the thresholds stay with Data Quality.</p>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:20px">
+      <h3 data-i18n="mx2_h">Who does what</h3>
+      <div class="scroll-x" style="margin-top:10px"><table class="mx" id="rmx"></table></div>
+      <div class="legend"><span><i class="lv l2"></i><span data-i18n="lg_own">Owns: decides and answers for it</span></span><span><i class="lv l1"></i><span data-i18n="lg_sup">Supports: provides input or executes</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="weekly" class="scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="wk_eye">Step 9 · Weekly plan</span>
+      <h2 data-i18n="w_h">Weekly plan, generated for each person</h2>
+      <p data-i18n="w_p">Built every week from priorities, capacity and the comments the team left the week before.</p>
+    </div>
+    <div class="panel" style="max-width:720px">
+      <div class="row-between" style="margin-bottom:14px"><div class="tabs" id="wTabs" role="tablist" style="margin:0"></div><span class="sample" data-i18n="sample">Illustrative data</span></div>
+      <div class="plan" id="wPlan"></div>
+    </div>
+  </div>
+</section>
+
+<section id="docs" class="band scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="doc_eye">Documentation frameworks</span>
+      <h2 data-i18n="doc_h">Decide it once, write it down, restart without friction</h2>
+      <p data-i18n="doc_p">Two documents carried most of the weight: the Data Requirement Document at the start, and a handoff note whenever work paused.</p>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3 data-i18n="drd_h">Data Requirement Document</h3>
+        <p class="muted" style="margin-bottom:12px;font-size:.9rem" data-i18n="drd_p">Everything that has to be clear before anyone builds.</p>
+        <ol class="dq" id="drd"></ol>
+      </div>
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="ho_h">Handoff note</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <p class="muted" style="margin:6px 0 12px;font-size:.9rem" data-i18n="ho_p">Written by each role when a project pauses.</p>
+        <div class="tabs" id="hTabs" role="tablist"></div>
+        <div class="cols" style="gap:16px">
+          <div><b style="font-size:.84rem" data-i18n="ho_done">Done</b><ul class="ck done" id="hDone" style="margin-top:8px"></ul></div>
+          <div><b style="font-size:.84rem" data-i18n="ho_pend">Pending</b><ul class="ck" id="hPend" style="margin-top:8px"></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tracking" class="scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="al_eye">Step 9 · Tracking</span>
+      <h2 data-i18n="al_h">An alert before the deadline is missed</h2>
+      <p data-i18n="a_p">Each epic compares the share of scope completed with the share of planned time elapsed. A gap above 15 points raises an alert before the deadline is missed.</p>
+    </div>
+    <div class="panel"><div id="alerts" class="alertgrid"></div></div>
+  </div>
+</section>
+
+<section id="timeline" class="band scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="al_eye">Step 9 · Tracking</span>
+      <h2 data-i18n="tl_h">When priorities change, the record shows why</h2>
+      <p data-i18n="tl_p">One project over 20 weeks.</p>
+    </div>
+    <div class="panel">
+      <div class="row-between" style="margin-bottom:16px"><h3 data-i18n="tl_t">Project timeline</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+      <div class="tl" id="tl"></div>
+      <div class="axis"><span>W1</span><span>W5</span><span>W10</span><span>W15</span><span>W20</span></div>
+      <h3 style="font-size:1rem;margin:26px 0 12px" data-i18n="tl_c">Share of delay by cause</h3>
+      <div class="causes" id="causes"></div>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="scene" data-part="2">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="team_eye">Feedback loop</span>
+      <h2 data-i18n="team_h">The same data told me where the team was stretched</h2>
+      <p data-i18n="team_p">Tracking every ticket showed who was overloaded, who was blocking others, and how much queued work each role would have to absorb.</p>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="l_h">Assigned hours vs weekly capacity</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <div class="load" id="load" style="margin-top:14px"></div>
+        <p class="summary" id="loadNote" style="margin-top:18px"></p>
+      </div>
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="h_h">Queued demand vs capacity, by role</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <p class="muted" style="margin:8px 0 14px;font-size:.88rem" data-i18n="h_p">Hours per week.</p>
+        <div class="load" id="demand"></div>
+        <p class="summary" id="demandNote" style="margin-top:18px"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="part3" class="band scene chapter" data-part="3" data-nonext="1">
+  <div class="wrap">
+    <div class="chap">
+      <div class="chnum" aria-hidden="true">3</div>
+      <div class="chbody">
+        <p class="chlabel"><span data-i18n="part_w">Part</span> 3 / 4</p>
+        <h2 data-i18n="ch3_h">Chapter</h2>
+        <p class="chlead" data-i18n="ch3_p">Text</p>
+        <ul class="chchips" data-chips="3"></ul>
+        <a class="btn2 chgo" href="#entry" data-i18n="ch_go">Start this part</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="entry" class="scene" data-part="3">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ce_eye">Step 8 · Catalogue entry</span>
+      <h2 data-i18n="ce_h">Every data point arrives with its owner and its meaning</h2>
+      <p data-i18n="cat_p">The entry is created at the same time as the data arrives.</p>
+    </div>
+    <div class="panel">
+      <div class="row-between" style="margin-bottom:16px"><h3 data-i18n="cat_h">Catalogue entry, filled while the table is ingested</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+      <div class="kv" id="catEntry"></div>
+    </div>
+  </div>
+</section>
+
+<section id="classification" class="band scene" data-part="3">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="cl_eye">Step 10 · Classification</span>
+      <h2 data-i18n="cl_h">Data is classified by domain and by sensitivity</h2>
+      <p data-i18n="cl_p">Every data point is classified twice.</p>
+    </div>
+    <div class="cols" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)">
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="cl_t">Example data points</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <div class="scroll-x" style="margin-top:10px"><table class="mx" id="clx"></table></div>
+        <p class="summary" id="clNote" style="margin-top:16px"></p>
+      </div>
+      <div class="panel">
+        <h3 data-i18n="cl_s">Sensitivity levels</h3>
+        <ul class="lvls" id="clLevels" style="margin-top:14px"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lineage" class="scene" data-part="3">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="lin_eye">Step 8 · Data catalogue</span>
+      <h2 data-i18n="lin_h">Follow a number from where it is born to where it is read</h2>
+      <p data-i18n="lin_p">Select a step.</p>
+    </div>
+    <div class="cols" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)">
+      <div class="panel lin"><div class="scroll-x" id="lineage-svg"></div></div>
+      <div class="panel" id="linDetail" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="part4" class="band scene chapter" data-part="4" data-nonext="1">
+  <div class="wrap">
+    <div class="chap">
+      <div class="chnum" aria-hidden="true">4</div>
+      <div class="chbody">
+        <p class="chlabel"><span data-i18n="part_w">Part</span> 4 / 4</p>
+        <h2 data-i18n="ch4_h">Chapter</h2>
+        <p class="chlead" data-i18n="ch4_p">Text</p>
+        <ul class="chchips" data-chips="4"></ul>
+        <a class="btn2 chgo" href="#governance" data-i18n="ch_go">Start this part</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="governance" class="scene" data-part="4">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="gov_eye">Step 10 · Data governance</span>
+      <h2 data-i18n="gov_h">Who can see and change what, and who answers for it</h2>
+      <p data-i18n="gov_p">I defined access processes, permission levels by job role, access tracking, and roles and responsibilities for the department.</p>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="mx_h">Permissions by role</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <div class="scroll-x" style="margin-top:10px"><table class="mx" id="mx"></table></div>
+        <div class="legend"><span><i class="lv"></i><span data-i18n="lg0">No access</span></span><span><i class="lv l1"></i><span data-i18n="lg1">Restricted: approval and logging</span></span><span><i class="lv l2"></i><span data-i18n="lg2">Full</span></span></div>
+        <p class="summary" id="roleNote" style="margin-top:16px"></p>
+      </div>
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="sg_h">Data is segmented before anyone asks for access</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <p class="muted" style="margin:8px 0 10px;font-size:.9rem" data-i18n="sg_p">Each domain has its own area.</p>
+        <div class="scroll-x"><table class="mx" id="smx"></table></div>
+        <p class="summary" id="segNote" style="margin-top:16px"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="access" class="band scene" data-part="4">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ac_eye">Part 4 · Access flow</span>
+      <h2 data-i18n="ac_h">Does it contain sensitive data?</h2>
+      <p data-i18n="ac_p">Every access request follows this decision.</p>
+    </div>
+    <div class="panel dec">
+      <div class="row-between" style="margin-bottom:14px"><div class="decq"><b data-i18n="ac_q">Sensitive data involved?</b><div id="decToggle"></div></div><span class="sample" data-i18n="sample">Illustrative data</span></div>
+      <div class="scroll-x" id="decision"></div>
+      <p class="summary" id="decNote" style="margin-top:14px"></p>
+    </div>
+  </div>
+</section>
+
+<section id="audit" class="scene" data-part="4">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="au_eye">Part 4 · Access tracking</span>
+      <h2 data-i18n="au_h">Every access leaves a trail</h2>
+      <p data-i18n="au_p">Grants are recorded.</p>
+    </div>
+    <div class="tiles" id="auTiles"></div>
+    <div class="cols" style="margin-top:20px">
+      <div class="panel">
+        <div class="row-between"><h3 data-i18n="log_h">Every access request leaves a trail</h3><span class="sample" data-i18n="sample">Illustrative data</span></div>
+        <div class="log" id="log" style="margin-top:14px"></div>
+      </div>
+      <div class="panel">
+        <h3 data-i18n="pr_h">Operating principles</h3>
+        <ul class="ck done" id="principles" style="margin-top:12px"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="cdmp" class="band scene">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="cd_eye">Coming soon</span>
+      <h2 data-i18n="cd_h">CDMP preparation</h2>
+      <p data-i18n="cd_p">I hold the CDMP certification from DAMA International and I am putting together a course to help other data professionals pass it.</p>
+    </div>
+    <div class="panel" style="border-style:dashed;max-width:760px">
+      <span class="pill warn" data-i18n="cd_soon">Coming soon</span>
+      <h3 style="margin:14px 0 18px" data-i18n="cd_q">Want to get your CDMP certification?</h3>
+      <a id="cdmpBtn" class="btn2" href="#contactBtns" target="_blank" rel="noopener" data-i18n="cd_btn">Contact me</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="contact">
+  <div class="wrap">
+    <div class="panel">
+      <div>
+        <h2 data-i18n="ct_h">Looking for someone to run this for your data team?</h2>
+        <p class="muted" style="margin-top:10px" data-i18n="ct_p">Open to data product and data governance leadership roles, and to consulting engagements that set up the operating model.</p>
+      </div>
+      <div class="btnrow" id="contactBtns"></div>
+    </div>
+    <p class="foot" data-i18n="foot">All projects, names, figures and charts on this page are illustrative examples, built to show the method. They are not data from any employer.</p>
+  </div>
+</div>
+
+<script>
+/* Set once the LinkedIn address is confirmed; the button stays hidden while empty. */
+const LINKEDIN_URL = "https://www.linkedin.com/in/jos%C3%A9-marmolejo";
+
+const D = {
+nav_flow:["The flow","El flujo"], 
+hero_eye:["Data & Product Lead · Data Governance Lead","Data & Product Lead · Data Governance Lead"],
+hero_h1:["I turn business requests into prioritised, tracked and governed data delivery.","Convierto peticiones de negocio en entregas de datos priorizadas, medidas y gobernadas."],
+hero_lead:["I built the operating model around a data team: how work is requested, justified, estimated, prioritised, delivered, documented and governed. This page lets you run a simplified version of it yourself.","Construí el modelo operativo de un equipo de datos: cómo se pide, justifica, estima, prioriza, entrega, documenta y gobierna el trabajo. En esta página puedes ejecutar tú mismo una versión simplificada."],
+chip1:["Data product leadership","Liderazgo de producto de datos"], chip2:["Data governance","Gobierno del dato"], chip3:["Delivery & stakeholder management","Entrega y gestión de stakeholders"],
+cta:["Run the method on a request","Aplica el método a una petición"],
+sec1:["Gambling","Gambling"], sec1d:["High-volume transactional data, regulatory reporting","Datos transaccionales de alto volumen, reporting regulatorio"],
+sec2:["Aerospace","Aeronáutica"], sec2d:["Maintenance data catalogue, lineage and access control","Catálogo de datos de mantenimiento, linaje y control de accesos"],
+sec3:["Retail","Retail"], sec3d:["Customer and sales data, constant demand for fast ETAs","Datos de cliente y ventas, demanda constante de ETAs rápidos"],
+flow_eye:["End to end","De principio a fin"], flow_h:["From a request to governed access, in ten steps","De una petición a un acceso gobernado, en diez pasos"],
+flow_p:["The work runs through four parts, shown here by colour. Select a step to see what happened, what it produced and where it appears on this page.","El trabajo recorre cuatro partes, indicadas aquí por colores. Selecciona un paso para ver qué ocurría, qué producía y dónde aparece en esta página."],
+flow_out:["Output","Resultado"],
+s1t:["Request tied to a KPI","Petición ligada a un KPI"], s1d:["A request had to name the company KPI it moves, the expected impact with the figures behind it, today's problem and process with the time it takes, the minimum version that would help, and the date needed. Nothing entered the queue without that.","Una petición debía indicar el KPI de empresa que mueve, el impacto esperado con las cifras que lo respaldan, el problema y el proceso actuales con el tiempo que llevan, la versión mínima que ayudaría y la fecha necesaria. Nada entraba en la cola sin eso."], s1o:["Requirement document with the KPI named","Documento de requisitos con el KPI identificado"],
+s2t:["Scoring: cost, complexity, ROI","Scoring: coste, complejidad, ROI"], s2d:["Each request was scored on people involved, complexity, expected ROI and how soon that ROI would start.","Cada petición se puntuaba por personas implicadas, complejidad, ROI esperado y cuándo empezaría ese ROI."], s2o:["Ranked list of what to start first","Lista ordenada de qué empezar antes"],
+s3t:["Architect estimate","Estimación del arquitecto"], s3d:["First conversation was with the architect: how much already exists, which data sources are involved, does the architecture need to change? That set the effort.","La primera conversación era con el arquitecto: cuánto existe ya, qué fuentes de datos intervienen, ¿hay que cambiar la arquitectura? Eso fijaba el esfuerzo."], s3o:["Effort range in hours","Rango de esfuerzo en horas"],
+s4t:["Options for the stakeholder","Opciones para el stakeholder"], s4d:["The stakeholder received several options with different scope and time, and chose the one that fit their need.","El stakeholder recibía varias opciones con distinto alcance y plazo, y elegía la que encajaba con su necesidad."], s4o:["Chosen scope and date","Alcance y fecha elegidos"],
+s5t:["Priority agreed with product","Prioridad acordada con product"], s5d:["Priority was set after reviewing the portfolio with the heads of product and the Chief Product Officer, so the team worked on what the business ranked first. The requester never set it.","La prioridad se fijaba tras revisar el portfolio con los heads of product y el Chief Product Officer, para que el equipo trabajara en lo que el negocio situaba primero. No la fijaba el solicitante."], s5o:["Agreed priority order","Orden de prioridad acordado"],
+s6t:["ETA from live workload","ETA según la carga real"], s6d:["A model combined priority, complexity and current team load to answer 'when?' in the meeting, and to show what moves if the priority changes.","Un modelo combinaba prioridad, complejidad y carga actual del equipo para responder '¿cuándo?' en la reunión y mostrar qué se mueve si cambia la prioridad."], s6o:["Date, and the cost of moving it","Fecha y coste de moverla"],
+s7t:["Plan in Jira","Plan en Jira"], s7d:["Initiative, epics, tasks and subtasks, with hour estimates, owners and links between tickets that block each other.","Iniciativa, épicas, tareas y subtareas, con horas estimadas, responsables y enlaces entre tickets que se bloquean."], s7o:["Assigned and linked tickets","Tickets asignados y enlazados"],
+s8t:["Build, with the catalogue in parallel","Construcción, con el catálogo en paralelo"], s8d:["While the engineers ingest and model the data, the catalogue is completed at the same time: who owns each data point, what it means, how sensitive it is and which quality rule applies. Documentation is part of the build, not something left for later.","Mientras los ingenieros ingestan y modelan los datos, el catálogo se completa a la vez: quién es el responsable de cada data point, qué significa, qué sensibilidad tiene y qué regla de calidad aplica. La documentación forma parte de la construcción, no se deja para después."], s8o:["Data and its catalogue entry, ready together","Datos y su ficha de catálogo, listos a la vez"],
+s9t:["Tracking, reports and weekly plan","Seguimiento, reportes y plan semanal"], s9d:["Progress was compared with the agreed plan continuously and alerts fired when a deadline was at risk. Each person received an automatic weekly plan built from priorities, capacity and the team's own comments.","El avance se comparaba con el plan acordado de forma continua y saltaban alertas cuando un plazo estaba en riesgo. Cada persona recibía un plan semanal automático a partir de prioridades, capacidad y los comentarios del propio equipo."], s9o:["Early warning, and everyone knows next week's work","Aviso temprano, y todos conocen el trabajo de la semana siguiente"],
+s10t:["Controlled access","Acceso controlado"], s10d:["Once the data is live, people get access through a fixed flow: request, owner approval, policy check, approval by the CTO and the CISOs when the data is sensitive, grant by the engineer, logging with expiry, and periodic review.","Con los datos ya disponibles, el acceso sigue un flujo fijo: petición, aprobación del responsable, revisión de políticas, aprobación del CTO y los CISOs si los datos son sensibles, concesión por el ingeniero, registro con caducidad y revisión periódica."], s10o:["Access that is approved, logged and reviewable","Acceso aprobado, registrado y revisable"],
+try_eye:["Part 1 · The request","Parte 1 · La petición"], try_h:["Bring me a request. See the answer I would give.","Tráeme una petición. Mira la respuesta que daría."],
+try_p:["Follow one request through the method, one stage at a time: the request, the architect, the priority review with product, and the data contract.","Sigue una petición por el método, etapa a etapa: la petición, el arquitecto, la revisión de prioridad con product y el data contract."],
+sample:["Illustrative data","Datos ilustrativos"], f_h:["The request","La petición"], f_preset:["Start from an example","Parte de un ejemplo"],
+p_sales:["Weekly sales dashboard","Dashboard semanal de ventas"], p_report:["Automate compliance report","Automatizar informe de cumplimiento"], p_churn:["Customer churn model","Modelo de fuga de clientes"], p_custom:["Custom request","Petición propia"],
+f_kpi:["Which company KPI does it move?","¿Qué KPI de empresa mueve?"], k_sav:["Savings","Ahorro"], k_rev:["Revenue","Ingresos"],
+f_impact:["Expected annual impact","Impacto anual esperado"], f_fields:["Approximate number of fields","Número aproximado de campos"],
+f_refresh:["How fresh must the data be?","¿Qué tan fresco debe ser el dato?"], r_daily:["Daily","Diario"], r_hourly:["Hourly","Cada hora"], r_rt:["Near real time","Casi en tiempo real"],
+f_users:["People who will access it","Personas con acceso"], 
+pr1:["Critical","Crítica"], pr2:["High","Alta"], pr3:["Normal","Normal"], pr4:["Low","Baja"],
+o_req:["Requirement summary","Resumen de requisitos"], o_req_p:["What would be written in the Data Requirement Document.","Lo que se recogería en el Data Requirement Document."],
+kv_req:["Request","Petición"], kv_kpi:["Company KPI","KPI de empresa"], kv_fld:["Fields","Campos"], kv_ref:["Refresh","Refresco"], 
+
+
+o_opt:["Options for the stakeholder","Opciones para el stakeholder"], o_opt_p:["Pick the option the stakeholder chooses. The next stage decides when it can be delivered.","Elige la opción que escoge el stakeholder. La siguiente etapa decide cuándo se puede entregar."],
+op_mvp:["Essentials","Esencial"], op_bal:["Balanced","Equilibrada"], op_full:["Full scope","Alcance completo"],
+op_mvp_d:["Core metrics only, one refresh path","Solo métricas clave, un camino de refresco"], op_bal_d:["Most fields, standard monitoring","La mayoría de campos, monitorización estándar"], op_full_d:["Everything requested, with quality checks","Todo lo pedido, con controles de calidad"],
+l_eff:["Effort","Esfuerzo"], l_cost:["Cost","Coste"], l_deliv:["Delivery","Entrega"], l_pay:["ROI starts","El ROI empieza"], l_ben:["Benefit kept","Beneficio"], mo:["mo","m"], hrs:["h","h"],
+
+sum_new:["In position {p} of the queue, this lands on {d}.","En la posición {p} de la cola, se entrega el {d}."], sum_none:[" No other project moves."," Ningún otro proyecto se mueve."],
+sum_push:[" {n} other project(s) move. The largest, {x}, slips {w} weeks to {d}."," Se mueven {n} proyecto(s). El mayor, {x}, se retrasa {w} semanas hasta el {d}."],
+wk:["wk","sem"], 
+b_reg:["Regulatory reporting automation","Automatización de reporting regulatorio"], b_c360:["Customer 360 model","Modelo Customer 360"], b_fc:["Revenue forecasting dashboard","Dashboard de previsión de ingresos"], b_mig:["Legacy reports migration","Migración de informes legacy"], b_dq:["Data quality monitoring","Monitorización de calidad de datos"],
+del_eye:["Part 2 · How we structure the work","Parte 2 · Cómo estructuramos el trabajo"], del_h:["Once agreed, everything is traceable","Una vez acordado, todo es trazable"],
+del_p:["The agreement became a custom Jira structure, with estimates, dependencies and alerts. Select any ticket to see what blocks it and what it blocks.","El acuerdo se convertía en una estructura Jira a medida, con estimaciones, dependencias y alertas. Selecciona un ticket para ver qué lo bloquea y a qué bloquea."],
+j_h:["Initiative, epics, tasks, subtasks","Iniciativa, épicas, tareas, subtareas"], lg_blocks:["Blocked by (upstream)","Bloqueado por (aguas arriba)"], lg_blocked:["Blocks (downstream)","Bloquea (aguas abajo)"],
+st_done:["Done","Hecho"], st_prog:["In progress","En curso"], st_blk:["Blocked","Bloqueado"], st_todo:["To do","Pendiente"],
+a_p:["Each epic compares the share of scope completed with the share of planned time elapsed. A gap above 15 points raises an alert before the deadline is missed.","Cada épica compara el porcentaje de alcance completado con el porcentaje de tiempo planificado transcurrido. Una brecha superior a 15 puntos lanza una alerta antes de incumplir el plazo."],
+a_scope:["Scope done","Alcance hecho"], a_time:["Time elapsed","Tiempo usado"], a_risk:["At risk","En riesgo"], a_ok:["On track","En plazo"], a_msg:["Gap of {g} points. Escalate to the owner and review dependencies.","Brecha de {g} puntos. Escalar al responsable y revisar dependencias."], a_msg_ok:["Gap of {g} points. No action needed.","Brecha de {g} puntos. Sin acción necesaria."],
+i1:["Customer data platform","Plataforma de datos de cliente"], e1:["Ingestion","Ingesta"], e2:["Modelling","Modelado"],
+t11:["Ingest transactions","Ingesta de transacciones"], t12:["Ingest CRM","Ingesta de CRM"], t21:["Customer dimension","Dimensión de cliente"], t22:["Reporting layer","Capa de reporting"],
+u111:["Connect source API","Conectar API de origen"], u112:["Landing tables","Tablas de landing"], u113:["Load scheduling","Planificación de cargas"], u121:["Obtain source access","Obtener acceso al origen"], u122:["Map CRM fields","Mapear campos del CRM"], u123:["Incremental load","Carga incremental"],
+u211:["Define keys","Definir claves"], u212:["Build dimension","Construir dimensión"], u213:["Quality checks","Controles de calidad"], u221:["Semantic model","Modelo semántico"], u222:["Dashboard","Dashboard"],
+tl_h:["When priorities change, the record shows why","Cuando cambian las prioridades, el registro explica por qué"],
+tl_p:["One project over 20 weeks. Every pause was logged with its cause, and the documentation left at each pause made restarting fast. This is how delays were traced to priority changes and dependencies on other areas.","Un proyecto a lo largo de 20 semanas. Cada pausa se registraba con su causa, y la documentación dejada en cada pausa hacía rápido el reinicio. Así se atribuían los retrasos a cambios de prioridad y dependencias de otras áreas."],
+tl_on:["Active","Activo"], tl_pause:["Paused","Pausado"], tl_c:["Share of delay by cause","Porcentaje de retraso por causa"],
+c_prio:["Priority change","Cambio de prioridad"], c_dep:["Waiting on other teams","Espera a otros equipos"], c_scope:["Scope change","Cambio de alcance"], c_cap:["Data team capacity","Capacidad del equipo de datos"],
+w_h:["Weekly plan, generated for each person","Plan semanal generado para cada persona"], w_p:["Built every week from priorities, capacity and the comments the team left the week before. Different parts of the team could be on unrelated projects and each still got the right list.","Se construía cada semana con prioridades, capacidad y los comentarios que el equipo dejó la semana anterior. Distintas partes del equipo podían estar en proyectos sin relación y cada una recibía su lista."],
+w_week:["Week of {d}","Semana del {d}"], role_eng:["Engineer","Ingeniero"], role_arc:["Architect","Arquitecto"], role_mod:["Modeller","Modelador"], role_dq:["Data quality","Calidad de datos"],
+team_eye:["Part 2 · How we evaluate ourselves","Parte 2 · Cómo nos autoevaluamos"], team_h:["The same data told me where the team was stretched","Los mismos datos me decían dónde estaba tensionado el equipo"],
+team_p:["Tracking every ticket showed who was overloaded, who was blocking others, and how much queued work each role would have to absorb. It was the evidence behind staffing and hiring requests.","El seguimiento de cada ticket mostraba quién estaba sobrecargado, quién bloqueaba a otros y cuánto trabajo en cola tendría que absorber cada rol. Era la evidencia detrás de las peticiones de personal y contrataciones."],
+l_h:["Assigned hours vs weekly capacity","Horas asignadas vs capacidad semanal"], l_blk:["blocks","bloquea"],
+ln_over:["{n} of {t} people are above capacity. {r} blocks the most tickets ({b}), a bottleneck to fix before adding more work.","{n} de {t} personas superan su capacidad. {r} bloquea más tickets ({b}); es un cuello de botella a resolver antes de añadir trabajo."],
+h_h:["Queued demand vs capacity, by role","Demanda en cola vs capacidad, por rol"], h_p:["Hours per week: assigned now, and queued in the prioritised roadmap for the next eight weeks. The line marks the capacity of the role.","Horas por semana: asignadas ahora y en cola en el roadmap priorizado para las próximas ocho semanas. La línea marca la capacidad del rol."],
+dm_now:["Assigned now","Asignadas ahora"], dm_q:["Queued, next 8 weeks","En cola, próximas 8 semanas"], dm_cap:["Capacity","Capacidad"],
+dm_note:["Queued work for the {r} role exceeds its capacity by {n} people. That gap, not opinion, is what supports a hiring request.","El trabajo en cola del rol {r} supera su capacidad en {n} personas. Esa brecha, y no una opinión, es lo que respalda una petición de contratación."],
+pe_a:["Engineer A","Ingeniero A"], pe_b:["Engineer B","Ingeniero B"], pe_c:["Engineer C","Ingeniero C"], pe_arc:["Architect","Arquitecto"], pe_mod:["Modeller","Modelador"], pe_dq:["Data quality analyst","Analista de calidad"],
+doc_eye:["Part 2 · How we structure the work","Parte 2 · Cómo estructuramos el trabajo"], doc_h:["Decide it once, write it down, restart without friction","Decidirlo una vez, dejarlo escrito, reanudar sin fricción"],
+doc_p:["Two documents carried most of the weight: the Data Requirement Document at the start, and a handoff note whenever work paused.","Dos documentos sostenían casi todo: el Data Requirement Document al inicio y una nota de traspaso cada vez que el trabajo se pausaba."],
+drd_h:["Data Requirement Document","Data Requirement Document"], drd_p:["Everything that has to be clear before anyone builds.","Todo lo que debe estar claro antes de construir nada."],
+d1:["Business goal and linked KPI","Objetivo de negocio y KPI asociado"], d2:["Requester and stakeholders","Solicitante y stakeholders"], d3:["Fields and their definitions","Campos y sus definiciones"], d4:["Source systems","Sistemas de origen"], d5:["Refresh frequency","Frecuencia de refresco"], d6:["Who accesses it, and how","Quién accede y cómo"], d7:["Sensitivity classification","Clasificación de sensibilidad"], d8:["Quality rules","Reglas de calidad"], d9:["Acceptance criteria","Criterios de aceptación"], d10:["Owner and retirement date","Responsable y fecha de retirada"],
+ho_h:["Handoff note","Nota de traspaso"], ho_p:["Written by each role when a project pauses.","La escribe cada rol cuando un proyecto se pausa."], ho_done:["Done","Hecho"], ho_pend:["Pending","Pendiente"],
+hd_eng:["Ingested 3 of 5 tables","Ingeridas 3 de 5 tablas"], hd_eng2:["Incremental load tested","Carga incremental probada"], hp_eng:["Ingest the remaining 2 tables","Ingerir las 2 tablas restantes"], hp_eng2:["Automate the nightly schedule","Automatizar la planificación nocturna"],
+hd_arc:["Target model approved","Modelo objetivo aprobado"], hd_arc2:["Access pattern defined","Patrón de acceso definido"], hp_arc:["Review partitioning strategy","Revisar estrategia de particionado"], hp_arc2:["Sign off lineage","Validar el linaje"],
+hd_mod:["Customer keys defined","Claves de cliente definidas"], hd_mod2:["Naming conventions agreed","Convenciones de nombres acordadas"], hp_mod:["Build the fact table","Construir la tabla de hechos"], hp_mod2:["Document metric definitions","Documentar definiciones de métricas"],
+hd_dq:["Completeness and uniqueness checks live","Controles de completitud y unicidad activos"], hd_dq2:["Baseline error rate recorded","Tasa de error base registrada"], hp_dq:["Reconcile totals against source","Cuadrar totales contra el origen"], hp_dq2:["Set alert thresholds","Definir umbrales de alerta"],
+gov_eye:["Part 4 · Permissions and segmentation","Parte 4 · Permisos y segmentación"], gov_h:["Who can see and change what, and who answers for it","Quién puede ver y cambiar qué, y quién responde de ello"],
+gov_p:["I defined access processes, permission levels by job role, access tracking, and roles and responsibilities for the department. I then worked with the engineering director to extend that model across the company.","Definí los procesos de acceso, los niveles de permisos por puesto, el seguimiento de accesos y los roles y responsabilidades del departamento. Después trabajé con el director de ingeniería para extender ese modelo a toda la empresa."],
+mx_h:["Permissions by role","Permisos por rol"], lg0:["No access","Sin acceso"], lg1:["Restricted: approval and logging","Restringido: aprobación y registro"], lg2:["Full","Completo"],
+pm1:["Read","Leer"], pm2:["Read sensitive","Leer sensible"], pm3:["Write","Escribir"], pm4:["Change schema","Cambiar esquema"], pm5:["Grant access","Dar acceso"],
+ro1:["Viewer","Lector"], ro2:["Analyst","Analista"], ro3:["Data steward","Data steward"], ro4:["Engineer","Ingeniero"], ro5:["Domain owner","Responsable de dominio"],
+rd1:["Consumes dashboards and published datasets. No access to raw or sensitive fields.","Consume dashboards y datasets publicados. Sin acceso a campos en bruto ni sensibles."],
+rd2:["Queries curated data. Sensitive fields only through an approved, time-limited request.","Consulta datos curados. Los campos sensibles solo mediante petición aprobada y con caducidad."],
+rd3:["Keeps definitions and quality rules. Can approve access inside their domain.","Mantiene definiciones y reglas de calidad. Puede aprobar accesos dentro de su dominio."],
+rd4:["Builds and changes pipelines and models. Schema changes go through review.","Construye y modifica pipelines y modelos. Los cambios de esquema pasan por revisión."],
+rd5:["Accountable for the data in their area and the only role that grants access to it.","Responsable de los datos de su área y único rol que concede acceso a ellos."],
+log_h:["Every access request leaves a trail","Cada petición de acceso deja rastro"],
+lg_a:["Analyst requested: read sensitive, customer table","Analista solicitó: leer sensible, tabla de clientes"], lg_a2:["Approved by Domain owner · expires in 30 days","Aprobado por Responsable de dominio · caduca en 30 días"],
+lg_b:["Engineer requested: schema change, sales mart","Ingeniero solicitó: cambio de esquema, mart de ventas"], lg_b2:["Approved after review · change recorded","Aprobado tras revisión · cambio registrado"],
+lg_c:["Viewer requested: read, forecasting dashboard","Lector solicitó: lectura, dashboard de previsión"], lg_c2:["Approved by Data steward · standard access","Aprobado por Data steward · acceso estándar"],
+pr_h:["Operating principles","Principios de funcionamiento"], pp1:["Access follows the job role, not the person","El acceso sigue al puesto, no a la persona"], pp2:["Sensitive access expires and is reviewed","El acceso sensible caduca y se revisa"], pp3:["Every dataset has a named owner","Cada dataset tiene un responsable con nombre"],
+lin_eye:["Part 3 · Lineage","Parte 3 · Linaje"], lin_h:["Follow a number from where it is born to where it is read","Sigue un número desde donde nace hasta donde se lee"],
+lin_p:["While each table is ingested, its catalogue entry is filled in at the same time: who owns every data point, what it means, how sensitive it is and which rule checks it. I set up a catalogue for an aerospace maintenance organisation and started a second one with OpenMetadata in a gambling company, focusing on lineage from source to dashboard. Select a step.","Mientras se ingesta cada tabla, su ficha de catálogo se completa a la vez: quién es responsable de cada data point, qué significa, qué sensibilidad tiene y qué regla lo comprueba. Monté un catálogo para una organización de mantenimiento aeronáutico y empecé otro con OpenMetadata en una empresa de gambling, centrado en el linaje de origen a dashboard. Selecciona un paso."],
+lc0:["Source","Origen"], lc1:["Landing","Landing"], lc2:["Staging","Staging"], lc3:["Core","Core"], lc4:["Consumption","Consumo"],
+n_s1:["Transactions DB","BD transacciones"], n_s2:["CRM","CRM"], n_l1:["Raw transactions","Transacciones raw"], n_l2:["Raw CRM","CRM raw"], n_st:["Cleaned records","Registros limpios"], n_co:["Customer model","Modelo de cliente"], n_m1:["Sales mart","Mart de ventas"], n_m2:["Churn dashboard","Dashboard de fuga"],
+nd_s1:["Operational system of record. Owner: platform team. Loaded every night.","Sistema operacional de referencia. Responsable: equipo de plataforma. Carga nocturna."],
+nd_s2:["Customer relationship system. Contains personal data, so access is restricted.","Sistema de relación con clientes. Contiene datos personales, por lo que el acceso es restringido."],
+nd_l1:["Copied as-is, no changes. Row counts compared with the source after each load.","Copiado tal cual, sin cambios. Se comparan los recuentos de filas con el origen tras cada carga."],
+nd_l2:["Copied as-is. Personal fields are tagged in the catalogue on arrival.","Copiado tal cual. Los campos personales se etiquetan en el catálogo al llegar."],
+nd_st:["Types fixed, duplicates removed, nulls handled, customer IDs standardised. Quality checks run here.","Tipos corregidos, duplicados eliminados, nulos tratados e IDs de cliente estandarizados. Aquí se ejecutan los controles de calidad."],
+nd_co:["Transactions and CRM joined on customer key. One definition of 'active customer', documented in the catalogue.","Transacciones y CRM unidos por clave de cliente. Una única definición de 'cliente activo', documentada en el catálogo."],
+nd_m1:["Aggregated by day and product for the sales dashboard. Read-only for analysts.","Agregado por día y producto para el dashboard de ventas. Solo lectura para analistas."],
+nd_m2:["Churn score per customer. Sensitive fields masked for most viewers.","Puntuación de fuga por cliente. Campos sensibles enmascarados para la mayoría de lectores."],
+ln_up:["Upstream","Aguas arriba"], ln_dn:["Downstream","Aguas abajo"], ln_none:["None","Ninguno"],
+ct_h:["Looking for someone to run this for your data team?","¿Buscas a alguien que lo ponga en marcha en tu equipo de datos?"],
+ct_p:["Open to data product and data governance leadership roles, and to consulting engagements that set up the operating model.","Abierto a roles de liderazgo en producto de datos y gobierno del dato, y a consultoría para montar el modelo operativo."],
+ct_li:["LinkedIn profile","Perfil de LinkedIn"],
+hero_h1a:["I turn business requests into","Convierto peticiones de negocio en"], hero_h1b:["prioritised, tracked and governed data delivery.","entregas de datos priorizadas, medidas y gobernadas."],
+m_head:["Live roadmap","Roadmap en vivo"], m_new:["New request","Nueva petición"], m_delay:["delayed","retrasados"], m_none:["Nothing delayed","Nada se retrasa"],
+sectors_line:["Experience across gambling, aerospace and retail.","Experiencia en gambling, aeronáutica y retail."],
+
+kv_own:["Business owner","Responsable de negocio"], own_t:["Named by the requester before work starts","Lo nombra el solicitante antes de empezar"],
+cat_h:["Catalogue entry, filled while the table is ingested","Ficha de catálogo, completada mientras se ingesta la tabla"],
+cat_p:["The entry is created at the same time as the data arrives. Each part is provided by the role that is accountable for it, so nothing waits until after delivery.","La ficha se crea a la vez que llegan los datos. Cada parte la aporta el rol responsable de ella, así que nada espera a después de la entrega."],
+cat_by:["Set by","Aporta"],
+roles_eye:["Part 2 · How we structure the work","Parte 2 · Cómo estructuramos el trabajo"], roles_h:["One task, one owner","Cada tarea, un responsable"],
+roles_p:["Every recurring task had a defined owner and a defined way to hand work to the next role. Some tasks overlap, but who decides and who executes was always explicit. Select a role.","Cada tarea recurrente tenía un responsable definido y una forma definida de pasar el trabajo al siguiente rol. Algunas tareas se solapan, pero siempre estaba explícito quién decide y quién ejecuta. Selecciona un rol."],
+r_own:["Owns","Es responsable de"], r_hand:["Hand-offs","Traspasos"],
+chain_h:["Example: a quality check, end to end","Ejemplo: un control de calidad, de principio a fin"],
+chain_n:["The engineer runs the automation. The meaning of the data and the thresholds stay with Data Quality.","El ingeniero ejecuta la automatización. El significado del dato y los umbrales siguen siendo de Data Quality."],
+mx2_h:["Who does what","Quién hace qué"], lg_own:["Owns: decides and answers for it","Responsable: decide y responde"], lg_sup:["Supports: provides input or executes","Apoya: aporta o ejecuta"],
+
+
+grp_biz:["Business case","Caso de negocio"],
+grp_now:["Current situation","Situación actual"],
+grp_need:["What they need","Qué necesitan"],
+f_sub:["Subcategory","Subcategoría"],
+f_ev:["How solid is that figure?","¿Qué solidez tiene esa cifra?"],
+ev_figures:["Backed by figures","Respaldada por cifras"],
+ev_estimate:["Team estimate","Estimación del equipo"],
+ev_assumption:["Assumption","Suposición"],
+f_evid:["Calculation behind it","Cálculo que la respalda"],
+f_prob:["Problem today and its effect on daily operations","Problema actual y cómo afecta a la operativa diaria"],
+f_proc:["How it is done today","Cómo se hace hoy"],
+f_time:["Time the current process takes","Tiempo que lleva el proceso actual"],
+f_mvp:["Minimum version that would already solve it (MVP)","Versión mínima que ya lo resolvería (MVP)"],
+f_need:["Date they would like it","Fecha en la que lo quieren"],
+f_blocks:["Other projects depend on this","Otros proyectos dependen de esto"],
+f_deps:["Which projects?","¿Qué proyectos?"],
+f_fields_h:["The final list is fixed in the data contract.","La lista final se fija en el data contract."],
+r_weekly:["Weekly","Semanal"],
+f_cons:["Who consumes it?","¿Quién lo consume?"],
+c_people:["People","Personas"],
+c_sys:["Systems only","Solo sistemas"],
+f_action:["Action it triggers","Acción que lanza"],
+a_email:["Send an email automatically","Enviar un email automáticamente"],
+a_system:["Update another system","Actualizar otro sistema"],
+a_alert:["Raise an alert","Lanzar una alerta"],
+sub_savings_a:["Process automation","Automatización de procesos"],
+sub_savings_b:["Cost reduction","Reducción de costes"],
+sub_savings_c:["Risk and compliance avoidance","Evitar riesgos e incumplimientos"],
+sub_revenue_a:["New revenue","Nuevos ingresos"],
+sub_revenue_b:["Conversion and retention","Conversión y retención"],
+sub_revenue_c:["Pricing and upsell","Precios y venta cruzada"],
+kv_imp:["Impact","Impacto"],
+kv_chk:["Backing check","Comprobación"],
+kv_time:["Time today","Tiempo hoy"],
+kv_need:["Needed by","Para el"],
+kv_cons:["Consumers","Consumidores"],
+kv_prob:["Problem today","Problema actual"],
+kv_proc:["Current process","Proceso actual"],
+kv_mvp:["MVP","MVP"],
+kv_evid:["Calculation","Cálculo"],
+kv_dep:["Dependencies","Dependencias"],
+dep_none:["None","Ninguna"],
+chk_sav:["{h} h × 52 weeks × €35/h = {v} a year","{h} h × 52 semanas × 35 €/h = {v} al año"],
+chk_ok:["Supported","Respaldado"],
+chk_hi:["Claim is {x}× what the time supports","La cifra es {x}× lo que respalda el tiempo"],
+chk_none:["No time baseline","Sin referencia de tiempo"],
+chk_rev:["Needs a finance baseline","Requiere una base de finanzas"],
+fld_note:["final list in the data contract","lista final en el data contract"],
+cons_sys:["Systems only: {a}","Solo sistemas: {a}"],
+cons_people:["{n} people","{n} personas"],
+on_time:["On time","A tiempo"],
+late:["{n} wk late","{n} sem. de retraso"],
+need_tile:["Needed by {d}","Para el {d}"],
+l_benadj:["Benefit, risk-adjusted","Beneficio ajustado por riesgo"],
+u_hw:["h/week","h/sem"],
+ar_h:["Architect analysis","Análisis del arquitecto"],
+ar_p:["Step 3. The architect judges how much already exists and which sources are involved. This, not the request, sets the effort.","Paso 3. El arquitecto valora cuánto existe ya y qué fuentes intervienen. Esto, y no la petición, fija el esfuerzo."],
+ar_f:["Architecture impact","Impacto en arquitectura"],
+ar_inplace:["Already in place","Ya existe"],
+ar_ext:["Extension of what exists","Extensión de lo existente"],
+ar_new:["New architecture","Arquitectura nueva"],
+ar_src:["Data sources involved","Fuentes de datos implicadas"],
+pz_h:["Priority review","Revisión de prioridad"],
+pz_p:["Set after the review with the heads of product and the Chief Product Officer. The requester does not choose it.","Se fija tras la revisión con los heads of product y el Chief Product Officer. No la elige el solicitante."],
+dc_h:["Data contract","Data contract"],
+dc_p:["Written after the architect's analysis and the priority review. The final list of fields, sources and sensitivity is fixed here.","Se redacta tras el análisis del arquitecto y la revisión de prioridad. Aquí se fija la lista final de campos, fuentes y sensibilidad."],
+dc_sens:["After analysis, the data team classifies at least one data point as Sensitive or Critical","Tras el análisis, el equipo de datos clasifica al menos un data point como Sensible o Crítico"],
+dc_path:["Access path","Camino de acceso"],
+dc_std:["Internal and low-sensitivity data stays inside the domain: the owner and the steward approve. The CTO and the CISOs are not involved.","Los datos internos y de baja sensibilidad se quedan en el dominio: aprueban el responsable y el steward. No intervienen el CTO ni los CISOs."],
+dc_sensn:["Sensitive and critical data always needs approval from the CTO and the CISOs before anything is granted.","Los datos sensibles y críticos necesitan siempre la aprobación del CTO y los CISOs antes de conceder nada."],
+dc_sys:["No person gets access. A service account receives only the permission the action needs.","Ninguna persona recibe acceso. Una cuenta de servicio recibe solo el permiso que necesita la acción."],
+dc_cat:["{n} data points go into the catalogue during ingestion, each with an owner and a definition.","{n} data points entran en el catálogo durante la ingesta, cada uno con responsable y definición."],
+pt_req:["Requester","Solicitante"],
+pt_sysowner:["System owner","Responsable del sistema"],
+pt_grant:["Engineer applies grant","Ingeniero aplica el acceso"],
+pt_log:["Logged with expiry","Registro con caducidad"],
+cto:["CTO and CISOs","CTO y CISOs"],
+dep_note:["Waiting on this: {d}. It can only start after {x}.","Esperan a esto: {d}. Solo puede empezar después del {x}."],
+need_ok:["The {o} option lands on {d}, in time.","La opción {o} llega el {d}, a tiempo."],
+need_no:["No option meets the date at this priority. Raise the priority or move the date.","Ninguna opción cumple la fecha con esta prioridad. Hay que subir la prioridad o mover la fecha."],
+
+
+wz1:["Request","Petición"],
+wz2:["Architect","Arquitecto"],
+wz3:["Priority and roadmap","Prioridad y roadmap"],
+wz4:["Data contract","Data contract"],
+bt_1:["Continue: summary and architect","Continuar: resumen y arquitecto"],
+bt_2:["Continue: heads of product","Continuar: heads of product"],
+bt_3:["Continue: data contract","Continuar: data contract"],
+bt_4:["Continue to delivery","Continuar a la entrega"],
+bt_back:["Back","Atrás"],
+hint_1:["Nothing here is about architecture or priority. Those come next, from the people who own them.","Nada de esto trata de arquitectura ni de prioridad. Eso viene después, de quienes son responsables."],
+s2_h:["Requirement summary","Resumen de requisitos"],
+s2_p:["This summary goes into a meeting with the architect.","Este resumen se lleva a una reunión con el arquitecto."],
+cx_low:["Low complexity","Complejidad baja"],
+cx_med:["Medium complexity","Complejidad media"],
+cx_high:["High complexity","Complejidad alta"],
+cx_line:["{c}: about {w} weeks of team time at full scope.","{c}: unas {w} semanas de tiempo del equipo con el alcance completo."],
+l_wks:["Team time","Tiempo de equipo"],
+s3_h:["Roadmap","Roadmap"],
+s3_p:["After the architect, the request goes to the heads of product and the Chief Product Officer, who rank it against everything else. Drag a project, or use the arrows, to see what each move does to the dates.","Tras el arquitecto, la petición pasa a los heads of product y al Chief Product Officer, que la ordenan frente a todo lo demás. Arrastra un proyecto, o usa las flechas, para ver qué hace cada movimiento a las fechas."],
+rm_reset:["Back to the priority order","Volver al orden por prioridad"],
+rm_up:["Move up","Subir"],
+rm_down:["Move down","Bajar"],
+rm_hint:["Drag rows or use the arrows. The number is the position in the queue.","Arrastra filas o usa las flechas. El número es la posición en la cola."],
+rm_vs:["Changes are against the plan before this request.","Las diferencias son respecto al plan anterior a esta petición."],
+mv_h:["Last move","Último movimiento"],
+mv_start:["Move any row to see what it does to the others.","Mueve cualquier fila para ver qué provoca en las demás."],
+mv_txt:["{n} moved from #{a} to #{b} ({d}).","{n} pasa de la posición {a} a la {b} ({d})."],
+mv_later:["Pushed back: {l}.","Se retrasan: {l}."],
+mv_earlier:["Earlier: {l}.","Se adelantan: {l}."],
+mv_none:["No other project changes date.","Ningún otro proyecto cambia de fecha."],
+s4_h:["Data contract","Data contract"],
+s4_p:["Once the work is approved, the architect and the data team agree the contract with the teams that produce and consume the data. The details are fixed here, not in the request.","Cuando el trabajo está aprobado, el arquitecto y el equipo de datos acuerdan el contrato con los equipos que producen y consumen los datos. Los detalles se fijan aquí, no en la petición."],
+dc1t:["Fields and definitions","Campos y definiciones"],
+dc1d:["Every field named, defined and typed.","Cada campo con nombre, definición y tipo."],
+dc1v:["final list agreed","lista final acordada"],
+dc2t:["Sources and refresh","Fuentes y refresco"],
+dc2d:["Where each field comes from and how often it lands.","De dónde viene cada campo y con qué frecuencia llega."],
+dc3t:["Quality rules","Reglas de calidad"],
+dc3d:["Thresholds and checks the data must pass.","Umbrales y controles que deben cumplir los datos."],
+dc3v:["Defined by Data Quality","Las define Data Quality"],
+dc4t:["Ownership","Responsables"],
+dc4d:["One accountable owner for every data point.","Un responsable por cada data point."],
+dc5t:["Access and sensitivity","Acceso y sensibilidad"],
+dc5d:["Each data point is classified by domain and sensitivity. The highest level decides who must approve.","Cada data point se clasifica por dominio y sensibilidad. El nivel más alto decide quién debe aprobar."],
+dc5s:["Sensitive: CTO and CISOs approve","Sensible: aprueban CTO y CISOs"],
+dc5n:["Standard: owner and steward","Estándar: responsable y steward"],
+dc6t:["Change process","Gestión de cambios"],
+dc6d:["How either side asks for a change to the contract.","Cómo pide un cambio cualquiera de las partes."],
+dc6v:["Schema changes go through review","Los cambios de esquema pasan por revisión"],
+dc_roles:["Once the contract is agreed, the work is split by role: engineer, architect, modeller and data quality.","Con el contrato acordado, el trabajo se reparte por rol: ingeniero, arquitecto, modelador y data quality."],
+src_n:["{n} sources","{n} fuentes"],
+nx:["Next","Siguiente"],
+j_ex_h:["How the structure works","Cómo funciona la estructura"],
+j_ex1:["Initiative: a large project made of several epics.","Iniciativa: un proyecto grande formado por varias épicas."],
+j_ex2:["Epic: one deliverable with an owner and a deadline.","Épica: un entregable con responsable y fecha límite."],
+j_ex3:["Task: a piece of work with its hours estimated.","Tarea: un trabajo con sus horas estimadas."],
+j_ex4:["Subtask: the smallest unit, linked to whatever blocks it.","Subtarea: la unidad más pequeña, enlazada con lo que la bloquea."],
+al_eye:["Part 2 · How we evaluate ourselves","Parte 2 · Cómo nos autoevaluamos"],
+al_h:["An alert before the deadline is missed","Una alerta antes de incumplir el plazo"],
+wk_eye:["Part 2 · How we structure the work","Parte 2 · Cómo estructuramos el trabajo"],
+tl_t:["Project timeline","Línea de tiempo del proyecto"],
+sg_h:["Data is segmented before anyone asks for access","Los datos están segmentados antes de que nadie pida acceso"],
+sg_p:["Each domain has its own area in the database and sensitive data sits in a separate vault. Access follows the department and the role, so nobody can reach data outside their area.","Cada dominio tiene su área en la base de datos y los datos sensibles están en una cámara aparte. El acceso sigue al departamento y al rol, así nadie llega a datos fuera de su área."],
+zn1:["Customer","Cliente"],
+zn2:["Finance","Finanzas"],
+zn3:["Operations","Operaciones"],
+zn4:["Sensitive vault","Cámara sensible"],
+dp1:["Marketing","Marketing"],
+dp2:["Finance","Finanzas"],
+dp3:["Operations","Operaciones"],
+dp4:["Compliance","Cumplimiento"],
+dp5:["Data team","Equipo de datos"],
+dpn1:["Works with customer data. Cannot see finance or operations, and never the sensitive vault.","Trabaja con datos de cliente. No ve finanzas ni operaciones, y nunca la cámara sensible."],
+dpn2:["Full access to finance data, restricted access to customer data. No sensitive vault.","Acceso completo a finanzas y restringido a datos de cliente. Sin cámara sensible."],
+dpn3:["Full access to its own operational data only.","Acceso completo solo a sus propios datos operativos."],
+dpn4:["Restricted, logged access to every area, including the vault, to carry out audits.","Acceso restringido y registrado a todas las áreas, incluida la cámara, para realizar auditorías."],
+dpn5:["Builds and runs every area, but the vault is restricted and every access is logged.","Construye y opera todas las áreas, pero la cámara es restringida y cada acceso queda registrado."],
+ac_eye:["Part 4 · Access flow","Parte 4 · Flujo de acceso"],
+ac_h:["Does it contain sensitive data?","¿Contiene datos sensibles?"],
+ac_p:["Every access request follows this decision. Data at the Sensitive and Critical levels always goes through the CTO and the CISOs. Answer below to see the path it takes.","Toda petición de acceso sigue esta decisión. Los datos de nivel Sensible y Crítico pasan siempre por el CTO y los CISOs. Responde abajo para ver el camino que recorre."],
+ac_q:["Sensitive data involved?","¿Hay datos sensibles?"],
+ac_yes:["Yes","Sí"],
+ac_no:["No","No"],
+dg_req:["Access request","Petición de acceso"],
+dg_owner:["Domain owner approves","Aprueba el responsable de dominio"],
+dg_stw:["Data steward checks policy","El steward comprueba la política"],
+dg_q:["Sensitive data?","¿Datos sensibles?"],
+dg_cto:["CTO and CISOs approve","Aprueban CTO y CISOs"],
+dg_grant:["Engineer applies grant","El ingeniero aplica el acceso"],
+dg_log:["Logged with expiry","Registro con caducidad"],
+dg_rev:["Quarterly review","Revisión trimestral"],
+ce_eye:["Part 3 · Data catalogue","Parte 3 · Catálogo de datos"],
+ce_h:["Every data point arrives with its owner and its meaning","Cada data point llega con su responsable y su significado"],
+cl_eye:["Part 3 · Classification","Parte 3 · Clasificación"],
+cl_h:["Data is classified by domain and by sensitivity","Los datos se clasifican por dominio y por sensibilidad"],
+cl_p:["Every data point is classified twice: by domain (customer, employee, finance, operations) and by sensitivity. Inside one domain a name is far less sensitive than a card number, and the level decides who must approve access and which specific roles can read it.","Cada data point se clasifica dos veces: por dominio (cliente, empleado, finanzas, operaciones) y por sensibilidad. Dentro de un mismo dominio un nombre es mucho menos sensible que un número de tarjeta, y el nivel decide quién debe aprobar el acceso y qué roles concretos pueden leerlo."],
+cl_t:["Example data points","Data points de ejemplo"],
+cl_s:["Sensitivity levels","Niveles de sensibilidad"],
+cl_pt:["Data point","Data point"],
+cl_dom:["Domain","Dominio"],
+cl_sens:["Sensitivity","Sensibilidad"],
+cl_apr:["Approval","Aprobación"],
+cl_roles:["Roles with access","Roles con acceso"],
+cd1:["Customer","Cliente"],
+cd2:["Employee","Empleado"],
+cd3:["Finance","Finanzas"],
+cd4:["Operations","Operaciones"],
+lvl0:["Internal","Interno"],
+lvl1:["Low","Bajo"],
+lvl2:["Sensitive","Sensible"],
+lvl3:["Critical","Crítico"],
+lvd0:["Business figures with no personal content. Any approved role can read them.","Cifras de negocio sin contenido personal. Cualquier rol aprobado puede leerlas."],
+lvd1:["Personal but low risk, such as a name. The owner and the steward approve.","Personal pero de bajo riesgo, como un nombre. Aprueban el responsable y el steward."],
+lvd2:["Could cause harm if exposed, such as an address or a salary. The CTO and the CISOs must approve.","Podría causar daño si se expone, como una dirección o un salario. Deben aprobar el CTO y los CISOs."],
+lvd3:["Could cause serious harm, such as a card number. CTO and CISOs approve, masked by default, specific roles only.","Podría causar un daño grave, como un número de tarjeta. Aprueban CTO y CISOs, enmascarado por defecto y solo para roles concretos."],
+ap_lo:["Owner and steward","Responsable y steward"],
+ap_hi:["Owner, steward, CTO and CISOs","Responsable, steward, CTO y CISOs"],
+part_w:["Part","Parte"],
+ch_go:["Start this part","Empezar esta parte"],
+go_see:["See it","Verlo"],
+nav_p1:["Request","Petición"],
+nav_p2:["Delivery","Entrega"],
+nav_p3:["Catalogue","Catálogo"],
+nav_p4:["Access","Acceso"],
+ch1_h:["From request to agreement","De la petición al acuerdo"],
+ch1_p:["A business request becomes an agreed piece of work: what they need and why, the architect's estimate, the priority set with product, and the data contract.","Una petición de negocio se convierte en un trabajo acordado: qué necesitan y por qué, la estimación del arquitecto, la prioridad fijada con product y el data contract."],
+ch2_h:["How we structure and measure our own work","Cómo estructuramos y medimos nuestro propio trabajo"],
+ch2_p:["Once the work is agreed, it is organised in Jira, split between roles, planned week by week and documented. The same data is used to evaluate the team: alerts, delays by cause and workload.","Una vez acordado, el trabajo se organiza en Jira, se reparte entre roles, se planifica semana a semana y se documenta. Los mismos datos sirven para evaluar al equipo: alertas, retrasos por causa y carga de trabajo."],
+ch3_h:["Catalogue and lineage","Catálogo y linaje"],
+ch3_p:["While data is ingested, the catalogue is filled in: what each data point means, who owns it, how it is classified, and where it comes from and goes.","Mientras se ingestan los datos se completa el catálogo: qué significa cada data point, quién es su responsable, cómo se clasifica y de dónde viene y a dónde va."],
+ch4_h:["Access and permissions","Acceso y permisos"],
+ch4_p:["Who can see and change what: permissions by role, data segmented by domain, one decision flow for every access request, and a trail of every grant.","Quién puede ver y cambiar qué: permisos por rol, datos segmentados por dominio, un flujo de decisión para cada petición de acceso y un registro de cada concesión."],
+au_eye:["Part 4 · Access tracking","Parte 4 · Seguimiento de accesos"],
+au_h:["Every access leaves a trail","Cada acceso deja rastro"],
+au_p:["Grants are recorded with who approved them, why, and when they end. Unused or expired access is removed at the quarterly review.","Los accesos se registran con quién los aprobó, por qué y cuándo terminan. Los accesos sin uso o caducados se retiran en la revisión trimestral."],
+au1l:["Active grants","Accesos activos"],
+au1s:["Across all domains","En todos los dominios"],
+au2l:["Expiring in 30 days","Caducan en 30 días"],
+au2s:["Owners renew them or let them lapse","Los responsables los renuevan o los dejan caducar"],
+au3l:["Unused for 90 days","Sin uso en 90 días"],
+au3s:["Removed at the next review","Se retiran en la próxima revisión"],
+au4l:["Sensitive grants","Accesos sensibles"],
+au4s:["All approved by the CTO and the CISOs","Todos aprobados por el CTO y los CISOs"],
+lg_d:["Support agent requested: read, customer_name","Agente de soporte solicitó: lectura, customer_name"],
+lg_d2:["Approved by Data steward · expires in 90 days","Aprobado por Data steward · caduca en 90 días"],
+lg_e:["Payments engineer requested: read, card_number","Ingeniero de pagos solicitó: lectura, card_number"],
+lg_e2:["Approved by Domain owner, then CTO and CISOs · masked by default · expires in 30 days","Aprobado por Responsable de dominio y después CTO y CISOs · enmascarado por defecto · caduca en 30 días"],
+cd_eye:["Coming soon","Próximamente"], cd_h:["CDMP preparation","Preparación para el CDMP"],
+cd_p:["I hold the CDMP certification from DAMA International and I am putting together a course to help other data professionals pass it. The syllabus, dates and format will be announced here.","Tengo la certificación CDMP de DAMA International y estoy preparando un curso para ayudar a otros profesionales del dato a conseguirla. El temario, las fechas y el formato se anunciarán aquí."],
+cd_soon:["Coming soon","Próximamente"], cd_q:["Want to get your CDMP certification?","¿Quieres sacarte la certificación CDMP?"], cd_btn:["Contact me","Contáctame"],
+foot:["All projects, names, figures and charts on this page are illustrative examples, built to show the method. They are not data from any employer.","Todos los proyectos, nombres, cifras y gráficos de esta página son ejemplos ilustrativos creados para mostrar el método. No son datos de ningún empleador."]
+};
+
+let lang = "en";
+try { const s = localStorage.getItem("pf-lang"); if (s === "es" || s === "en") lang = s; } catch (e) {}
+const t = (k, v) => {
+  let s = (D[k] || [k, k])[lang === "es" ? 1 : 0];
+  if (v) for (const x in v) s = s.split("{" + x + "}").join(v[x]);
+  return s;
+};
+const $ = id => document.getElementById(id);
+const fmtEur = n => "€" + (n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1) + "k" : Math.round(n));
+const nf = (n, d = 1) => n.toFixed(d).replace(".", lang === "es" ? "," : ".");
+
+/* ---------- date helpers ---------- */
+const monday = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + ((8 - d.getDay()) % 7 || 7)); return d; })();
+const dateAt = w => new Date(monday.getTime() + Math.round(w * 7) * 864e5);
+const fmtDate = d => new Intl.DateTimeFormat(lang === "es" ? "es-ES" : "en-GB", { day: "numeric", month: "short" }).format(d);
+
+/* ---------- flow ---------- */
+let flowSel = 0;
+/* each of the ten steps belongs to one of the four parts, and links to the scene that shows it */
+const FLOWPART = [1, 1, 1, 1, 1, 1, 2, 3, 2, 4];
+const FLOWSCENE = ["try", "try", "try", "try", "try", "try", "delivery", "entry", "tracking", "access"];
+function renderFlow() {
+  const box = $("flowSteps");
+  box.innerHTML = "";
+  for (let i = 1; i <= 10; i++) {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.dataset.part = FLOWPART[i - 1];
+    b.setAttribute("aria-selected", String(i - 1 === flowSel));
+    b.innerHTML = '<span class="n">' + String(i).padStart(2, "0") + '</span><span class="t">' + t("s" + i + "t") + "</span>";
+    b.addEventListener("click", () => { flowSel = i - 1; renderFlow(); });
+    box.appendChild(b);
+  }
+  const n = flowSel + 1, p = FLOWPART[flowSel];
+  $("flowDetail").innerHTML = "<div><span class='partpill' data-part='" + p + "'>" + t("part_w") + " " + p + " · " + t("nav_p" + p) + "</span><h3 style='margin-top:12px'>" + t("s" + n + "t") + "</h3><p style='margin-top:10px'>" + t("s" + n + "d") + "</p></div>" +
+    "<div class='out'><span class='muted'>" + t("flow_out") + "</span><br>" + t("s" + n + "o") + "<br><a class='seelink' href='#" + FLOWSCENE[flowSel] + "'>" + t("go_see") + " ↓</a></div>";
+  $("flegend").innerHTML = [1, 2, 3, 4].map(k => "<span data-part='" + k + "'><i></i>" + t("part_w") + " " + k + " · " + t("nav_p" + k) + "</span>").join("");
+}
+
+/* ---------- simulator: four sequential stages ---------- */
+const BASE = [
+  { id: "reg", k: "b_reg", p: 1, h: 240 },
+  { id: "c360", k: "b_c360", p: 2, h: 360 },
+  { id: "fc", k: "b_fc", p: 2, h: 200 },
+  { id: "mig", k: "b_mig", p: 3, h: 280 },
+  { id: "dq", k: "b_dq", p: 3, h: 160 }
+];
+const CAP = 120, RATE = 60, EUR_H = 35;
+const EV = { figures: 1, estimate: .75, assumption: .5 };
+const ARCH = { inplace: .8, ext: 1, new: 1.6 };
+const PRESETS = {
+  sales: { kpi: "revenue", sub: "b", impact: 180, ev: "figures", hours: 24, weeks: 10, blocks: false, refresh: "daily", fields: 24, cons: "people", users: 25, action: "email",
+    arch: "inplace", sources: 4, sens: false, prio: 2,
+    txt: {
+      problem: ["Regional managers get last week's sales on Thursday and decide promotions on old numbers.", "Los gerentes regionales reciben las ventas de la semana pasada el jueves y deciden promociones con datos viejos."],
+      process: ["An analyst exports three reports into a spreadsheet and consolidates them by hand every Monday and Tuesday.", "Un analista exporta tres informes a una hoja de cálculo y los consolida a mano cada lunes y martes."],
+      mvp: ["One page with sales by region and product, refreshed daily, for the regional managers.", "Una página con ventas por región y producto, actualizada a diario, para los gerentes regionales."],
+      evid: ["24 h/week of manual work, plus decisions on data that is 4 days old. A 0.1% margin gain on about €3.5M of weekly sales is roughly €180k a year.", "24 h/semana de trabajo manual, y decisiones con datos de hace 4 días. Una mejora del 0,1% de margen sobre unos 3,5 M€ de ventas semanales son unos 180 k€ al año."],
+      deps: ["", ""] } },
+  report: { kpi: "savings", sub: "a", impact: 60, ev: "figures", hours: 32, weeks: 6, blocks: true, refresh: "weekly", fields: 35, cons: "people", users: 6, action: "email",
+    arch: "ext", sources: 4, sens: true, prio: 1,
+    txt: {
+      problem: ["The compliance report is built by hand every month, and the last two were filed with corrections.", "El informe de cumplimiento se elabora a mano cada mes y los dos últimos se presentaron con correcciones."],
+      process: ["Three people copy figures from four systems into a template, then reconcile and review them over several days.", "Tres personas copian cifras de cuatro sistemas a una plantilla y las concilian y revisan durante varios días."],
+      mvp: ["The same report layout the regulator receives, generated automatically and reviewed by one person.", "El mismo formato de informe que recibe el regulador, generado automáticamente y revisado por una persona."],
+      evid: ["32 h/week of manual compilation × 52 weeks × €35/h ≈ €58k a year, before counting the cost of corrections.", "32 h/semana de elaboración manual × 52 semanas × 35 €/h ≈ 58 k€ al año, sin contar el coste de las correcciones."],
+      deps: ["Quarterly regulatory submission", "Presentación regulatoria trimestral"] } },
+  churn: { kpi: "revenue", sub: "b", impact: 300, ev: "estimate", hours: 10, weeks: 14, blocks: true, refresh: "daily", fields: 55, cons: "systems", users: 1, action: "email",
+    arch: "new", sources: 6, sens: true, prio: 3,
+    txt: {
+      problem: ["We learn a customer has left only at the quarterly review, when winning them back is unlikely.", "Sabemos que un cliente se ha ido solo en la revisión trimestral, cuando recuperarlo es poco probable."],
+      process: ["Account managers scan a spreadsheet of inactive customers once a quarter.", "Los account managers revisan una hoja con clientes inactivos una vez por trimestre."],
+      mvp: ["A daily risk score per customer that automatically triggers a retention email.", "Una puntuación diaria de riesgo por cliente que lanza automáticamente un email de retención."],
+      evid: ["Team estimate: keeping 8% of about 8,000 at-risk customers at €40 a month each ≈ €300k a year. Not yet validated with finance.", "Estimación del equipo: retener el 8% de unos 8.000 clientes en riesgo a 40 € al mes cada uno ≈ 300 k€ al año. Sin validar aún con finanzas."],
+      deps: ["Retention email campaign", "Campaña de emails de retención"] } }
+};
+const OPTS = [{ k: "mvp", f: .55, b: .6 }, { k: "bal", f: .8, b: .85 }, { k: "full", f: 1, b: 1 }];
+/* decided after the request: architect analysis, priority review, data classification */
+const O = { arch: "ext", sources: 4, sens: false, prio: 2 };
+let optSel = "bal", stage = 1, maxStage = 1, order = null, orderDirty = false, lastMove = null, dragId = null;
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const isoLocal = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const seg = (name, items, sel) => '<div class="seg">' + items.map(x => '<label><input type="radio" name="' + name + '" value="' + x[0] + '"' + (String(x[0]) === String(sel) ? " checked" : "") + "><span>" + x[1] + "</span></label>").join("") + "</div>";
+const pick = (name, items, sel, label) => '<select name="' + name + '" aria-label="' + label + '">' + items.map(x => '<option value="' + x[0] + '"' + (String(x[0]) === String(sel) ? " selected" : "") + ">" + x[1] + "</option>").join("") + "</select>";
+
+function fillSub(keep) {
+  const k = document.querySelector('input[name="kpi"]:checked').value;
+  const cur = keep || $("sub").value || "a";
+  $("sub").innerHTML = ["a", "b", "c"].map(x => '<option value="' + x + '">' + t("sub_" + k + "_" + x) + "</option>").join("");
+  $("sub").value = cur;
+}
+function readState() {
+  const g = n => document.querySelector('input[name="' + n + '"]:checked');
+  return Object.assign({
+    preset: $("preset").value, kpi: g("kpi").value, sub: $("sub").value, impact: +$("impact").value, ev: $("ev").value, evid: $("evid").value,
+    problem: $("problem").value, process: $("process").value, hours: +$("hours").value, mvp: $("mvp").value, need: $("need").value,
+    blocks: $("blocks").checked, deps: $("deps").value, refresh: $("refresh").value, fields: +$("fields").value,
+    cons: g("cons").value, users: +$("users").value, action: $("action").value
+  }, O);
+}
+function writeTexts(p) {
+  const i = lang === "es" ? 1 : 0;
+  ["problem", "process", "mvp", "evid", "deps"].forEach(k => { $(k).value = p.txt[k][i]; });
+}
+function writeState(p) {
+  document.querySelector('input[name="kpi"][value="' + p.kpi + '"]').checked = true;
+  document.querySelector('input[name="cons"][value="' + p.cons + '"]').checked = true;
+  fillSub(p.sub);
+  $("impact").value = p.impact; $("ev").value = p.ev; $("hours").value = p.hours;
+  $("need").value = isoLocal(dateAt(p.weeks));
+  $("blocks").checked = p.blocks; $("refresh").value = p.refresh; $("fields").value = p.fields;
+  $("users").value = p.users; $("action").value = p.action;
+  Object.assign(O, { arch: p.arch, sources: p.sources, sens: p.sens, prio: p.prio });
+  orderDirty = false; lastMove = null;
+  writeTexts(p);
+}
+function retext() {
+  const p = PRESETS[$("preset").value];
+  if (p) writeTexts(p);
+}
+function estimateHours(s) {
+  const rf = { weekly: 0, daily: 10, hourly: 40, rt: 110 }[s.refresh];
+  const consumers = s.cons === "people" ? s.users * .4 : 18;
+  return (30 + s.fields * 1.5 + s.sources * 28 + rf + (s.sens ? 35 : 0) + consumers) * ARCH[s.arch];
+}
+const optHours = (s, o) => Math.max(10, Math.round(estimateHours(s) * o.f / 5) * 5);
+
+/* queue: an ordered list of project ids, each worked in turn at the team's weekly capacity */
+function layout(ids, hNew, pNew) {
+  let c = 0;
+  return ids.filter(id => id !== "new" || hNew).map(id => {
+    const x = id === "new" ? { id: "new", p: pNew, h: hNew, isNew: true } : { ...BASE.find(b => b.id === id) };
+    x.s = c / CAP; c += x.h; x.e = c / CAP;
+    return x;
+  });
+}
+function defaultOrder(p) {
+  const ids = BASE.map(b => b.id);
+  let i = 0;
+  if (p > 1) BASE.forEach((x, j) => { if (x.p <= p) i = j + 1; });
+  ids.splice(i, 0, "new");
+  return ids;
+}
+const schedule = (h, p) => layout(defaultOrder(p), h, p);
+
+function plan(s, o) {
+  const hours = optHours(s, o);
+  const q = layout(order, hours, s.prio);
+  const me = q.find(x => x.isNew);
+  const cost = hours * RATE;
+  const benefit = s.impact * 1000 * o.b * EV[s.ev];
+  return { hours, q, me, cost, benefit, weeks: hours / CAP, payM: me.e / 4.345 + cost / (benefit / 12) };
+}
+const reqName = s => s.preset === "custom" ? t("p_custom") : t("p_" + s.preset);
+const nameOf = (id, s) => id === "new" ? reqName(s) : t(BASE.find(b => b.id === id).k);
+function ctx() {
+  const s = readState();
+  if (!order || !orderDirty) order = defaultOrder(O.prio);
+  const plans = {};
+  OPTS.forEach(o => plans[o.k] = plan(s, o));
+  const cur = plans[optSel];
+  const needD = s.need ? new Date(s.need + "T00:00:00") : null;
+  const etaD = dateAt(cur.me.e);
+  const late = !!needD && etaD > needD;
+  return { s, plans, cur, needD, etaD, late, lateWk: late ? Math.ceil((etaD - needD) / (7 * 864e5)) : 0, name: reqName(s) };
+}
+function etaMap() {
+  const s = readState(), o = OPTS.find(x => x.k === optSel), m = {};
+  layout(order, optHours(s, o), s.prio).forEach(x => m[x.id] = x.e);
+  return m;
+}
+function moveTo(id, to) {
+  const from = order.indexOf(id);
+  if (to < 0 || to >= order.length || to === from) return;
+  const before = etaMap();
+  order.splice(from, 1); order.splice(to, 0, id); orderDirty = true;
+  const after = etaMap(), s = readState(), later = [], earlier = [];
+  Object.keys(after).forEach(k => {
+    if (k === id) return;
+    const d = after[k] - before[k];
+    if (d > .05) later.push({ n: nameOf(k, s), d }); else if (d < -.05) earlier.push({ n: nameOf(k, s), d: -d });
+  });
+  lastMove = { n: nameOf(id, s), a: from + 1, b: to + 1, self: after[id] - before[id], later, earlier };
+}
+const sgn = d => (d > 0 ? "+" : "−") + nf(Math.abs(d)) + t("wk");
+
+/* ---- shared pieces ---- */
+function summaryKv(c) {
+  const { s, needD } = c;
+  const implied = s.hours * 52 * EUR_H, ratio = implied ? s.impact * 1000 / implied : 0;
+  let chk;
+  if (s.kpi === "savings") {
+    chk = s.hours ? t("chk_sav", { h: s.hours, v: fmtEur(implied) }) + ' <span class="pill ' + (ratio <= 1.15 ? "good" : "warn") + '">' + (ratio <= 1.15 ? t("chk_ok") : t("chk_hi", { x: nf(ratio) })) + "</span>" : t("chk_none");
+  } else {
+    chk = t("chk_rev") + ' <span class="pill ' + (s.ev === "figures" ? "good" : "warn") + '">' + t("ev_" + s.ev) + "</span>";
+  }
+  const consText = s.cons === "systems" ? t("cons_sys", { a: t("a_" + s.action) }) : t("cons_people", { n: s.users });
+  const row = (k, v, wide) => "<div" + (wide ? ' class="wide"' : "") + "><small>" + t(k) + "</small><b>" + v + "</b></div>";
+  const txt = v => v.trim() ? esc(v) : "—";
+  return '<div class="kv">' + [
+    row("kv_req", esc(c.name)), row("kv_kpi", t(s.kpi === "savings" ? "k_sav" : "k_rev") + " · " + t("sub_" + s.kpi + "_" + s.sub)),
+    row("kv_imp", fmtEur(s.impact * 1000) + "/y · " + t("ev_" + s.ev)), row("kv_chk", chk),
+    row("kv_time", s.hours + " " + t("u_hw")), row("kv_need", needD ? fmtDate(needD) : "—"),
+    row("kv_cons", consText), row("kv_ref", t("r_" + s.refresh)),
+    row("kv_fld", "≈ " + s.fields + " (" + t("fld_note") + ")"), row("kv_own", t("own_t")),
+    row("kv_prob", txt(s.problem), 1), row("kv_proc", txt(s.process), 1), row("kv_mvp", txt(s.mvp), 1), row("kv_evid", txt(s.evid), 1),
+    row("kv_dep", s.blocks && s.deps.trim() ? esc(s.deps) : t("dep_none"), 1)
+  ].join("") + "</div>";
+}
+const foot = (back, next, key) => '<div class="stagefoot"><button type="button" class="btn2 ghost" data-go="' + back + '">' + t("bt_back") + '</button><button type="button" class="btn2" data-go="' + next + '">' + t(key) + "</button></div>";
+
+/* ---- stage 2: summary and architect ---- */
+function renderStage2(c) {
+  const { s, plans } = c;
+  const hFull = plans.full.hours, cx = hFull < 250 ? "low" : hFull < 500 ? "med" : "high";
+  const architect = '<div class="panel"><h3>' + t("ar_h") + '</h3><p class="muted" style="margin:6px 0 14px;font-size:.9rem">' + t("ar_p") + '</p><div class="twof"><div class="field"><label>' + t("ar_f") + "</label>" +
+    pick("arch", [["inplace", t("ar_inplace")], ["ext", t("ar_ext")], ["new", t("ar_new")]], s.arch, t("ar_f")) + '</div><div class="field"><label>' + t("ar_src") + "</label>" +
+    pick("srcs", [[2, "1–2"], [4, "3–4"], [6, "5–6"], [8, "7+"]], s.sources, t("ar_src")) + '</div></div><p class="summary" style="margin-top:16px">' +
+    t("cx_line", { c: t("cx_" + cx), w: nf(hFull / CAP) }) + "</p></div>";
+  const opts = OPTS.map(o => {
+    const p = plans[o.k];
+    return '<label class="opt"><input type="radio" name="opt" value="' + o.k + '"' + (o.k === optSel ? " checked" : "") + '><span class="card"><b>' + t("op_" + o.k) + "</b><small>" + t("op_" + o.k + "_d") + "</small>" +
+      '<span class="num">' + t("l_eff") + ": " + p.hours + t("hrs") + "</span>" +
+      '<span class="num">' + t("l_wks") + ": " + nf(p.weeks) + " " + t("wk") + "</span>" +
+      '<span class="num">' + t("l_cost") + ": " + fmtEur(p.cost) + "</span>" +
+      '<span class="num">' + t("l_ben") + ": " + fmtEur(p.benefit) + "/y</span></span></label>";
+  }).join("");
+  $("st2").innerHTML = '<div class="s2"><div class="panel"><h3>' + t("s2_h") + '</h3><p class="muted" style="margin:6px 0 14px;font-size:.9rem">' + t("s2_p") + "</p>" + summaryKv(c) + "</div>" +
+    '<div class="side">' + architect + '<div class="panel"><h3>' + t("o_opt") + '</h3><p class="muted" style="margin:6px 0 12px;font-size:.9rem">' + t("o_opt_p") + '</p><div class="opts">' + opts + "</div></div></div></div>" +
+    foot(1, 3, "bt_2");
+}
+
+/* ---- stage 3: priority and interactive roadmap ---- */
+function renderStage3(c) {
+  const { s, cur } = c;
+  const baseE = {};
+  layout(BASE.map(b => b.id), 0, 0).forEach(x => baseE[x.id] = x.e);
+  const q = cur.q, total = Math.max(...q.map(x => x.e)) + .5;
+  const pushed = [];
+  const rows = q.map((x, i) => {
+    const d = x.isNew ? 0 : x.e - baseE[x.id];
+    if (d > .05) pushed.push({ x, d });
+    const dl = Math.abs(d) > .05 ? '<span class="delta' + (d < 0 ? " good" : "") + '">' + sgn(d) + "</span>" : "";
+    return '<div class="rmrow' + (x.isNew ? " new" : "") + '" draggable="true" data-id="' + x.id + '"><span class="rank">' + (i + 1) + '</span><span class="grip" aria-hidden="true">⋮⋮</span>' +
+      '<div class="rname">' + (x.isNew ? "<b>" + esc(c.name) + "</b>" : t(BASE.find(b => b.id === x.id).k)) + "<small>P" + x.p + " · " + x.h + t("hrs") + "</small></div>" +
+      '<div class="track"><div class="bar" style="left:' + (x.s / total * 100) + "%;width:" + ((x.e - x.s) / total * 100) + '%"></div></div>' +
+      '<div class="eta">' + fmtDate(dateAt(x.e)) + dl + "</div>" +
+      '<div class="mv"><button type="button" data-mv="up" aria-label="' + t("rm_up") + '"' + (i === 0 ? " disabled" : "") + '>▲</button><button type="button" data-mv="down" aria-label="' + t("rm_down") + '"' + (i === q.length - 1 ? " disabled" : "") + ">▼</button></div></div>";
+  }).join("");
+  pushed.sort((a, b) => b.d - a.d);
+  let sum = t("sum_new", { p: "#" + (q.findIndex(x => x.isNew) + 1), d: fmtDate(c.etaD) });
+  sum += pushed.length ? t("sum_push", { n: pushed.length, x: t(BASE.find(b => b.id === pushed[0].x.id).k), w: nf(pushed[0].d), d: fmtDate(dateAt(pushed[0].x.e)) }) : t("sum_none");
+  if (s.blocks && s.deps.trim()) sum += " " + t("dep_note", { d: esc(s.deps), x: fmtDate(c.etaD) });
+  if (c.late) {
+    const ok = [...OPTS].reverse().find(o => dateAt(c.plans[o.k].me.e) <= c.needD);
+    sum += " " + (ok ? t("need_ok", { o: t("op_" + ok.k), d: fmtDate(dateAt(c.plans[ok.k].me.e)) }) : t("need_no"));
+  }
+  let mv;
+  if (!lastMove) mv = t("mv_start");
+  else {
+    const L = lastMove, list = a => a.map(x => x.n + " " + sgn(x.d)).join(", ");
+    mv = t("mv_txt", { n: L.n, a: L.a, b: L.b, d: Math.abs(L.self) > .05 ? sgn(L.self) : "0" });
+    if (L.later.length) mv += " " + t("mv_later", { l: list(L.later) });
+    if (L.earlier.length) mv += " " + t("mv_earlier", { l: list(L.earlier.map(x => ({ n: x.n, d: -x.d }))) });
+    if (!L.later.length && !L.earlier.length) mv += " " + t("mv_none");
+  }
+  const tiles = [
+    [t("l_deliv"), fmtDate(c.etaD), c.needD ? t("need_tile", { d: fmtDate(c.needD) }) + ' <span class="pill ' + (c.late ? "warn" : "good") + '">' + (c.late ? t("late", { n: c.lateWk }) : t("on_time")) + "</span>" : t("op_" + optSel)],
+    [t("l_pay"), nf(cur.payM) + " " + t("mo"), t("l_cost") + ": " + fmtEur(cur.cost)],
+    [t("l_benadj"), fmtEur(cur.benefit) + "/y", t(s.kpi === "savings" ? "k_sav" : "k_rev") + " · " + t("ev_" + s.ev)]
+  ].map(x => '<div class="tile"><small>' + x[0] + "</small><b>" + x[1] + "</b><span>" + x[2] + "</span></div>").join("");
+  $("st3").innerHTML = '<div class="s3"><div class="panel"><div class="row-between"><h3>' + t("s3_h") + '</h3><button type="button" class="btn2 ghost small" data-reset="1">' + t("rm_reset") + "</button></div>" +
+    '<p class="muted" style="margin:6px 0 14px;font-size:.9rem">' + t("s3_p") + '</p><div class="road">' + rows + '</div><p class="muted" style="margin-top:12px;font-size:.78rem">' + t("rm_hint") + " " + t("rm_vs") + "</p>" +
+    '<p class="summary" style="margin-top:14px">' + sum + "</p></div>" +
+    '<div class="side"><div class="tiles">' + tiles + "</div>" +
+    '<div class="panel"><h3>' + t("pz_h") + '</h3><p class="muted" style="margin:6px 0 14px;font-size:.9rem">' + t("pz_p") + "</p>" + seg("prio", [1, 2, 3, 4].map(n => [n, "P" + n + " · " + t("pr" + n)]), s.prio) + "</div>" +
+    '<div class="panel" aria-live="polite"><h3>' + t("mv_h") + '</h3><p class="summary" style="margin-top:10px">' + mv + "</p></div></div></div>" +
+    foot(2, 4, "bt_3");
+}
+
+/* ---- stage 4: data contract ---- */
+function renderStage4(c) {
+  const { s } = c;
+  const clauses = [
+    ["≈ " + s.fields + " → " + t("dc1v"), 1], [t("src_n", { n: O.sources }) + " · " + t("r_" + s.refresh), 2], [t("dc3v"), 3], [t("own_t"), 4], [t(s.sens ? "dc5s" : "dc5n"), 5], [t("dc6v"), 6]
+  ].map(x => "<li><div><b>" + t("dc" + x[1] + "t") + '</b><small>' + t("dc" + x[1] + "d") + "</small></div><span>" + x[0] + "</span></li>").join("");
+  const chips = [s.cons === "systems" ? t("pt_sysowner") : t("pt_req"), t("ro5"), t("ro3")].map(x => '<span class="pill">' + x + "</span>")
+    .concat(s.sens ? ['<span class="pill warn">' + t("cto") + "</span>"] : [])
+    .concat(['<span class="pill">' + t("pt_grant") + "</span>", '<span class="pill">' + t("pt_log") + "</span>"]).join(' <span class="muted">→</span> ');
+  $("st4").innerHTML = '<div class="s2"><div class="panel"><h3>' + t("s4_h") + '</h3><p class="muted" style="margin:6px 0 14px;font-size:.9rem">' + t("s4_p") + '</p><ul class="clauses">' + clauses + "</ul></div>" +
+    '<div class="side"><div class="panel"><h3>' + t("dc_h") + '</h3><label class="check" style="margin-top:12px"><input type="checkbox" name="sens"' + (s.sens ? " checked" : "") + "> <span>" + t("dc_sens") + "</span></label>" +
+    '<p class="eyebrow" style="margin:18px 0 8px">' + t("dc_path") + '</p><div class="path">' + chips + "</div>" +
+    '<p class="summary" style="margin-top:14px">' + t(s.sens ? "dc_sensn" : "dc_std") + (s.cons === "systems" ? " " + t("dc_sys") : "") + "</p>" +
+    '<p class="muted" style="margin-top:10px;font-size:.88rem">' + t("dc_cat", { n: s.fields }) + "</p></div>" +
+    '<div class="panel"><p>' + t("dc_roles") + "</p></div></div></div>" +
+    '<div class="stagefoot"><button type="button" class="btn2 ghost" data-go="3">' + t("bt_back") + '</button><a class="btn2" href="#part2">' + t("bt_4") + " ↓</a></div>";
+}
+
+/* ---- wizard ---- */
+function renderProg() {
+  $("wprog").innerHTML = [1, 2, 3, 4].map(n => "<li><button type='button' data-go='" + n + "'" + (n > maxStage ? " disabled" : "") + " class='" + (n === stage ? "cur" : n < stage ? "done" : "") + "'><span class='n'>" + n + "</span><span>" + t("wz" + n) + "</span></button></li>").join("");
+}
+function renderSim() {
+  const c = ctx(), s = c.s;
+  $("o_impact").textContent = fmtEur(s.impact * 1000) + "/y";
+  $("o_hours").textContent = s.hours + " " + t("u_hw");
+  $("o_fields").textContent = s.fields; $("o_users").textContent = s.users;
+  $("depsField").hidden = !s.blocks;
+  $("usersField").hidden = s.cons === "systems";
+  $("actionField").hidden = s.cons !== "systems";
+  for (let i = 1; i <= 4; i++) $("st" + i).hidden = i !== stage;
+  renderProg();
+  if (stage === 2) renderStage2(c); else if (stage === 3) renderStage3(c); else if (stage === 4) renderStage4(c);
+}
+function goTo(n) {
+  stage = Math.min(4, Math.max(1, +n)); maxStage = Math.max(maxStage, stage);
+  renderSim();
+  const el = $("try");
+  if (el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+function wireSim() {
+  writeState(PRESETS.sales);
+  const root = $("try");
+  $("preset").addEventListener("change", e => { if (PRESETS[e.target.value]) writeState(PRESETS[e.target.value]); renderSim(); });
+  $("simForm").addEventListener("input", e => {
+    if (e.target.id !== "preset") $("preset").value = "custom";
+    if (e.target.name === "kpi") fillSub();
+    renderSim();
+  });
+  root.addEventListener("click", e => {
+    const el = e.target.closest ? e.target.closest("[data-go],[data-mv],[data-reset]") : null;
+    if (!el || el.disabled) return;
+    if (el.dataset.go) { goTo(el.dataset.go); return; }
+    if (el.dataset.reset) { orderDirty = false; lastMove = null; renderSim(); return; }
+    const id = el.closest(".rmrow").dataset.id;
+    moveTo(id, order.indexOf(id) + (el.dataset.mv === "up" ? -1 : 1));
+    renderSim();
+    const f = root.querySelector('.rmrow[data-id="' + id + '"] [data-mv="' + el.dataset.mv + '"]');
+    if (f && !f.disabled) f.focus();
+  });
+  root.addEventListener("change", e => {
+    if (e.target.closest("#simForm")) return;
+    const n = e.target.name, v = e.target.value;
+    if (n === "opt") optSel = v;
+    else if (n === "prio") { O.prio = +v; orderDirty = false; lastMove = null; }
+    else if (n === "arch") O.arch = v;
+    else if (n === "srcs") O.sources = +v;
+    else if (n === "sens") O.sens = e.target.checked;
+    else return;
+    renderSim();
+    const el = root.querySelector('select[name="' + n + '"], input[name="' + n + '"]:checked, input[type=checkbox][name="' + n + '"]');
+    if (el) el.focus();
+  });
+  root.addEventListener("dragstart", e => {
+    const r = e.target.closest ? e.target.closest(".rmrow") : null;
+    if (!r) return;
+    dragId = r.dataset.id;
+    e.dataTransfer.effectAllowed = "move";
+    try { e.dataTransfer.setData("text/plain", dragId); } catch (x) {}
+    r.classList.add("dragging");
+  });
+  root.addEventListener("dragover", e => { if (dragId && e.target.closest && e.target.closest(".rmrow")) e.preventDefault(); });
+  root.addEventListener("drop", e => {
+    const r = e.target.closest ? e.target.closest(".rmrow") : null;
+    if (!r || !dragId) return;
+    e.preventDefault();
+    const id = dragId; dragId = null;
+    moveTo(id, order.indexOf(r.dataset.id));
+    renderSim();
+  });
+  root.addEventListener("dragend", () => { dragId = null; root.querySelectorAll(".dragging").forEach(el => el.classList.remove("dragging")); });
+}
+
+/* ---------- Jira tree ---------- */
+const TK = [
+  { id: "INI-1", k: "i1", lvl: "top", kids: [
+    { id: "E-1", k: "e1", lvl: "top", elapsed: 60, kids: [
+      { id: "T-11", k: "t11", kids: [
+        { id: "S-111", k: "u111", h: 8, st: "done" }, { id: "S-112", k: "u112", h: 12, st: "done" }, { id: "S-113", k: "u113", h: 10, st: "done" }] },
+      { id: "T-12", k: "t12", kids: [
+        { id: "S-121", k: "u121", h: 6, st: "done" }, { id: "S-122", k: "u122", h: 20, st: "prog" }, { id: "S-123", k: "u123", h: 18, st: "blk", by: ["S-122"] }] }] },
+    { id: "E-2", k: "e2", lvl: "top", elapsed: 45, kids: [
+      { id: "T-21", k: "t21", kids: [
+        { id: "S-211", k: "u211", h: 8, st: "done" }, { id: "S-212", k: "u212", h: 24, st: "blk", by: ["S-122", "S-211"] }, { id: "S-213", k: "u213", h: 12, st: "blk", by: ["S-212"] }] },
+      { id: "T-22", k: "t22", kids: [
+        { id: "S-221", k: "u221", h: 20, st: "blk", by: ["S-212"] }, { id: "S-222", k: "u222", h: 16, st: "blk", by: ["S-221"] }] }] }] }
+];
+const flat = {};
+(function idx(n, parent) { flat[n.id] = n; n.parent = parent; (n.kids || []).forEach(c => idx(c, n)); })(TK[0], null);
+const leaves = n => n.kids ? n.kids.flatMap(leaves) : [n];
+const hoursOf = n => leaves(n).reduce((a, b) => a + b.h, 0);
+let tkSel = null;
+function chain(id, dir) {
+  const out = new Set();
+  (function walk(x) {
+    Object.values(flat).forEach(n => {
+      const hit = dir === "up" ? (flat[x].by || []).includes(n.id) : (n.by || []).includes(x);
+      if (hit && !out.has(n.id)) { out.add(n.id); walk(n.id); }
+    });
+  })(id);
+  return out;
+}
+function renderTree() {
+  const up = tkSel ? chain(tkSel, "up") : new Set(), down = tkSel ? chain(tkSel, "down") : new Set();
+  const stMap = { done: "good", prog: "acc", blk: "bad", todo: "" };
+  const li = n => {
+    const isLeaf = !n.kids;
+    const h = isLeaf ? n.h : hoursOf(n);
+    const cls = "tk" + (n.lvl ? " top-lvl" : "") + (n.id === tkSel ? " sel" : "") + (up.has(n.id) ? " up" : "") + (down.has(n.id) ? " down" : "");
+    let by = "";
+    if (n.by) by = '<span class="pill">← ' + n.by.join(", ") + "</span>";
+    return "<li><button type='button' class='" + cls + "' data-id='" + n.id + "'><span class='id'>" + n.id + "</span><span class='ti'>" + t(n.k) + "</span>" +
+      (isLeaf ? '<span class="pill ' + stMap[n.st] + '">' + t("st_" + n.st) + "</span>" : "") + by + "<span class='h'>" + h + "h</span></button>" +
+      (n.kids ? "<ul>" + n.kids.map(li).join("") + "</ul>" : "") + "</li>";
+  };
+  $("tree").innerHTML = li(TK[0]);
+  $("tree").querySelectorAll("button").forEach(b => b.addEventListener("click", () => { tkSel = tkSel === b.dataset.id ? null : b.dataset.id; renderTree(); }));
+  $("jlegend").innerHTML = '<span><i class="lv" style="border-color:var(--bad);background:var(--bad-soft)"></i>' + t("lg_blocks") + '</span><span><i class="lv" style="border-color:var(--warn);background:var(--warn-soft)"></i>' + t("lg_blocked") + "</span>";
+  $("alerts").innerHTML = TK[0].kids.map(e => {
+    const ls = leaves(e), tot = ls.reduce((a, b) => a + b.h, 0), dn = ls.filter(l => l.st === "done").reduce((a, b) => a + b.h, 0);
+    const scope = Math.round(dn / tot * 100), gap = e.elapsed - scope, risk = gap > 15;
+    return "<div class='alert'><div class='row-between'><b>" + e.id + " · " + t(e.k) + "</b><span class='pill " + (risk ? "bad" : "good") + "'>" + t(risk ? "a_risk" : "a_ok") + "</span></div>" +
+      "<div class='mrow'><span>" + t("a_scope") + "</span><div class='meter'><i style='width:" + scope + "%'></i></div><span>" + scope + "%</span></div>" +
+      "<div class='mrow'><span>" + t("a_time") + "</span><div class='meter tm'><i style='width:" + e.elapsed + "%'></i></div><span>" + e.elapsed + "%</span></div>" +
+      "<span class='muted' style='font-size:.82rem'>" + t(risk ? "a_msg" : "a_msg_ok", { g: gap }) + "</span></div>";
+  }).join("");
+}
+
+/* ---------- timeline ---------- */
+const TL = [{ on: 1, w: 5 }, { c: "c_prio", w: 4 }, { on: 1, w: 4 }, { c: "c_dep", w: 2 }, { on: 1, w: 5 }];
+const CAUSES = [["c_prio", 55], ["c_dep", 30], ["c_scope", 10], ["c_cap", 5]];
+function renderTimeline() {
+  $("tl").innerHTML = TL.map(s => "<div class='" + (s.on ? "on" : "pause") + "' style='flex:" + s.w + "' title='" + (s.on ? t("tl_on") : t(s.c)) + "'>" + (s.on ? (s.w >= 4 ? t("tl_on") : "") : (s.w >= 4 ? t(s.c) : t("tl_pause"))) + "</div>").join("");
+  const CC = { c_prio: "var(--amber)", c_dep: "var(--accent)", c_scope: "var(--teal)", c_cap: "var(--muted)" };
+  let acc = 0;
+  const stops = CAUSES.map(c => { const a = acc; acc += c[1]; return CC[c[0]] + " " + a + "% " + acc + "%"; }).join(",");
+  $("causes").innerHTML = "<div class='causewrap'><div class='donut' style='background:conic-gradient(" + stops + ")'></div><div class='causes' style='flex:1;min-width:240px'>" +
+    CAUSES.map(c => "<div class='crow'><span>" + t(c[0]) + "</span><div class='meter'><i style='width:" + c[1] + "%;background:" + CC[c[0]] + "'></i></div><span>" + c[1] + "%</span></div>").join("") + "</div></div>";
+}
+
+/* ---------- tabs helper ---------- */
+function tabs(el, items, sel, cb, prefix) {
+  el.innerHTML = "";
+  items.forEach(k => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(k === sel));
+    b.textContent = t((prefix || "role_") + k);
+    b.addEventListener("click", () => cb(k));
+    el.appendChild(b);
+  });
+}
+const ROLES = ["eng", "arc", "mod", "dq"];
+
+/* ---------- weekly plan ---------- */
+const WP = {
+  eng: [["Customer 360 · CRM incremental load", "Customer 360 · carga incremental CRM", 18], ["Regulatory reporting · fix failing schedule", "Reporting regulatorio · corregir planificación fallida", 8], ["Support and requests", "Soporte y peticiones", 6], ["Code review and documentation", "Revisión de código y documentación", 8]],
+  arc: [["Review Customer 360 target model", "Revisar modelo objetivo Customer 360", 12], ["Estimate new incoming request", "Estimar la nueva petición entrante", 8], ["Stakeholder alignment", "Alineación con stakeholders", 10], ["Lineage sign-off", "Validación del linaje", 10]],
+  mod: [["Build customer dimension", "Construir dimensión de cliente", 24], ["Metric definitions", "Definiciones de métricas", 10], ["Review requirement document", "Revisar documento de requisitos", 6]],
+  dq: [["Reconcile totals against source", "Cuadrar totales contra el origen", 20], ["Set alert thresholds", "Definir umbrales de alerta", 12], ["Inputs for weekly report", "Datos para el reporte semanal", 8]]
+};
+let wSel = "eng";
+function renderWeekly() {
+  tabs($("wTabs"), ROLES, wSel, k => { wSel = k; renderWeekly(); });
+  const L = lang === "es" ? 1 : 0;
+  const items = WP[wSel];
+  const tot = items.reduce((a, b) => a + b[2], 0);
+  $("wPlan").innerHTML = "<div><b style='font-family:var(--f-body);font-weight:600'>" + t("w_week", { d: fmtDate(monday) }) + "</b><b>" + tot + "h</b></div>" + items.map(i => "<div><span>" + i[L] + "</span><b>" + i[2] + "h</b></div>").join("");
+}
+
+/* ---------- team ---------- */
+const PEOPLE = [["pe_a", 46, 7], ["pe_b", 34, 2], ["pe_c", 42, 3], ["pe_arc", 44, 9], ["pe_mod", 31, 1], ["pe_dq", 27, 2]];
+/* role, weekly capacity, assigned now, queued over the next eight weeks (hours per week) */
+const DEMAND = [["role_eng", 120, 122, 168], ["role_arc", 40, 44, 46], ["role_mod", 40, 31, 36], ["role_dq", 40, 27, 30]];
+function renderTeam() {
+  const max = 56;
+  $("load").innerHTML = PEOPLE.map(p => {
+    const over = p[1] > 40;
+    return "<div class='lrow" + (over ? " over" : "") + "'><span>" + t(p[0]) + "</span><div class='track'><div class='bar' style='left:0;width:" + (p[1] / max * 100) + "%'></div><div class='cap' style='left:" + (40 / max * 100) + "%'></div></div><span class='mono' style='font-size:.78rem'>" + p[1] + "/40h</span></div>";
+  }).join("");
+  const over = PEOPLE.filter(p => p[1] > 40).length;
+  const top = PEOPLE.reduce((a, b) => b[2] > a[2] ? b : a);
+  $("loadNote").textContent = t("ln_over", { n: over, t: PEOPLE.length, r: t(top[0]), b: top[2] });
+  const dmax = 180, pct = v => (v / dmax * 100) + "%";
+  $("demand").innerHTML = DEMAND.map(d => "<div class='lrow'><span>" + t(d[0]) + "</span><div>" +
+    "<div class='track'><div class='bar' style='left:0;width:" + pct(d[2]) + "'></div><div class='cap' style='left:" + pct(d[1]) + "'></div></div>" +
+    "<div class='track q'><div class='bar' style='left:0;width:" + pct(d[3]) + "'></div><div class='cap' style='left:" + pct(d[1]) + "'></div></div></div>" +
+    "<span class='mono' style='font-size:.78rem'>" + d[3] + "/" + d[1] + "h</span></div>").join("") +
+    "<div class='legend'><span><i class='lv' style='background:var(--accent);border-color:var(--accent)'></i>" + t("dm_now") + "</span><span><i class='lv' style='background:var(--amber);border-color:var(--amber)'></i>" + t("dm_q") + "</span><span>| " + t("dm_cap") + "</span></div>";
+  const gap = DEMAND.reduce((a, b) => (b[3] - b[1]) > (a[3] - a[1]) ? b : a);
+  $("demandNote").textContent = t("dm_note", { r: t(gap[0]).toLowerCase(), n: nf((gap[3] - gap[1]) / 40) });
+}
+
+/* ---------- docs ---------- */
+const HO = { eng: ["hd_eng", "hd_eng2", "hp_eng", "hp_eng2"], arc: ["hd_arc", "hd_arc2", "hp_arc", "hp_arc2"], mod: ["hd_mod", "hd_mod2", "hp_mod", "hp_mod2"], dq: ["hd_dq", "hd_dq2", "hp_dq", "hp_dq2"] };
+let hSel = "eng";
+function renderDocs() {
+  $("drd").innerHTML = Array.from({ length: 10 }, (_, i) => "<li><i>" + String(i + 1).padStart(2, "0") + "</i><span>" + t("d" + (i + 1)) + "</span></li>").join("");
+  tabs($("hTabs"), ROLES, hSel, k => { hSel = k; renderDocs(); });
+  const h = HO[hSel];
+  $("hDone").innerHTML = [h[0], h[1]].map(k => "<li>" + t(k) + "</li>").join("");
+  $("hPend").innerHTML = [h[2], h[3]].map(k => "<li>" + t(k) + "</li>").join("");
+}
+
+/* ---------- governance ---------- */
+const MX = [[2, 0, 0, 0, 0], [2, 1, 0, 0, 0], [2, 2, 1, 0, 1], [2, 1, 2, 2, 0], [2, 2, 0, 0, 2]];
+let roleSel = 1;
+function renderGov() {
+  const lv = n => "<i class='lv" + (n ? " l" + n : "") + "' role='img' aria-label='" + t("lg" + n) + "'></i>";
+  $("mx").innerHTML = "<tr><th>" + t("nav_gov") + "</th>" + [1, 2, 3, 4, 5].map(i => "<th>" + t("pm" + i) + "</th>").join("") + "</tr>" +
+    MX.map((r, i) => "<tr class='rl" + (i === roleSel ? " sel" : "") + "' data-i='" + i + "' tabindex='0'><td><b>" + t("ro" + (i + 1)) + "</b></td>" + r.map(v => "<td>" + lv(v) + "</td>").join("") + "</tr>").join("");
+  $("mx").querySelectorAll("tr.rl").forEach(tr => {
+    const pick = () => { roleSel = +tr.dataset.i; renderGov(); };
+    tr.addEventListener("click", pick);
+    tr.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+  });
+  $("roleNote").innerHTML = "<b>" + t("ro" + (roleSel + 1)) + ".</b> " + t("rd" + (roleSel + 1));
+  $("log").innerHTML = [["lg_a", "lg_a2"], ["lg_b", "lg_b2"], ["lg_c", "lg_c2"], ["lg_d", "lg_d2"], ["lg_e", "lg_e2"]].map(r => "<div><span>" + t(r[0]) + "</span><small>" + t(r[1]) + "</small></div>").join("");
+  $("principles").innerHTML = ["pp1", "pp2", "pp3"].map(k => "<li>" + t(k) + "</li>").join("");
+}
+
+/* ---------- lineage ---------- */
+const NODES = [
+  { id: "s1", c: 0, y: 60, n: "n_s1", d: "nd_s1" }, { id: "s2", c: 0, y: 180, n: "n_s2", d: "nd_s2" },
+  { id: "l1", c: 1, y: 60, n: "n_l1", d: "nd_l1" }, { id: "l2", c: 1, y: 180, n: "n_l2", d: "nd_l2" },
+  { id: "st", c: 2, y: 120, n: "n_st", d: "nd_st" }, { id: "co", c: 3, y: 120, n: "n_co", d: "nd_co" },
+  { id: "m1", c: 4, y: 60, n: "n_m1", d: "nd_m1" }, { id: "m2", c: 4, y: 180, n: "n_m2", d: "nd_m2" }
+];
+const EDGES = [["s1", "l1"], ["s2", "l2"], ["l1", "st"], ["l2", "st"], ["st", "co"], ["co", "m1"], ["co", "m2"]];
+let nodeSel = "st";
+const NW = 150, NH = 54, CX = c => 16 + c * 188;
+function relatives(id, dir) {
+  const out = new Set();
+  (function walk(x) { EDGES.forEach(e => { const [a, b] = dir === "up" ? [e[1], e[0]] : [e[0], e[1]]; if (a === x && !out.has(b)) { out.add(b); walk(b); } }); })(id);
+  return out;
+}
+function renderLineage() {
+  const up = relatives(nodeSel, "up"), down = relatives(nodeSel, "down");
+  const rel = new Set([...up, ...down]);
+  const P = id => NODES.find(n => n.id === id);
+  const edges = EDGES.map(e => {
+    const a = P(e[0]), b = P(e[1]);
+    const x1 = CX(a.c) + NW, y1 = a.y + NH / 2, x2 = CX(b.c), y2 = b.y + NH / 2, m = (x1 + x2) / 2;
+    const hot = (e[0] === nodeSel || up.has(e[0])) && (e[1] === nodeSel || up.has(e[1])) || (e[0] === nodeSel || down.has(e[0])) && (e[1] === nodeSel || down.has(e[1]));
+    return "<path class='edge" + (hot ? " hot" : "") + "' d='M" + x1 + " " + y1 + " C" + m + " " + y1 + " " + m + " " + y2 + " " + x2 + " " + y2 + "'/>";
+  }).join("");
+  const nodes = NODES.map(n => "<g class='node" + (n.id === nodeSel ? " hot" : rel.has(n.id) ? " rel" : "") + "' data-id='" + n.id + "' tabindex='0' role='button' aria-label='" + t(n.n) + "'><rect x='" + CX(n.c) + "' y='" + n.y + "' width='" + NW + "' height='" + NH + "' rx='8'/><text x='" + (CX(n.c) + 12) + "' y='" + (n.y + 24) + "'>" + t(n.n) + "</text><text class='sub' x='" + (CX(n.c) + 12) + "' y='" + (n.y + 41) + "'>" + t("lc" + n.c) + "</text></g>").join("");
+  const heads = [0, 1, 2, 3, 4].map(c => "<text class='colh' x='" + CX(c) + "' y='28'>" + t("lc" + c) + "</text>").join("");
+  $("lineage-svg").innerHTML = "<svg viewBox='0 0 940 260' role='group' aria-label='Lineage'>" + heads + edges + nodes + "</svg>";
+  $("lineage-svg").querySelectorAll(".node").forEach(g => {
+    const pick = () => { nodeSel = g.dataset.id; renderLineage(); };
+    g.addEventListener("click", pick);
+    g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+  });
+  const names = s => s.size ? [...s].map(id => t(P(id).n)).join(", ") : t("ln_none");
+  const cur = P(nodeSel);
+  $("linDetail").innerHTML = "<h3>" + t(cur.n) + "</h3><p class='muted' style='margin:8px 0 14px'>" + t(cur.d) + "</p>" +
+    "<div class='kv' style='grid-template-columns:minmax(0,1fr)'><div><small>" + t("ln_up") + "</small><b>" + names(up) + "</b></div><div><small>" + t("ln_dn") + "</small><b>" + names(down) + "</b></div></div>";
+}
+
+/* ---------- hero mock roadmap ---------- */
+const MOCK_P = [3, 2, 1];
+let mockI = 1, mockRows = {};
+function buildMock() {
+  const box = $("mockRows");
+  box.innerHTML = ""; mockRows = {};
+  BASE.concat([{ id: "new", k: "m_new" }]).forEach(x => {
+    const r = document.createElement("div");
+    r.className = "mrow2" + (x.id === "new" ? " new" : "");
+    r.innerHTML = "<span>" + t(x.k) + "</span><div class='tr'><div class='b'></div></div>";
+    box.appendChild(r); mockRows[x.id] = r;
+  });
+  tickMock();
+}
+function tickMock() {
+  const p = MOCK_P[mockI], q = schedule(200, p), base = schedule(0, p), total = 12.6, bm = {};
+  base.forEach(x => bm[x.id] = x.e);
+  let pushed = 0;
+  q.forEach(x => {
+    const r = mockRows[x.id];
+    if (!r) return;
+    const b = r.querySelector(".b");
+    b.style.left = (x.s / total * 100) + "%"; b.style.width = ((x.e - x.s) / total * 100) + "%";
+    const push = !x.isNew && x.e - bm[x.id] > .05;
+    r.classList.toggle("push", push);
+    if (push) pushed++;
+  });
+  $("mockFoot").innerHTML = "<span class='pill acc'>" + t("m_new") + " · P" + p + "</span><span class='mono'>ETA " + fmtDate(dateAt(q.find(x => x.isNew).e)) + "</span><span class='pill " + (pushed ? "warn" : "good") + "'>" + (pushed ? pushed + " " + t("m_delay") : t("m_none")) + "</span>";
+}
+
+/* ---------- roles ---------- */
+const RR = {
+  eng: { own: [["Builds and runs the ingestion pipelines", "Construye y opera los pipelines de ingesta"], ["Implements the checks that Data Quality specifies and supervises the jobs", "Implementa los controles que especifica Data Quality y supervisa los jobs"], ["Applies access grants once they are approved", "Aplica los accesos una vez aprobados"]],
+    not: ["Does not define quality rules, thresholds or what a data point means.", "No define reglas de calidad, umbrales ni qué significa un dato."],
+    hand: ["Receives specifications from Data Quality and the Modeller, and returns finished pipelines for validation.", "Recibe especificaciones de Data Quality y del Modelador, y devuelve los pipelines terminados para su validación."] },
+  arc: { own: [["Estimates effort and architecture impact for every request", "Estima el esfuerzo y el impacto en arquitectura de cada petición"], ["Designs the target architecture and patterns", "Diseña la arquitectura objetivo y los patrones"], ["Signs off design and lineage", "Valida el diseño y el linaje"]],
+    not: ["Does not build pipelines day to day.", "No construye pipelines en el día a día."],
+    hand: ["Gives the estimate that goes into the options for the stakeholder, and reviews what the engineers build.", "Da la estimación que alimenta las opciones para el stakeholder y revisa lo que construyen los ingenieros."] },
+  mod: { own: [["Models tables, keys and relationships", "Modela tablas, claves y relaciones"], ["Writes metric definitions and business terms", "Escribe las definiciones de métricas y términos de negocio"], ["Records what each data point means in the catalogue", "Registra en el catálogo qué significa cada data point"]],
+    not: ["Does not schedule jobs or set quality thresholds.", "No programa jobs ni fija umbrales de calidad."],
+    hand: ["Hands the model specification to the engineer and the definitions to the catalogue.", "Entrega la especificación del modelo al ingeniero y las definiciones al catálogo."] },
+  dq: { own: [["Defines quality rules, thresholds and how often to check", "Define reglas de calidad, umbrales y la frecuencia de comprobación"], ["Investigates incidents and reconciles totals against the source", "Investiga incidencias y cuadra totales contra el origen"], ["Reports quality status every week", "Informa del estado de calidad cada semana"]],
+    not: ["Does not write pipeline code. Hands a specification to the engineer.", "No escribe código de pipelines. Entrega una especificación al ingeniero."],
+    hand: ["Hands the check specification to the engineer, then reviews the results.", "Entrega la especificación del control al ingeniero y después revisa los resultados."] }
+};
+/* task, then who owns (O) or supports (S) it: architect, engineer, modeller, data quality */
+const TASKS = [
+  [["Estimate effort and architecture impact", "Estimar esfuerzo e impacto en arquitectura"], ["O", "S", "S", ""]],
+  [["Design target architecture and patterns", "Diseñar arquitectura objetivo y patrones"], ["O", "S", "", ""]],
+  [["Build and run ingestion pipelines", "Construir y operar pipelines de ingesta"], ["S", "O", "", ""]],
+  [["Model tables, keys and metric definitions", "Modelar tablas, claves y definiciones de métricas"], ["S", "S", "O", ""]],
+  [["Define quality rules and thresholds", "Definir reglas de calidad y umbrales"], ["", "", "S", "O"]],
+  [["Implement and schedule quality checks", "Implementar y programar controles de calidad"], ["", "O", "", "S"]],
+  [["Investigate quality incidents", "Investigar incidencias de calidad"], ["", "S", "", "O"]],
+  [["Document data points in the catalogue", "Documentar los data points en el catálogo"], ["", "S", "O", "S"]],
+  [["Sign off lineage", "Validar el linaje"], ["O", "S", "S", ""]]
+];
+const MXROLES = ["arc", "eng", "mod", "dq"];
+let rSel = "eng";
+function renderRoles() {
+  const i = lang === "es" ? 1 : 0, r = RR[rSel];
+  tabs($("rTabs"), ROLES, rSel, k => { rSel = k; renderRoles(); });
+  $("rCard").innerHTML = "<h3>" + t("role_" + rSel) + "</h3><p class='eyebrow' style='margin:14px 0 10px'>" + t("r_own") + "</p><ul class='ck done'>" +
+    r.own.map(o => "<li>" + o[i] + "</li>").join("") + "</ul><p class='not'>" + r.not[i] + "</p><p class='hand'><b>" + t("r_hand") + ".</b> " + r.hand[i] + "</p>";
+  const step = (n, role, cls, txt) => "<div class='cstep " + cls + "'><span class='no'>" + n + "</span><div><b>" + t("role_" + role) + "</b><p>" + txt + "</p></div></div>";
+  $("chain").innerHTML =
+    step(1, "dq", "", i ? "Escribe la especificación: qué comprobar, la consulta, con qué frecuencia y el umbral de alerta." : "Writes the specification: what to check, the query, how often, and the alert threshold.") +
+    "<div class='cdown'>↓</div>" +
+    step(2, "eng", "eng", i ? "Implementa el control en el pipeline, lo programa y supervisa el job. No cambia la regla." : "Implements the check in the pipeline, schedules it and supervises the job. Does not change the rule.") +
+    "<div class='cdown'>↓</div>" +
+    step(3, "dq", "", i ? "Revisa los resultados, investiga los fallos e informa del estado." : "Reviews the results, investigates failures and reports status.");
+  const lv = v => v === "O" ? "<i class='lv l2' role='img' aria-label='" + t("lg_own") + "'></i>" : v === "S" ? "<i class='lv l1' role='img' aria-label='" + t("lg_sup") + "'></i>" : "";
+  const sel = MXROLES.indexOf(rSel);
+  $("rmx").innerHTML = "<tr><th></th>" + MXROLES.map((k, j) => "<th class='" + (j === sel ? "colsel" : "") + "'>" + t("role_" + k) + "</th>").join("") + "</tr>" +
+    TASKS.map(tk => "<tr><td>" + tk[0][i] + "</td>" + tk[1].map((v, j) => "<td class='" + (j === sel ? "colsel" : "") + "'>" + lv(v) + "</td>").join("") + "</tr>").join("");
+}
+
+/* ---------- access flow and catalogue entry ---------- */
+/* ---------- segmentation, access decision, scene navigation ---------- */
+const ZONES = ["zn1", "zn2", "zn3", "zn4"];
+const SEG = [[2, 0, 0, 0], [1, 2, 0, 0], [0, 0, 2, 0], [1, 1, 1, 1], [2, 2, 2, 1]];
+let dpSel = 0;
+function renderSeg() {
+  const lv = n => "<i class='lv" + (n ? " l" + n : "") + "' role='img' aria-label='" + t("lg" + n) + "'></i>";
+  $("smx").innerHTML = "<tr><th></th>" + ZONES.map(z => "<th>" + t(z) + "</th>").join("") + "</tr>" +
+    SEG.map((r, i) => "<tr class='rl" + (i === dpSel ? " sel" : "") + "' data-i='" + i + "' tabindex='0'><td><b>" + t("dp" + (i + 1)) + "</b></td>" + r.map(v => "<td>" + lv(v) + "</td>").join("") + "</tr>").join("");
+  $("smx").querySelectorAll("tr.rl").forEach(tr => {
+    const sel = () => { dpSel = +tr.dataset.i; renderSeg(); };
+    tr.addEventListener("click", sel);
+    tr.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sel(); } });
+  });
+  $("segNote").innerHTML = "<b>" + t("dp" + (dpSel + 1)) + ".</b> " + t("dpn" + (dpSel + 1));
+}
+
+const CLS = [
+  ["customer_name", 0, 1, ["Analyst, Support agent, Marketing analyst", "Analista, Agente de soporte, Analista de marketing"]],
+  ["order_total", 2, 0, ["Analyst, Finance analyst", "Analista, Analista financiero"]],
+  ["home_address", 0, 2, ["Support lead, Delivery operations", "Responsable de soporte, Operaciones de reparto"]],
+  ["employee_salary", 1, 2, ["HR business partner, Payroll specialist", "HR business partner, Especialista de nómina"]],
+  ["card_number", 0, 3, ["Payments engineer, Fraud analyst (masked by default)", "Ingeniero de pagos, Analista de fraude (enmascarado por defecto)"]]
+];
+let clSel = 4;
+function renderClass() {
+  const i = lang === "es" ? 1 : 0, pc = ["", "good", "warn", "bad"];
+  $("clx").innerHTML = "<tr><th>" + t("cl_pt") + "</th><th>" + t("cl_dom") + "</th><th>" + t("cl_sens") + "</th><th>" + t("cl_apr") + "</th></tr>" +
+    CLS.map((r, n) => "<tr class='rl" + (n === clSel ? " sel" : "") + "' data-i='" + n + "' tabindex='0'><td class='mono'>" + r[0] + "</td><td>" + t("cd" + (r[1] + 1)) + "</td><td><span class='pill " + pc[r[2]] + "'>" + t("lvl" + r[2]) + "</span></td><td>" + t(r[2] >= 2 ? "ap_hi" : "ap_lo") + "</td></tr>").join("");
+  $("clx").querySelectorAll("tr.rl").forEach(tr => {
+    const sel = () => { clSel = +tr.dataset.i; renderClass(); };
+    tr.addEventListener("click", sel);
+    tr.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sel(); } });
+  });
+  const r = CLS[clSel];
+  $("clNote").innerHTML = "<b class='mono'>" + r[0] + "</b> · " + t("cd" + (r[1] + 1)) + " · " + t("lvl" + r[2]) + ". " + t("cl_roles") + ": " + r[3][i] + ".";
+  $("clLevels").innerHTML = [0, 1, 2, 3].map(n => "<li><span class='pill " + pc[n] + "'>" + t("lvl" + n) + "</span><span>" + t("lvd" + n) + "</span></li>").join("");
+}
+
+let decSens = true;
+function lines(txt) {
+  const w = txt.split(" ");
+  if (txt.length < 17 || w.length < 2) return [txt];
+  let best = 1, diff = 1e9;
+  for (let i = 1; i < w.length; i++) {
+    const d = Math.abs(w.slice(0, i).join(" ").length - w.slice(i).join(" ").length);
+    if (d < diff) { diff = d; best = i; }
+  }
+  return [w.slice(0, best).join(" "), w.slice(best).join(" ")];
+}
+function dnode(x, y, w, h, key, cls, diamond) {
+  const L = lines(t(key)), cx = x + w / 2, cy = y + h / 2;
+  const shape = diamond ? "<polygon points='" + [x, cy, cx, y, x + w, cy, cx, y + h].join(" ") + "'/>" : "<rect x='" + x + "' y='" + y + "' width='" + w + "' height='" + h + "' rx='10'/>";
+  const txt = L.map((l, i) => "<text x='" + cx + "' y='" + (cy + 5 + (i - (L.length - 1) / 2) * 16) + "' text-anchor='middle'>" + l + "</text>").join("");
+  return "<g class='dn " + cls + "'>" + shape + txt + "</g>";
+}
+function renderDecision() {
+  const on = decSens;
+  const edge = (d, hot) => "<path class='de " + (hot ? "hot" : "dim") + "' d='" + d + "' marker-end='url(#" + (hot ? "ah" : "ad") + ")'/>";
+  const edges = [
+    ["M170 68 L205 68", 1], ["M365 68 L400 68", 1], ["M570 68 L590 68", 1],
+    ["M750 68 L865 68 L865 150", !on], ["M670 118 L670 190", on], ["M750 218 L770 218 L770 178 L790 178", on],
+    ["M865 206 L865 290", 1], ["M790 318 L750 318", 1]
+  ].map(e => edge(e[0], e[1])).join("");
+  const nodes = dnode(20, 40, 150, 56, "dg_req", "hot") + dnode(205, 40, 160, 56, "dg_owner", "hot") + dnode(400, 40, 170, 56, "dg_stw", "hot") +
+    dnode(590, 18, 160, 100, "dg_q", "hot", true) + dnode(590, 190, 160, 56, "dg_cto", on ? "hot warn" : "dim") +
+    dnode(790, 150, 150, 56, "dg_grant", "hot") + dnode(790, 290, 150, 56, "dg_log", "hot") + dnode(590, 290, 160, 56, "dg_rev", "hot");
+  const labels = "<text class='dl' x='800' y='58'>" + t("ac_no").toUpperCase() + "</text><text class='dl' x='682' y='158'>" + t("ac_yes").toUpperCase() + "</text>";
+  $("decision").innerHTML = "<svg viewBox='0 0 960 370' role='img' aria-label='" + t("ac_h") + "'><defs>" +
+    "<marker id='ah' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto'><path class='ahp' d='M0 0L10 5L0 10z'/></marker>" +
+    "<marker id='ad' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='7' markerHeight='7' orient='auto'><path class='adp' d='M0 0L10 5L0 10z'/></marker></defs>" +
+    edges + labels + nodes + "</svg>";
+  $("decToggle").innerHTML = seg("dec", [["yes", t("ac_yes")], ["no", t("ac_no")]], on ? "yes" : "no");
+  $("decNote").textContent = t(on ? "dc_sensn" : "dc_std");
+}
+
+let sceneObs = null;
+function buildScenes() {
+  const scenes = [...document.querySelectorAll("section.scene")];
+  document.querySelectorAll(".next").forEach(n => n.remove());
+  scenes.forEach((sec, i) => {
+    if (i === scenes.length - 1 || sec.dataset.nonext) return;
+    const nx = scenes[i + 1], h = nx.querySelector("h2");
+    const a = document.createElement("a");
+    a.className = "next"; a.href = "#" + nx.id;
+    a.textContent = t("nx") + " · " + (h ? h.textContent : "") + " ↓";
+    sec.querySelector(".wrap").appendChild(a);
+  });
+  const dots = $("dots");
+  dots.innerHTML = "";
+  scenes.forEach(sec => {
+    const h = sec.querySelector("h2"), a = document.createElement("a");
+    a.href = "#" + sec.id; a.dataset.sc = sec.id; a.dataset.part = sec.dataset.part || ""; if (sec.classList.contains("chapter")) a.className = "ch";
+    a.setAttribute("aria-label", h ? h.textContent : sec.id); a.title = h ? h.textContent : sec.id;
+    dots.appendChild(a);
+  });
+  document.querySelectorAll("[data-chips]").forEach(ul => {
+    const inPart = scenes.filter(sc => sc.dataset.part === ul.dataset.chips && !sc.classList.contains("chapter"));
+    ul.innerHTML = "";
+    inPart.forEach(sc => {
+      const li = document.createElement("li"), a = document.createElement("a"), h = sc.querySelector("h2");
+      a.href = "#" + sc.id; a.textContent = h ? h.textContent : sc.id;
+      li.appendChild(a); ul.appendChild(li);
+    });
+  });
+  if (!sceneObs && typeof IntersectionObserver !== "undefined") {
+    sceneObs = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting) document.querySelectorAll("#dots a").forEach(a => a.classList.toggle("on", a.dataset.sc === en.target.id));
+    }), { rootMargin: "-45% 0px -50% 0px" });
+    scenes.forEach(sec => sceneObs.observe(sec));
+  }
+}
+
+function renderAudit() {
+  $("auTiles").innerHTML = [["au1", 148], ["au2", 12], ["au3", 9], ["au4", 21]].map(x => '<div class="tile"><small>' + t(x[0] + "l") + "</small><b>" + x[1] + "</b><span>" + t(x[0] + "s") + "</span></div>").join("");
+}
+function renderCat() {
+  const i = lang === "es" ? 1 : 0;
+  const rows = [
+    [["Data point", "Data point"], "customer_name", null],
+    [["Domain", "Dominio"], t("cd1"), "ro3"],
+    [["Definition", "Definición"], ["Full name of the customer as registered in the CRM", "Nombre completo del cliente tal como figura en el CRM"], "role_mod"],
+    [["Business owner", "Responsable de negocio"], ["Head of Customer Analytics", "Responsable de Customer Analytics"], "ro5"],
+    [["Steward", "Steward"], ["Customer domain steward", "Steward del dominio de cliente"], "ro3"],
+    [["Source", "Origen"], "CRM.full_name → staging → core", "role_eng"],
+    [["Sensitivity", "Sensibilidad"], t("lvl1") + " · " + (i ? "aprueban responsable y steward" : "owner and steward approve"), "ro3"],
+    [["Quality rule", "Regla de calidad"], ["Not null; no digits", "No nulo; sin dígitos"], "role_dq"],
+    [["Access", "Acceso"], ["Analyst, Support agent, Marketing analyst: read", "Analista, Agente de soporte, Analista de marketing: lectura"], "ro5", true]
+  ];
+  $("catEntry").innerHTML = rows.map((r, n) => "<div" + (r[3] ? " class='wide'" : "") + "><small>" + r[0][i] + "</small><b" + (n === 0 ? " class='mono'" : "") + ">" + (typeof r[1] === "string" ? r[1] : r[1][i]) + "</b>" +
+    (r[2] ? "<br><span class='pill acc'>" + t("cat_by") + ": " + t(r[2]) + "</span>" : "") + "</div>").join("");
+}
+
+/* ---------- contact + language ---------- */
+function renderContact() {
+  if (LINKEDIN_URL) $("cdmpBtn").href = LINKEDIN_URL;
+  $("contactBtns").innerHTML = LINKEDIN_URL ? "<a class='btn' href='" + LINKEDIN_URL + "' target='_blank' rel='noopener'>" + t("ct_li") + "</a>" : "";
+}
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  $("lang-en").setAttribute("aria-pressed", String(lang === "en"));
+  $("lang-es").setAttribute("aria-pressed", String(lang === "es"));
+  fillSub(); retext(); renderFlow(); renderSim(); renderTree(); renderTimeline(); renderWeekly(); renderTeam(); renderDocs(); renderGov(); renderLineage(); renderContact(); buildMock(); renderRoles(); renderDecision(); renderSeg(); renderClass(); renderAudit(); buildScenes(); renderCat();
+}
+function setLang(l) { lang = l; try { localStorage.setItem("pf-lang", l); } catch (e) {} applyLang(); }
+$("lang-en").addEventListener("click", () => setLang("en"));
+$("lang-es").addEventListener("click", () => setLang("es"));
+$("decToggle").addEventListener("change", e => {
+  decSens = e.target.value === "yes";
+  renderDecision();
+  const el = $("decToggle").querySelector("input:checked");
+  if (el) el.focus();
+});
+wireSim();
+applyLang();
+if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) { mockI = 2; tickMock(); }
+else setInterval(() => { mockI = (mockI + 1) % MOCK_P.length; tickMock(); }, 3200);
+</script>
