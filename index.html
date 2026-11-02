@@ -485,6 +485,13 @@ section.chapter{background:radial-gradient(900px 520px at 12% 35%,color-mix(in s
 section.band[data-part]{background:radial-gradient(900px 460px at 8% 0%,color-mix(in srgb,var(--pc) 17%,transparent),transparent 64%),radial-gradient(640px 360px at 100% 100%,color-mix(in srgb,var(--pc) 8%,transparent),transparent 60%),var(--bg)}
 section[data-part]:not(.band){background:radial-gradient(900px 420px at 90% 0%,color-mix(in srgb,var(--pc) 8%,transparent),transparent 62%),linear-gradient(180deg,color-mix(in srgb,var(--pc) 3%,var(--bg)),var(--bg) 40%)}
 section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,color-mix(in srgb,var(--pc) 30%,transparent),transparent 64%),radial-gradient(600px 400px at 100% 100%,color-mix(in srgb,var(--pc) 12%,transparent),transparent 60%),var(--bg)}
+.hcdmp{flex:none;display:inline-flex;align-items:center;text-decoration:none;font-weight:600;font-size:.82rem;color:#2B1E02;background:linear-gradient(135deg,#F4D272,#D9A12F);border-radius:999px;padding:7px 14px;box-shadow:0 6px 18px -8px rgba(217,161,47,.8);transition:transform .2s,box-shadow .2s;white-space:nowrap}
+.hcdmp:hover{transform:translateY(-1px);box-shadow:0 10px 22px -8px rgba(217,161,47,.95)}
+.hcdmp .short{display:none}
+.hli{flex:none;display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-size:.84rem;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.hli:hover{border-color:var(--accent);color:var(--accent)}
+.hli svg{width:16px;height:16px;fill:currentColor}
+@media (max-width:860px){.hcdmp .long{display:none}.hcdmp .short{display:inline}.hli span{display:none}.hli{padding:7px}.top .wrap{gap:10px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -498,6 +505,8 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
       <a href="#part3" data-part="3"><span class="nn">3</span> <span data-i18n="nav_p3">Catalogue</span></a>
       <a href="#part4" data-part="4"><span class="nn">4</span> <span data-i18n="nav_p4">Access</span></a>
     </nav>
+    <a class="hcdmp" href="#cdmp"><span class="long" data-i18n="hd_cdmp">Get your CDMP certification</span><span class="short" data-i18n="hd_cdmp_s">CDMP</span></a>
+    <a class="hli" id="hLinkedin" href="#contactBtns" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg><span>LinkedIn</span></a>
     <div class="lang" role="group" aria-label="Language">
       <button id="lang-en" type="button" aria-pressed="true">EN</button>
       <button id="lang-es" type="button" aria-pressed="false">
@@ -1330,6 +1339,7 @@ lg_d:["Support agent requested: read, customer_name","Agente de soporte solicit�
 lg_d2:["Approved by Data steward · expires in 90 days","Aprobado por Data steward · caduca en 90 días"],
 lg_e:["Payments engineer requested: read, card_number","Ingeniero de pagos solicitó: lectura, card_number"],
 lg_e2:["Approved by Domain owner, then CTO and CISOs · masked by default · expires in 30 days","Aprobado por Responsable de dominio y después CTO y CISOs · enmascarado por defecto · caduca en 30 días"],
+hd_cdmp:["Get your CDMP certification","Consigue tu certificación CDMP"], hd_cdmp_s:["CDMP","CDMP"],
 cd_eye:["Coming soon","Próximamente"], cd_h:["CDMP preparation","Preparación para el CDMP"],
 cd_p:["I hold the CDMP certification from DAMA International and I am putting together a course to help other data professionals pass it. The syllabus, dates and format will be announced here.","Tengo la certificación CDMP de DAMA International y estoy preparando un curso para ayudar a otros profesionales del dato a conseguirla. El temario, las fechas y el formato se anunciarán aquí."],
 cd_soon:["Coming soon","Próximamente"], cd_q:["Want to get your CDMP certification?","¿Quieres sacarte la certificación CDMP?"], cd_btn:["Contact me","Contáctame"],
@@ -2107,7 +2117,7 @@ function renderCat() {
 
 /* ---------- contact + language ---------- */
 function renderContact() {
-  if (LINKEDIN_URL) $("cdmpBtn").href = LINKEDIN_URL;
+  if (LINKEDIN_URL) { $("cdmpBtn").href = LINKEDIN_URL; $("hLinkedin").href = LINKEDIN_URL; }
   $("contactBtns").innerHTML = LINKEDIN_URL ? "<a class='btn' href='" + LINKEDIN_URL + "' target='_blank' rel='noopener'>" + t("ct_li") + "</a>" : "";
 }
 function applyLang() {
