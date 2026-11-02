@@ -503,6 +503,13 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
 .hli:hover{border-color:var(--accent);color:var(--accent)}
 .hli svg{width:16px;height:16px;fill:currentColor}
 @media (max-width:860px){.hcdmp .long{display:none}.hcdmp .short{display:inline}.hli span{display:none}.hli{padding:7px}.top .wrap{gap:10px}}
+.ctarow{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.ctarow .cta{margin-top:0}
+.cta2{border:1px solid color-mix(in srgb,var(--accent) 60%,transparent);color:var(--ink);background:rgba(255,255,255,.05);border-radius:999px;padding:14px 22px;font-weight:600;transition:transform .2s,background .2s}
+.cta2:hover{background:color-mix(in srgb,var(--accent) 18%,transparent);transform:translateY(-2px)}
+.mock[data-roadmap]{cursor:pointer;transition:box-shadow .25s,transform .25s}
+.mock[data-roadmap]:hover{transform:translateY(-3px);box-shadow:0 40px 90px -28px rgba(0,0,0,.85),0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent)}
+.footbtns{display:flex;gap:12px;flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -541,9 +548,12 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
         <span class="chip" data-i18n="chip2">Data governance</span>
         <span class="chip" data-i18n="chip3">Delivery &amp; stakeholder management</span>
       </div>
-      <a class="cta" href="#try" data-i18n="cta">Run the method on a request</a>
+      <div class="ctarow">
+        <a class="cta" href="#try" data-i18n="cta">Run the method on a request</a>
+        <button type="button" class="cta2" data-roadmap="1" data-i18n="cta2">Go straight to the roadmap</button>
+      </div>
     </div>
-    <div class="mock" aria-hidden="true">
+    <div class="mock" aria-hidden="true" data-roadmap="1">
       <div class="mock-head"><span data-i18n="m_head">Live roadmap</span><span class="live"><i></i>LIVE</span></div>
       <div id="mockRows"></div>
       <div class="mock-foot" id="mockFoot"></div>
@@ -660,7 +670,8 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
           </div>
         </div>
         <div class="stagefoot"><span class="muted" data-i18n="hint_1">Nothing here is about architecture or priority. Those come next, from the people who own them.</span>
-          <button type="button" class="btn2" data-go="2" data-i18n="bt_1">Continue: summary and architect</button></div>
+          <div class="footbtns"><button type="button" class="btn2 ghost" data-roadmap="1" data-i18n="bt_skip">Skip to the roadmap</button>
+          <button type="button" class="btn2" data-go="2" data-i18n="bt_1">Continue: summary and architect</button></div></div>
       </form>
     </div>
     <div class="stage" id="st2" hidden></div>
@@ -1350,6 +1361,7 @@ lg_d:["Support agent requested: read, customer_name","Agente de soporte solicit�
 lg_d2:["Approved by Data steward · expires in 90 days","Aprobado por Data steward · caduca en 90 días"],
 lg_e:["Payments engineer requested: read, card_number","Ingeniero de pagos solicitó: lectura, card_number"],
 lg_e2:["Approved by Domain owner, then CTO and CISOs · masked by default · expires in 30 days","Aprobado por Responsable de dominio y después CTO y CISOs · enmascarado por defecto · caduca en 30 días"],
+cta2:["Go straight to the roadmap","Ir directo al roadmap"], bt_skip:["Skip to the roadmap","Saltar al roadmap"],
 hd_cdmp:["Get your CDMP certification","Consigue tu certificación CDMP"], hd_cdmp_s:["CDMP","CDMP"],
 cd_eye:["Coming soon","Próximamente"], cd_h:["CDMP preparation","Preparación para el CDMP"],
 cd_p:["I hold the CDMP certification from DAMA International and I am putting together a course to help other data professionals pass it. The syllabus, dates and format will be announced here.","Tengo la certificación CDMP de DAMA International y estoy preparando un curso para ayudar a otros profesionales del dato a conseguirla. El temario, las fechas y el formato se anunciarán aquí."],
@@ -2146,6 +2158,10 @@ $("decToggle").addEventListener("change", e => {
   renderDecision();
   const el = $("decToggle").querySelector("input:checked");
   if (el) el.focus();
+});
+document.addEventListener("click", e => {
+  const el = e.target.closest ? e.target.closest("[data-roadmap]") : null;
+  if (el) { e.preventDefault(); goTo(3); }
 });
 wireSim();
 applyLang();
