@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="An interactive walkthrough of how I run a data team: from a business request to governed data delivery.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="José Marmolejo · Data & Product Lead">
+<meta property="og:title" content="José Marmolejo · Product Owner, Data Products & Governance">
 <meta property="og:description" content="An interactive walkthrough of how I run a data team: from a business request to governed data delivery.">
 <meta property="og:url" content="https://jose-marmolejo.netlify.app">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1220'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='%236CB6F0' font-family='Georgia,serif' font-weight='700'%3EJM%3C/text%3E%3C/svg%3E">
@@ -510,6 +510,18 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
 .mock[data-roadmap]{cursor:pointer;transition:box-shadow .25s,transform .25s}
 .mock[data-roadmap]:hover{transform:translateY(-3px);box-shadow:0 40px 90px -28px rgba(0,0,0,.85),0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent)}
 .footbtns{display:flex;gap:12px;flex-wrap:wrap}
+.about{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+.about p{font-size:1.05rem;max-width:62ch}
+.about p + p{margin-top:16px}
+.facts{display:grid;gap:14px}
+.facts > div{display:grid;gap:4px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.facts > div:last-child{border-bottom:0;padding-bottom:0}
+.facts small{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts b{font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:28px}
+.toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:860px){.about{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -517,11 +529,13 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
   <div class="wrap">
     <span class="brand">José Marmolejo</span>
     <nav class="nav" aria-label="Sections">
+      <a href="#about" data-i18n="nav_about">About</a>
       <a href="#flow" data-i18n="nav_flow">The flow</a>
       <a href="#part1" data-part="1"><span class="nn">1</span> <span data-i18n="nav_p1">Request</span></a>
       <a href="#part2" data-part="2"><span class="nn">2</span> <span data-i18n="nav_p2">Delivery</span></a>
       <a href="#part3" data-part="3"><span class="nn">3</span> <span data-i18n="nav_p3">Catalogue</span></a>
       <a href="#part4" data-part="4"><span class="nn">4</span> <span data-i18n="nav_p4">Access</span></a>
+      <a href="#cases" data-i18n="nav_cases">Cases</a>
     </nav>
     <a class="hcdmp" href="#cdmp"><span class="long" data-i18n="hd_cdmp">Get your CDMP certification</span><span class="short" data-i18n="hd_cdmp_s">CDMP</span></a>
     <a class="hli" id="hLinkedin" href="#contactBtns" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg><span>LinkedIn</span></a>
@@ -547,6 +561,7 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
         <span class="chip" data-i18n="chip1">Data product leadership</span>
         <span class="chip" data-i18n="chip2">Data governance</span>
         <span class="chip" data-i18n="chip3">Delivery &amp; stakeholder management</span>
+        <span class="chip" data-i18n="chip4">Business analysis</span>
       </div>
       <div class="ctarow">
         <a class="cta" href="#try" data-i18n="cta">Run the method on a request</a>
@@ -561,6 +576,54 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
     <p class="sectorline" data-i18n="sectors_line">Experience across gambling, aerospace and retail.</p>
   </div>
 </div>
+
+<section id="about" class="scene">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ab_eye">About me</span>
+      <h2 data-i18n="ab_h">Who is behind this page</h2>
+    </div>
+    <div class="about">
+      <div>
+        <p data-i18n="ab_p1">I work in data management, governance and data product delivery, with more than six years of experience in gambling, aerospace and retail.</p>
+        <p data-i18n="ab_p2">Most recently I was Product Owner of data products and platforms: I owned the backlog, set priorities with the product managers, and coordinated up to 12 initiatives at once across architecture, data engineering, data modelling and data quality teams. Before that I built a data governance framework from scratch for a gaming regulator, with more than 10 departments.</p>
+        <p data-i18n="ab_p3">What I do best sits between a business request and a governed delivery: understanding what people really need, estimating and prioritising with product and architecture, organising the team's work, and making sure the data is catalogued, classified and used only by the right people.</p>
+      </div>
+      <div class="panel facts">
+        <div><small data-i18n="ab_f1">Experience</small><b data-i18n="ab_f1v">6+ years in data</b></div>
+        <div><small data-i18n="ab_f2">Sectors</small><b data-i18n="ab_f2v">Gambling, aerospace, retail</b></div>
+        <div><small data-i18n="ab_f3">Certification</small><b>CDMP Practitioner · DAMA International</b></div>
+        <div><small data-i18n="ab_f4">Education</small><b data-i18n="ab_f4v">MSc Big Data, MSc Decision Making and Innovation, MSc Manufacturing Engineering, BSc Mechanical Engineering</b></div>
+        <div><small data-i18n="ab_f5">Languages</small><b data-i18n="ab_f5v">Spanish (native), English (C1/C2), Italian (learning)</b></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="tile"><small data-i18n="st_a">At once</small><b>12</b><span data-i18n="st_av">initiatives coordinated through team leads</span></div>
+      <div class="tile"><small data-i18n="st_b">Across four teams</small><b>21</b><span data-i18n="st_bv">professionals in architecture, engineering, modelling and quality</span></div>
+      <div class="tile"><small data-i18n="st_c">Pipeline set-up</small><b>5d → ≤2d</b><span data-i18n="st_cv">after standardising and automating data ingestion</span></div>
+      <div class="tile"><small data-i18n="st_d">Duplicates removed</small><b>8M → 5M</b><span data-i18n="st_dv">customer records consolidated at a gaming regulator</span></div>
+    </div>
+    <p class="muted" style="margin-top:14px;font-size:.82rem" data-i18n="st_note">Figures in this section come from my CV.</p>
+  </div>
+</section>
+
+<section id="tools" class="band scene">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="tl2_eye">Tools</span>
+      <h2 data-i18n="tl2_h">What I have worked with</h2>
+      <p data-i18n="tl2_p">The tools and platforms I have used in real work, grouped by what they were for.</p>
+    </div>
+    <div class="toolgrid">
+      <div class="panel"><h3 data-i18n="tg1">Planning and documentation</h3><div class="chips"><span class="chip">Jira</span><span class="chip">Confluence</span></div></div>
+      <div class="panel"><h3 data-i18n="tg2">Data platform</h3><div class="chips"><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Apache Spark</span><span class="chip">Apache Flink</span><span class="chip">StarRocks</span><span class="chip">Azure (machine learning)</span></div></div>
+      <div class="panel"><h3 data-i18n="tg3">Catalogue and governance</h3><div class="chips"><span class="chip">OpenMetadata</span><span class="chip">Excel</span></div></div>
+      <div class="panel"><h3 data-i18n="tg4">Analytics and BI</h3><div class="chips"><span class="chip">Tableau</span><span class="chip">Mixpanel</span><span class="chip">Excel</span></div></div>
+      <div class="panel"><h3 data-i18n="tg5">AI</h3><div class="chips"><span class="chip">ChatGPT</span><span class="chip">Claude</span></div></div>
+      <div class="panel"><h3 data-i18n="tg6">Marketing platforms I worked alongside</h3><div class="chips"><span class="chip">Xtremepush</span><span class="chip">Optimove</span><span class="chip">iWinBack</span></div><p class="muted" style="margin-top:12px;font-size:.84rem" data-i18n="tg6n">Run by the business. I handled their data requirements and made sure the data worked with each one.</p></div>
+    </div>
+  </div>
+</section>
 
 <section id="flow" class="scene">
   <div class="wrap">
@@ -974,6 +1037,37 @@ section.chapter[data-part]{background:radial-gradient(900px 520px at 12% 35%,col
     </div>
   </div>
 </section>
+<section id="cases" class="band scene">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="cs_eye">Case studies</span>
+      <h2 data-i18n="cs_h">Three cases from real work</h2>
+      <p data-i18n="cs_p">The method on this page comes from these projects. They describe real work, with figures from my CV. Company names are left out.</p>
+    </div>
+    <div class="tabs" id="csTabs" role="tablist"></div>
+    <div class="panel" id="csBody"></div>
+  </div>
+</section>
+
+<section id="ba" class="scene">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="ba_eye">Business analysis</span>
+      <h2 data-i18n="ba_h">Business analysis, in plain terms</h2>
+      <p data-i18n="ba_p">The work on this page maps to what a business analyst does. Here is where each skill shows up.</p>
+    </div>
+    <div class="toolgrid">
+      <div class="panel"><h3 data-i18n="ba1t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba1d">Text</p><a class="seelink" href="#try"><span data-i18n="go_see">See it</span>&nbsp;↓</a></div>
+      <div class="panel"><h3 data-i18n="ba2t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba2d">Text</p><a class="seelink" href="#try"><span data-i18n="go_see">See it</span>&nbsp;↓</a></div>
+      <div class="panel"><h3 data-i18n="ba3t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba3d">Text</p><button type="button" class="seelink" data-roadmap="1" style="background:transparent;cursor:pointer;font:inherit"><span data-i18n="go_see">See it</span>&nbsp;↓</button></div>
+      <div class="panel"><h3 data-i18n="ba4t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba4d">Text</p><a class="seelink" href="#try"><span data-i18n="go_see">See it</span>&nbsp;↓</a></div>
+      <div class="panel"><h3 data-i18n="ba5t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba5d">Text</p><a class="seelink" href="#docs"><span data-i18n="go_see">See it</span>&nbsp;↓</a></div>
+      <div class="panel"><h3 data-i18n="ba6t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba6d">Text</p><a class="seelink" href="#cases"><span data-i18n="go_see">See it</span>&nbsp;↓</a></div>
+      <div class="panel"><h3 data-i18n="ba7t">Skill</h3><p class="muted" style="margin-top:8px;font-size:.92rem" data-i18n="ba7d">Text</p><a class="seelink" href="#team"><span data-i18n="go_see">See it</span>&nbsp;↓</a></div>
+    </div>
+  </div>
+</section>
+
 <section id="cdmp" class="band scene">
   <div class="wrap">
     <div class="sec-head">
@@ -1009,14 +1103,14 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/jos%C3%A9-marmolejo";
 
 const D = {
 nav_flow:["The flow","El flujo"], 
-hero_eye:["Data & Product Lead · Data Governance Lead","Data & Product Lead · Data Governance Lead"],
+hero_eye:["Product Owner · Data Products & Governance","Product Owner · Productos de datos y gobierno del dato"],
 hero_h1:["I turn business requests into prioritised, tracked and governed data delivery.","Convierto peticiones de negocio en entregas de datos priorizadas, medidas y gobernadas."],
 hero_lead:["I built the operating model around a data team: how work is requested, justified, estimated, prioritised, delivered, documented and governed. This page lets you run a simplified version of it yourself.","Construí el modelo operativo de un equipo de datos: cómo se pide, justifica, estima, prioriza, entrega, documenta y gobierna el trabajo. En esta página puedes ejecutar tú mismo una versión simplificada."],
-chip1:["Data product leadership","Liderazgo de producto de datos"], chip2:["Data governance","Gobierno del dato"], chip3:["Delivery & stakeholder management","Entrega y gestión de stakeholders"],
+chip1:["Data product ownership","Product ownership de datos"], chip2:["Data governance","Gobierno del dato"], chip3:["Delivery & stakeholder management","Entrega y gestión de stakeholders"],
 cta:["Run the method on a request","Aplica el método a una petición"],
-sec1:["Gambling","Gambling"], sec1d:["High-volume transactional data, regulatory reporting","Datos transaccionales de alto volumen, reporting regulatorio"],
-sec2:["Aerospace","Aeronáutica"], sec2d:["Maintenance data catalogue, lineage and access control","Catálogo de datos de mantenimiento, linaje y control de accesos"],
-sec3:["Retail","Retail"], sec3d:["Customer and sales data, constant demand for fast ETAs","Datos de cliente y ventas, demanda constante de ETAs rápidos"],
+
+
+
 flow_eye:["End to end","De principio a fin"], flow_h:["From a request to governed access, in ten steps","De una petición a un acceso gobernado, en diez pasos"],
 flow_p:["The work runs through four parts, shown here by colour. Select a step to see what happened, what it produced and where it appears on this page.","El trabajo recorre cuatro partes, indicadas aquí por colores. Selecciona un paso para ver qué ocurría, qué producía y dónde aparece en esta página."],
 flow_out:["Output","Resultado"],
@@ -1101,7 +1195,7 @@ lg_b:["Engineer requested: schema change, sales mart","Ingeniero solicitó: camb
 lg_c:["Viewer requested: read, forecasting dashboard","Lector solicitó: lectura, dashboard de previsión"], lg_c2:["Approved by Data steward · standard access","Aprobado por Data steward · acceso estándar"],
 pr_h:["Operating principles","Principios de funcionamiento"], pp1:["Access follows the job role, not the person","El acceso sigue al puesto, no a la persona"], pp2:["Sensitive access expires and is reviewed","El acceso sensible caduca y se revisa"], pp3:["Every dataset has a named owner","Cada dataset tiene un responsable con nombre"],
 lin_eye:["Part 3 · Lineage","Parte 3 · Linaje"], lin_h:["Follow a number from where it is born to where it is read","Sigue un número desde donde nace hasta donde se lee"],
-lin_p:["While each table is ingested, its catalogue entry is filled in at the same time: who owns every data point, what it means, how sensitive it is and which rule checks it. I set up a catalogue for an aerospace maintenance organisation and started a second one with OpenMetadata in a gambling company, focusing on lineage from source to dashboard. Select a step.","Mientras se ingesta cada tabla, su ficha de catálogo se completa a la vez: quién es responsable de cada data point, qué significa, qué sensibilidad tiene y qué regla lo comprueba. Monté un catálogo para una organización de mantenimiento aeronáutico y empecé otro con OpenMetadata en una empresa de gambling, centrado en el linaje de origen a dashboard. Selecciona un paso."],
+lin_p:["While each table is ingested, its catalogue entry is filled in at the same time: who owns every data point, what it means, how sensitive it is and which rule checks it. I built the first enterprise data catalogue for a gaming regulator, and later started working with OpenMetadata in a data team, focusing on lineage from source to dashboard. Select a step.","Mientras se ingesta cada tabla, su ficha de catálogo se completa a la vez: quién es responsable de cada data point, qué significa, qué sensibilidad tiene y qué regla lo comprueba. Construí el primer catálogo de datos corporativo de un regulador de juego y después empecé a trabajar con OpenMetadata en un equipo de datos, centrado en el linaje de origen a dashboard. Selecciona un paso."],
 lc0:["Source","Origen"], lc1:["Landing","Landing"], lc2:["Staging","Staging"], lc3:["Core","Core"], lc4:["Consumption","Consumo"],
 n_s1:["Transactions DB","BD transacciones"], n_s2:["CRM","CRM"], n_l1:["Raw transactions","Transacciones raw"], n_l2:["Raw CRM","CRM raw"], n_st:["Cleaned records","Registros limpios"], n_co:["Customer model","Modelo de cliente"], n_m1:["Sales mart","Mart de ventas"], n_m2:["Churn dashboard","Dashboard de fuga"],
 nd_s1:["Operational system of record. Owner: platform team. Loaded every night.","Sistema operacional de referencia. Responsable: equipo de plataforma. Carga nocturna."],
@@ -1364,9 +1458,73 @@ lg_e2:["Approved by Domain owner, then CTO and CISOs · masked by default · exp
 cta2:["Go straight to the roadmap","Ir directo al roadmap"], bt_skip:["Skip to the roadmap","Saltar al roadmap"],
 hd_cdmp:["Get your CDMP certification","Consigue tu certificación CDMP"], hd_cdmp_s:["CDMP","CDMP"],
 cd_eye:["Coming soon","Próximamente"], cd_h:["CDMP preparation","Preparación para el CDMP"],
-cd_p:["I hold the CDMP certification from DAMA International and I am putting together a course to help other data professionals pass it. The syllabus, dates and format will be announced here.","Tengo la certificación CDMP de DAMA International y estoy preparando un curso para ayudar a otros profesionales del dato a conseguirla. El temario, las fechas y el formato se anunciarán aquí."],
+cd_p:["I hold the CDMP Practitioner certification from DAMA International and I am putting together a course to help other data professionals pass it. The syllabus, dates and format will be announced here.","Tengo la certificación CDMP Practitioner de DAMA International y estoy preparando un curso para ayudar a otros profesionales del dato a conseguirla. El temario, las fechas y el formato se anunciarán aquí."],
 cd_soon:["Coming soon","Próximamente"], cd_q:["Want to get your CDMP certification?","¿Quieres sacarte la certificación CDMP?"], cd_btn:["Contact me","Contáctame"],
-foot:["All projects, names, figures and charts on this page are illustrative examples, built to show the method. They are not data from any employer.","Todos los proyectos, nombres, cifras y gráficos de esta página son ejemplos ilustrativos creados para mostrar el método. No son datos de ningún empleador."]
+nav_about:["About","Sobre mí"],
+nav_cases:["Cases","Casos"],
+ab_eye:["About me","Sobre mí"],
+ab_h:["Who is behind this page","Quién está detrás de esta página"],
+ab_p1:["I work in data product ownership, data governance and business analysis, with more than six years of experience in gambling, aerospace and retail.","Trabajo en product ownership de datos, gobierno del dato y análisis de negocio, con más de seis años de experiencia en gambling, aeronáutica y retail."],
+ab_p2:["Most recently I was Product Owner of data products and platforms: I owned the backlog, set priorities with the product managers, and coordinated up to 12 initiatives at once across architecture, data engineering, data modelling and data quality teams. Before that I built a data governance framework from scratch for a gaming regulator, with more than 10 departments.","Hasta hace poco fui Product Owner de productos y plataformas de datos: era responsable del backlog, fijaba prioridades con los product managers y coordinaba hasta 12 iniciativas a la vez entre equipos de arquitectura, ingeniería de datos, modelado y calidad. Antes construí desde cero un marco de gobierno del dato para un regulador de juego, con más de 10 departamentos."],
+ab_p3:["What I do best sits between a business request and a governed delivery: understanding what people really need, estimating and prioritising with product and architecture, organising the team's work, and making sure the data is catalogued, classified and used only by the right people.","Lo que mejor hago está entre una petición de negocio y una entrega gobernada: entender qué necesita realmente la gente, estimar y priorizar con producto y arquitectura, organizar el trabajo del equipo y asegurar que los datos están catalogados, clasificados y los usan solo las personas adecuadas."],
+ab_f1:["Experience","Experiencia"],
+ab_f1v:["6+ years in data","Más de 6 años en datos"],
+ab_f2:["Sectors","Sectores"],
+ab_f2v:["Gambling, aerospace, retail","Gambling, aeronáutica, retail"],
+ab_f3:["Certification","Certificación"],
+ab_f4:["Education","Formación"],
+ab_f4v:["MSc Big Data, MSc Decision Making and Innovation, MSc Manufacturing Engineering, BSc Mechanical Engineering","Máster en Big Data, Máster en Toma de Decisiones e Innovación, Máster en Ingeniería de Fabricación, Grado en Ingeniería Mecánica"],
+ab_f5:["Languages","Idiomas"],
+ab_f5v:["Spanish (native), English (C1/C2), Italian (learning)","Español (nativo), inglés (C1/C2), italiano (aprendiendo)"],
+st_a:["At once","A la vez"],
+st_av:["initiatives coordinated through team leads","iniciativas coordinadas a través de líderes de equipo"],
+st_b:["Across four teams","En cuatro equipos"],
+st_bv:["professionals in architecture, engineering, modelling and quality","profesionales de arquitectura, ingeniería, modelado y calidad"],
+st_c:["Pipeline set-up","Puesta en marcha de pipelines"],
+st_cv:["after standardising and automating data ingestion","tras estandarizar y automatizar la ingesta de datos"],
+st_d:["Duplicates removed","Duplicados eliminados"],
+st_dv:["customer records consolidated at a gaming regulator","registros de clientes consolidados en un regulador de juego"],
+st_note:["Figures in this section come from my CV.","Las cifras de esta sección proceden de mi CV."],
+tl2_eye:["Tools","Herramientas"],
+tl2_h:["What I have worked with","Con qué he trabajado"],
+tl2_p:["The tools and platforms I have used in real work, grouped by what they were for.","Las herramientas y plataformas que he usado en trabajo real, agrupadas según para qué sirvieron."],
+tg1:["Planning and documentation","Planificación y documentación"],
+tg2:["Data platform","Plataforma de datos"],
+tg3:["Catalogue and governance","Catálogo y gobierno"],
+tg4:["Analytics and BI","Analítica y BI"],
+tg5:["AI","IA"],
+cs_eye:["Case studies","Casos de estudio"],
+cs_h:["Three cases from real work","Tres casos de trabajo real"],
+cs_p:["The method on this page comes from these projects. They describe real work, with figures from my CV. Company names are left out.","El método de esta página sale de estos proyectos. Describen trabajo real, con cifras de mi CV. No se nombran las empresas."],
+cs_a:["Delivery and forecasting","Entrega y previsión"],
+cs_b:["Governance and access","Gobierno y accesos"],
+cs_c:["Governance from scratch","Gobierno desde cero"],
+cs_ctx:["Context","Contexto"],
+cs_prob:["Problem","Problema"],
+cs_did:["What I did","Qué hice"],
+cs_res:["What changed","Qué cambió"],
+cs_learn:["What I learned","Qué aprendí"],
+chip4:["Business analysis","Análisis de negocio"],
+tg6:["Marketing platforms I worked alongside","Plataformas de marketing con las que trabajé"],
+tg6n:["Run by the business. I handled their data requirements and made sure the data worked with each one.","Las gestionaba el negocio. Yo atendía sus requisitos de datos y aseguraba que los datos funcionaran con cada una."],
+ba_eye:["Business analysis","Análisis de negocio"],
+ba_h:["Business analysis, in plain terms","Análisis de negocio, en pocas palabras"],
+ba_p:["The work on this page maps to what a business analyst does. Here is where each skill shows up.","El trabajo de esta página equivale a lo que hace un business analyst. Aquí ves dónde aparece cada habilidad."],
+ba1t:["Requirements elicitation","Recogida de requisitos"],
+ba1d:["A structured request: the KPI it moves, the expected impact with its backing, today's problem and the minimum version that would help.","Una petición estructurada: el KPI que mueve, el impacto esperado con su respaldo, el problema de hoy y la versión mínima que ayudaría."],
+ba2t:["Process analysis","Análisis de procesos"],
+ba2d:["How the work is done today and how long it takes, understood before anything is built.","Cómo se hace el trabajo hoy y cuánto tarda, entendido antes de construir nada."],
+ba3t:["Business case and prioritisation","Caso de negocio y priorización"],
+ba3d:["Cost, ROI and payback for each request, and an interactive roadmap that shows what every priority change costs.","Coste, ROI y retorno de cada petición, y un roadmap interactivo que muestra lo que cuesta cada cambio de prioridad."],
+ba4t:["Stakeholder management","Gestión de stakeholders"],
+ba4d:["Options with different scope and time, agreed with the business and with product.","Opciones con distinto alcance y plazo, acordadas con el negocio y con producto."],
+ba5t:["Requirements documentation","Documentación de requisitos"],
+ba5d:["A Data Requirement Document with acceptance criteria, a data contract and handoff notes.","Un Data Requirement Document con criterios de aceptación, un data contract y notas de traspaso."],
+ba6t:["Data analysis and quality","Análisis y calidad de datos"],
+ba6d:["SQL profiling, root cause analysis and quality rules. At a gaming regulator, about 8 million records were consolidated into 5 million.","Profiling en SQL, análisis de causa raíz y reglas de calidad. En un regulador de juego, unos 8 millones de registros se consolidaron en 5 millones."],
+ba7t:["Reporting and dashboards","Reporting y dashboards"],
+ba7d:["Weekly progress reports, workload dashboards, and analytics with Tableau and Mixpanel.","Reportes semanales de avance, dashboards de carga de trabajo y analítica con Tableau y Mixpanel."],
+foot:["The case studies and the figures in the About section describe real work and come from my CV. The simulator, charts and data points elsewhere on this page use illustrative data, built to show the method.","Los casos de estudio y las cifras de la sección Sobre mí describen trabajo real y proceden de mi CV. El simulador, los gráficos y los data points del resto de la página usan datos ilustrativos, creados para mostrar el método."]
 };
 
 let lang = "en";
@@ -2138,6 +2296,79 @@ function renderCat() {
     (r[2] ? "<br><span class='pill acc'>" + t("cat_by") + ": " + t(r[2]) + "</span>" : "") + "</div>").join("");
 }
 
+/* ---------- case studies ---------- */
+const CASES = {
+  a: {
+    tag: ["Gambling sector · Data team of 21 people", "Sector gambling · Equipo de datos de 21 personas"],
+    h: ["A delivery framework and a forecasting tool for a data team", "Un marco de entrega y una herramienta de previsión para un equipo de datos"],
+    ctx: ["A data team across architecture, data engineering, data modelling and data quality, serving many business areas. I owned the data product backlog and coordinated up to 12 initiatives at once through the team leads.", "Un equipo de datos con arquitectura, ingeniería de datos, modelado y calidad, al servicio de muchas áreas de negocio. Yo era responsable del backlog de producto de datos y coordinaba hasta 12 iniciativas a la vez a través de los líderes de equipo."],
+    prob: ["Requests came from many areas, priorities changed often, and 'when will it be ready?' was answered with an opinion. There was no single company roadmap, so nobody could see what a change of priority did to everything else.", "Las peticiones llegaban de muchas áreas, las prioridades cambiaban a menudo y a '¿cuándo estará listo?' se contestaba con una opinión. No había un roadmap único de la empresa, así que nadie veía qué provocaba un cambio de prioridad en todo lo demás."],
+    did: [
+      ["Set value-based prioritisation criteria: every request had to justify its business impact and expected ROI. Aligned priorities with the product managers in biweekly planning sessions.", "Definí criterios de priorización basados en valor: cada petición debía justificar su impacto de negocio y su ROI esperado. Alineaba prioridades con los product managers en sesiones quincenales."],
+      ["Designed a customised Jira project and a hybrid Scrum-Kanban framework, adapting backlog management, planning and team ceremonies.", "Diseñé un proyecto de Jira a medida y un marco híbrido Scrum-Kanban, adaptando la gestión del backlog, la planificación y las ceremonias del equipo."],
+      ["Built an automated delivery forecasting tool that turned stakeholder priorities into estimated completion dates, so the effect of reprioritising was visible to the business.", "Construí una herramienta automática de previsión de entregas que convertía las prioridades de los stakeholders en fechas estimadas, haciendo visible para el negocio el efecto de repriorizar."],
+      ["Developed AI-assisted dashboards to follow workloads, resource availability, progress and expected capacity constraints.", "Desarrollé dashboards asistidos por IA para seguir cargas de trabajo, disponibilidad de recursos, avance y futuras limitaciones de capacidad."],
+      ["Worked with data engineering to standardise and automate data ingestion and pipeline development.", "Trabajé con ingeniería de datos para estandarizar y automatizar la ingesta de datos y el desarrollo de pipelines."]
+    ],
+    res: [
+      ["Typical implementation time for a new pipeline fell from five working days to between half a day and two days.", "El tiempo típico de implementación de un pipeline nuevo pasó de cinco días laborables a entre medio día y dos días."],
+      ["Up to 12 initiatives coordinated at once, across four teams and 21 professionals.", "Hasta 12 iniciativas coordinadas a la vez, entre cuatro equipos y 21 profesionales."],
+      ["Dates were close to real delivery. When they slipped, the record showed it was mostly because of priority changes and dependencies on other areas.", "Las fechas se acercaban a la entrega real. Cuando se desviaban, el registro mostraba que era sobre todo por cambios de prioridad y dependencias de otras áreas."],
+      ["Data products delivered under this framework included a real-time CRM that cut agents' time to contact customers and resolve issues by about 50%, and data-driven campaigns that generated 15–20% more revenue than comparable campaigns the year before.", "Entre los productos de datos entregados con este marco hubo un CRM en tiempo real que redujo en torno a un 50% el tiempo de los agentes para contactar a clientes y resolver incidencias, y campañas basadas en datos que generaron un 15–20% más de ingresos que campañas comparables del año anterior."]
+    ],
+    learn: ["A planning system is only as accurate as the roadmap behind it. It needs one company roadmap and the commitment of everyone involved.", "Un sistema de planificación es tan preciso como el roadmap que tiene detrás. Necesita un roadmap único de la empresa y el compromiso de todos los implicados."]
+  },
+  b: {
+    tag: ["Gambling sector · Data team", "Sector gambling · Equipo de datos"],
+    h: ["Data governance, catalogue and access control in a data team", "Gobierno del dato, catálogo y control de accesos en un equipo de datos"],
+    ctx: ["A data team where many people need data and not everyone should see everything. I worked with the Data Director, the CTO and Information Security.", "Un equipo de datos donde mucha gente necesita datos y no todos deben verlo todo. Trabajé con la Dirección de Datos, el CTO y Seguridad de la Información."],
+    prob: ["Ownership and meaning of the data lived in people's heads, access requests had no single process, and quality problems kept coming back.", "La propiedad y el significado de los datos estaban en la cabeza de las personas, las peticiones de acceso no tenían un proceso único y los problemas de calidad se repetían."],
+    did: [
+      ["Developed a data management strategy with governance priorities, ownership responsibilities, quality standards and access procedures, approved by the Data Director.", "Desarrollé una estrategia de gestión del dato con prioridades de gobierno, responsabilidades de propiedad, estándares de calidad y procedimientos de acceso, aprobada por la Dirección de Datos."],
+      ["Established access management: permission requests, access tracking and quarterly access reviews, together with Information Security and the CISOs.", "Establecí la gestión de accesos: solicitudes de permisos, seguimiento de accesos y revisiones trimestrales, junto con Seguridad de la Información y los CISOs."],
+      ["Defined and coordinated automated quality controls for completeness, missing values and duplicates.", "Definí y coordiné controles de calidad automáticos de completitud, valores ausentes y duplicados."],
+      ["Led catalogue and business glossary work with the BI and data modelling teams, and started working with OpenMetadata to follow lineage.", "Lideré el catálogo y el glosario de negocio con los equipos de BI y modelado, y empecé a trabajar con OpenMetadata para seguir el linaje."],
+      ["Set up automated weekly notices to BI, Marketing and other teams about new tables and sources, and defined governance KPIs: system coverage, ownership assignments and data availability for real-time BI.", "Puse en marcha avisos semanales automáticos a BI, Marketing y otros equipos sobre tablas y fuentes nuevas, y definí KPIs de gobierno: cobertura de sistemas, asignación de responsables y disponibilidad del dato para BI en tiempo real."]
+    ],
+    res: [
+      ["More visibility and control over who has access to what.", "Más visibilidad y control sobre quién tiene acceso a qué."],
+      ["Recurring quality issues were identified and remediated.", "Se identificaron y corrigieron problemas de calidad recurrentes."],
+      ["Teams that consume data learned about new tables every week, which made data easier to find and reuse.", "Los equipos que consumen datos se enteraban cada semana de las tablas nuevas, lo que facilitaba encontrar y reutilizar los datos."]
+    ],
+    learn: ["Ownership and meaning are cheaper to capture while the data arrives than to reconstruct later.", "Es más barato capturar la propiedad y el significado del dato mientras llega que reconstruirlos después."]
+  },
+  c: {
+    tag: ["Gambling sector · Gaming regulator", "Sector gambling · Regulador de juego"],
+    h: ["A governance framework from scratch for a gaming regulator", "Un marco de gobierno del dato desde cero para un regulador de juego"],
+    ctx: ["An organisation with a data strategy drafted by an external consultancy and more than 10 departments to bring on board. I led its operational implementation, reporting to the Transformation Director.", "Una organización con una estrategia de datos redactada por una consultora externa y más de 10 departamentos a los que implicar. Lideré su implementación operativa, reportando a la Dirección de Transformación."],
+    prob: ["Data lived in a CRM, in departmental spreadsheets and in manual regulatory workflows. Nobody was accountable for it, and customer records were duplicated.", "Los datos estaban en un CRM, en hojas de cálculo de cada departamento y en procesos regulatorios manuales. Nadie era responsable de ellos y los registros de clientes estaban duplicados."],
+    did: [
+      ["Designed and implemented a data governance framework from the ground up: Data Owner and Data Steward roles, responsibilities and access procedures adopted across departments.", "Diseñé e implementé un marco de gobierno del dato desde cero: roles de Data Owner y Data Steward, responsabilidades y procedimientos de acceso adoptados por los departamentos."],
+      ["Built the first enterprise data catalogue in Excel, with definitions, ownership, lineage and classification, which laid the ground for choosing a dedicated tool.", "Construí el primer catálogo de datos corporativo en Excel, con definiciones, responsables, linaje y clasificación, que sentó las bases para elegir una herramienta específica."],
+      ["Set up quality assessment with SQL profiling and root cause analysis, and prioritised about 40% of the issues first reported.", "Puse en marcha la evaluación de calidad con profiling en SQL y análisis de causa raíz, y prioricé en torno al 40% de las incidencias reportadas inicialmente."],
+      ["Coordinated a consolidated master customer dataset and worked with business and technical teams to improve CRM data-entry rules.", "Coordiné un dataset maestro consolidado de clientes y trabajé con negocio y tecnología para mejorar las reglas de entrada de datos del CRM."],
+      ["Trained the departments on data ownership, quality and standard practices.", "Formé a los departamentos en propiedad del dato, calidad y prácticas estándar."]
+    ],
+    res: [
+      ["About 8 million source records were reduced to 5 million consolidated records by removing duplicates.", "Unos 8 millones de registros de origen se redujeron a 5 millones consolidados al eliminar duplicados."],
+      ["Governance roles and access procedures adopted across more than 10 departments.", "Roles de gobierno y procedimientos de acceso adoptados en más de 10 departamentos."],
+      ["Fewer chances of new duplicates and inconsistent information, thanks to better validation at data entry.", "Menos posibilidades de nuevos duplicados e información inconsistente, gracias a una mejor validación en la entrada de datos."]
+    ],
+    learn: ["Start simple. An Excel catalogue was enough to create the foundation, and it showed what a dedicated tool would need to do.", "Empieza por lo simple. Un catálogo en Excel bastó para crear la base, y mostró qué tendría que hacer una herramienta específica."]
+  }
+};
+let csSel = "a";
+function renderCases() {
+  const i = lang === "es" ? 1 : 0, c = CASES[csSel];
+  tabs($("csTabs"), ["a", "b", "c"], csSel, k => { csSel = k; renderCases(); }, "cs_");
+  const list = a => "<ul class='ck done' style='margin-top:10px'>" + a.map(x => "<li>" + x[i] + "</li>").join("") + "</ul>";
+  $("csBody").innerHTML = "<p class='eyebrow'>" + c.tag[i] + "</p><h3 style='font-size:1.6rem;margin:10px 0 22px'>" + c.h[i] + "</h3>" +
+    "<div class='cols'><div><p class='eyebrow'>" + t("cs_ctx") + "</p><p style='margin:8px 0 18px'>" + c.ctx[i] + "</p>" +
+    "<p class='eyebrow'>" + t("cs_prob") + "</p><p style='margin:8px 0 18px'>" + c.prob[i] + "</p>" +
+    "<p class='eyebrow'>" + t("cs_learn") + "</p><p class='summary' style='margin-top:8px'>" + c.learn[i] + "</p></div>" +
+    "<div><p class='eyebrow'>" + t("cs_did") + "</p>" + list(c.did) + "<p class='eyebrow' style='margin-top:22px'>" + t("cs_res") + "</p>" + list(c.res) + "</div></div>";
+}
+
 /* ---------- contact + language ---------- */
 function renderContact() {
   if (LINKEDIN_URL) { $("cdmpBtn").href = LINKEDIN_URL; $("hLinkedin").href = LINKEDIN_URL; }
@@ -2148,7 +2379,7 @@ function applyLang() {
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
   $("lang-en").setAttribute("aria-pressed", String(lang === "en"));
   $("lang-es").setAttribute("aria-pressed", String(lang === "es"));
-  fillSub(); retext(); renderFlow(); renderSim(); renderTree(); renderTimeline(); renderWeekly(); renderTeam(); renderDocs(); renderGov(); renderLineage(); renderContact(); buildMock(); renderRoles(); renderDecision(); renderSeg(); renderClass(); renderAudit(); buildScenes(); renderCat();
+  fillSub(); retext(); renderFlow(); renderSim(); renderTree(); renderTimeline(); renderWeekly(); renderTeam(); renderDocs(); renderGov(); renderLineage(); renderContact(); buildMock(); renderRoles(); renderDecision(); renderSeg(); renderClass(); renderAudit(); renderCases(); buildScenes(); renderCat();
 }
 function setLang(l) { lang = l; try { localStorage.setItem("pf-lang", l); } catch (e) {} applyLang(); }
 $("lang-en").addEventListener("click", () => setLang("en"));
